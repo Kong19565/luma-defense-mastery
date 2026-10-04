@@ -53,72 +53,74 @@
         }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-8 space-y-6">
+<body class="min-h-screen bg-[#090d16] text-[#e2e8f0] antialiased">
 
-<!-- Universal Top Navigation Bar (GitHub Pages) -->
-<div class="bg-slate-950/90 border-b border-slate-800/80 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs font-mono sticky top-0 z-50 backdrop-blur-md">
-    <div class="flex items-center gap-2">
-        <a href="./index.html" class="flex items-center gap-1.5 text-slate-300 hover:text-white font-bold transition-colors">
-            <span>🏠</span> <span>LUMA Mastery Hub</span>
-        </a>
-        <span class="text-slate-600">/</span>
-        <span class="text-sky-400 font-semibold">Node 2: Backend Core</span>
+<!-- Universal Sticky Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full bg-slate-950/95 backdrop-blur-md border-b border-slate-800 shadow-md">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+        <div class="flex items-center gap-2 truncate">
+            <a href="./index.html" class="flex items-center gap-1.5 text-slate-200 hover:text-white font-bold transition-colors shrink-0">
+                <span>🏠</span> <span>LUMA Hub</span>
+            </a>
+            <span class="text-slate-600">/</span>
+            <span class="text-emerald-400 font-semibold truncate text-[11px] sm:text-xs">Node 2: Backend Core</span>
+        </div>
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 text-[11px] shrink-0">
+            <a href="./frontend.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800 shrink-0">
+                <span>🌐</span> <span>Node 1</span>
+            </a>
+            <a href="./backend.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-emerald-500/20 text-emerald-300 border-emerald-500/50 font-bold shrink-0">
+                <span>⚙️</span> <span>Node 2</span>
+            </a>
+            <a href="./ai-server.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800 shrink-0">
+                <span>🤖</span> <span>Node 3</span>
+            </a>
+        </div>
     </div>
-    <div class="flex items-center gap-2">
-        <a href="./frontend.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800">
-            <span>🌐</span> <span>Node 1: Frontend</span>
-        </a>
-        <a href="./backend.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-emerald-500/20 text-emerald-300 border-emerald-500/50 font-bold">
-            <span>⚙️</span> <span>Node 2: Backend</span>
-        </a>
-        <a href="./ai-server.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800">
-            <span>🤖</span> <span>Node 3: AI Server</span>
-        </a>
-    </div>
-</div>
+</header>
 
-
+<main class="max-w-7xl mx-auto p-3.5 sm:p-6 space-y-6">
 
     <!-- Header Navigation -->
-    <header class="glass-card rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-emerald-500/20 shadow-xl">
+    <div class="glass-card rounded-2xl p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-emerald-500/20 shadow-xl">
         <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-2xl shadow-lg shadow-emerald-500/20">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-2xl shadow-lg shadow-emerald-500/20 shrink-0">
                 ⚙️
             </div>
             <div>
-                <div class="flex items-center gap-2">
-                    <h1 class="text-xl font-bold text-white tracking-wide">LUMA Backend (Node 2) — Interactive Defense Mastery</h1>
-                    <span class="px-2 py-0.5 text-xs rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono">FastAPI & OpenCV</span>
+                <div class="flex flex-wrap items-center gap-2">
+                    <h1 class="text-lg sm:text-xl font-bold text-white tracking-wide">LUMA Backend (Node 2) — Defense Mastery</h1>
+                    <span class="px-2 py-0.5 text-[10px] sm:text-xs rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono">FastAPI & OpenCV</span>
                 </div>
                 <p class="text-xs text-slate-400 mt-0.5">คู่มือเตรียมสอบปากเปล่าวิชา Image Processing: ส่องโค้ด Backend ทุกฟังก์ชัน, เจาะลึก OpenCV Color Dodge, และตะลุยโจทย์ 10 ข้อ</p>
             </div>
         </div>
-        <div class="flex items-center gap-3 text-xs font-mono">
-            <div class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
-                <span class="text-slate-500">Tech:</span> FastAPI + SQLAlchemy + OpenCV
+        <div class="flex items-center gap-2 text-xs font-mono">
+            <div class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 shrink-0">
+                <span class="text-slate-500">Tech:</span> FastAPI + SQLAlchemy
             </div>
-            <div class="px-3 py-1.5 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">
+            <div class="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 shrink-0">
                 Port: 8000
             </div>
         </div>
-    </header>
+    </div>
 
     <!-- Navigation Tabs -->
-    <nav class="flex border-b border-slate-800 text-sm gap-6 overflow-x-auto">
-        <button onclick="switchTab('pipeline')" id="tab-pipeline" class="tab-btn active pb-3 px-2 flex items-center gap-2 whitespace-nowrap">
-            <span>⚡</span> 1. Multi-Node Webhook Pipeline (โฟลว์งานข้ามเซิร์ฟเวอร์)
+    <nav class="flex border-b border-slate-800 text-xs sm:text-sm gap-2 sm:gap-4 overflow-x-auto pb-1 no-scrollbar">
+        <button onclick="switchTab('pipeline')" id="tab-pipeline" class="tab-btn active pb-2.5 px-2 flex items-center gap-1.5 whitespace-nowrap shrink-0">
+            <span>⚡</span> 1. Multi-Node Pipeline
         </button>
-        <button onclick="switchTab('opencv-lab')" id="tab-opencv-lab" class="tab-btn pb-3 px-2 flex items-center gap-2 text-slate-400 hover:text-slate-200 whitespace-nowrap">
-            <span>🧪</span> 2. OpenCV Image Processing Lab (แล็บสูตร Pencil Sketch & HSV)
+        <button onclick="switchTab('opencv-lab')" id="tab-opencv-lab" class="tab-btn pb-2.5 px-2 flex items-center gap-1.5 text-slate-400 hover:text-slate-200 whitespace-nowrap shrink-0">
+            <span>🧪</span> 2. OpenCV Lab
         </button>
-        <button onclick="switchTab('code')" id="tab-code" class="tab-btn pb-3 px-2 flex items-center gap-2 text-slate-400 hover:text-slate-200 whitespace-nowrap">
-            <span>📑</span> 3. Line-by-Line Code Inspector (ส่องโค้ดรายบรรทัด & Call Graph)
+        <button onclick="switchTab('code')" id="tab-code" class="tab-btn pb-2.5 px-2 flex items-center gap-1.5 text-slate-400 hover:text-slate-200 whitespace-nowrap shrink-0">
+            <span>📑</span> 3. Code Inspector (ส่องโค้ด)
         </button>
-        <button onclick="switchTab('exam')" id="tab-exam" class="tab-btn pb-3 px-2 flex items-center gap-2 text-slate-400 hover:text-slate-200 whitespace-nowrap">
-            <span>🎯</span> 4. Defense Exam Simulator (ห้องซ้อมตอบคำถามอาจารย์ 10 ข้อ)
+        <button onclick="switchTab('exam')" id="tab-exam" class="tab-btn pb-2.5 px-2 flex items-center gap-1.5 text-slate-400 hover:text-slate-200 whitespace-nowrap shrink-0">
+            <span>🎯</span> 4. Defense Exam Simulator
         </button>
-        <button onclick="switchTab('cheatsheet')" id="tab-cheatsheet" class="tab-btn pb-3 px-2 flex items-center gap-2 text-slate-400 hover:text-slate-200 whitespace-nowrap">
-            <span>🧠</span> 5. Backend Defense Cheat Sheet (จุดตายที่อาจารย์ชอบถาม)
+        <button onclick="switchTab('cheatsheet')" id="tab-cheatsheet" class="tab-btn pb-2.5 px-2 flex items-center gap-1.5 text-slate-400 hover:text-slate-200 whitespace-nowrap shrink-0">
+            <span>🧠</span> 5. Backend Cheat Sheet
         </button>
     </nav>
 
@@ -305,7 +307,7 @@
             <!-- Inspector Display Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
                 <!-- Left: Function List -->
-                <div class="lg:col-span-6 bg-slate-950 rounded-xl border border-slate-800 p-3 flex flex-col max-h-[640px]">
+                <div id="b-code-list-card" class="lg:col-span-5 bg-slate-950 rounded-xl border border-slate-800 p-3 flex flex-col max-h-[380px] lg:max-h-[660px]">
                     <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800/80 text-xs">
                         <span class="text-slate-400 font-medium" id="b-module-fn-count">รายการฟังก์ชันในหมวดนี้</span>
                         <span class="text-[11px] text-emerald-400 font-mono" id="b-module-file-badge">generation.py</span>
@@ -316,8 +318,15 @@
                 </div>
 
                 <!-- Right: Detailed Panel & Call Graph -->
-                <div class="lg:col-span-6 bg-slate-900/90 rounded-xl border border-slate-800 p-4 flex flex-col justify-between max-h-[640px] overflow-y-auto space-y-4">
+                <div id="b-inspect-detail-panel" class="lg:col-span-7 bg-slate-900/90 rounded-xl border border-slate-800 p-3.5 sm:p-4 flex flex-col justify-between max-h-[660px] overflow-y-auto space-y-4 scroll-mt-20">
                     <div class="space-y-3">
+                        <!-- Mobile Quick Scroll Back to List -->
+                        <div class="lg:hidden flex items-center justify-between bg-slate-950/80 p-2 rounded-lg border border-slate-800 text-xs">
+                            <span class="text-slate-400 text-[11px] font-mono">📖 กำลังอ่านรายละเอียดฟังก์ชัน</span>
+                            <button onclick="document.getElementById('b-code-list-card').scrollIntoView({behavior: 'smooth'})" class="text-emerald-400 hover:text-emerald-300 font-semibold text-[11px] flex items-center gap-1 bg-emerald-950/60 px-2.5 py-1 rounded border border-emerald-800/60">
+                                <span>↑</span> <span>เลือกฟังก์ชันอื่น</span>
+                            </button>
+                        </div>
                         <!-- Breadcrumb & Back Navigation -->
                         <div id="b-inspect-nav-bar" class="hidden items-center justify-between bg-slate-950/90 px-3 py-1.5 rounded-lg border border-slate-800 text-xs">
                             <div class="flex items-center gap-1.5 text-slate-400 text-[11px] font-mono truncate mr-2">
@@ -469,6 +478,7 @@
             </div>
         </div>
     </section>
+</main>
 
     <!-- JavaScript Application Logic -->
     <script>
@@ -858,23 +868,34 @@
                 const el = document.createElement('div');
                 const isFirst = idx === 0;
                 el.id = `be-item-${mod}-${item.line}`;
-                el.className = `p-2.5 rounded-lg cursor-pointer hover:bg-slate-900 border border-transparent hover:border-slate-800 flex items-center justify-between transition-all ${isFirst ? 'bg-slate-900/90 border-emerald-500/40 border-l-4 border-l-emerald-400 shadow-sm' : 'bg-slate-950/60'}`;
+                el.className = `p-2.5 rounded-lg cursor-pointer hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all ${isFirst ? 'bg-slate-900/90 border-emerald-500/40 border-l-4 border-l-emerald-400 shadow-sm' : 'bg-slate-950/60'}`;
                 const badgeColor = item.tag_color || 'bg-slate-800 text-emerald-300 border-slate-700';
 
                 el.innerHTML = `
-                    <div class="flex items-center gap-2.5 min-w-0 pr-2">
-                        <span class="text-slate-500 font-mono text-[11px] shrink-0">L${item.line}</span>
-                        <span class="font-bold text-slate-200 truncate text-xs">${item.name}</span>
+                    <div class="w-full min-w-0">
+                        <div class="flex items-center justify-between gap-1.5 mb-1">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="text-emerald-400 font-mono text-[10px] font-bold bg-slate-900 px-1.5 py-0.2 rounded border border-slate-800 shrink-0">L${item.line}</span>
+                                <span class="text-slate-100 font-mono font-bold text-xs truncate" title="${item.name}">${item.name}</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded text-[9px] font-mono border ${badgeColor} shrink-0">${item.tag}</span>
+                        </div>
+                        <div class="text-[11px] text-slate-400 font-sans truncate pl-6">
+                            ${item.title || item.name}
+                        </div>
                     </div>
-                    <span class="px-2 py-0.5 rounded text-[10px] font-mono border ${badgeColor} shrink-0">${item.tag}</span>
                 `;
 
                 el.onclick = () => {
                     document.querySelectorAll('#b-code-lines-container > div').forEach(d => {
-                        d.className = "p-2.5 rounded-lg cursor-pointer hover:bg-slate-900 border border-transparent hover:border-slate-800 flex items-center justify-between transition-all bg-slate-950/60";
+                        d.className = "p-2.5 rounded-lg cursor-pointer hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all bg-slate-950/60";
                     });
-                    el.className = "p-2.5 rounded-lg cursor-pointer bg-slate-900/90 border-emerald-500/40 border-l-4 border-l-emerald-400 flex items-center justify-between transition-all shadow-sm";
+                    el.className = "p-2.5 rounded-lg cursor-pointer bg-slate-900/90 border-emerald-500/40 border-l-4 border-l-emerald-400 transition-all shadow-sm";
                     inspectBackendCode(item);
+                    if (window.innerWidth < 1024) {
+                        const panel = document.getElementById('b-inspect-detail-panel');
+                        if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
                 };
 
                 container.appendChild(el);
