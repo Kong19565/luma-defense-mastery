@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMA Frontend (Node 1) — Interactive Defense Mastery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Sarabun', 'TH Sarabun New', 'sans-serif'],
+                        mono: ['Fira Code', 'Courier New', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background: #090d16; color: #f1f5f9; font-family: 'Sarabun', sans-serif; }
+        .glass-card { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
+        .tab-btn.active { color: #38bdf8; border-bottom: 2px solid #38bdf8; font-weight: 600; }
+        pre code { font-family: 'Fira Code', monospace; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 space-y-6">
+
+<!-- Universal Top Navigation Bar (GitHub Pages) -->
+<div class="bg-slate-950/90 border-b border-slate-800/80 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs font-mono sticky top-0 z-50 backdrop-blur-md">
+    <div class="flex items-center gap-2">
+        <a href="./index.html" class="flex items-center gap-1.5 text-slate-300 hover:text-white font-bold transition-colors">
+            <span>🏠</span> <span>LUMA Mastery Hub</span>
+        </a>
+        <span class="text-slate-600">/</span>
+        <span class="text-sky-400 font-semibold">Node 1: Frontend Client</span>
+    </div>
+    <div class="flex items-center gap-2">
+        <a href="./frontend.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-sky-500/20 text-sky-300 border-sky-500/50 font-bold">
+            <span>🌐</span> <span>Node 1: Frontend</span>
+        </a>
+        <a href="./backend.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800">
+            <span>⚙️</span> <span>Node 2: Backend</span>
+        </a>
+        <a href="./ai-server.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800">
+            <span>🤖</span> <span>Node 3: AI Server</span>
+        </a>
+    </div>
+</div>
+
+
+
+    <!-- Header Navigation -->
+    <header class="glass-card rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-sky-500/20 shadow-xl">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center text-2xl shadow-lg shadow-sky-500/20">
+                🎨
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h1 class="text-xl font-bold text-white tracking-wide">LUMA Frontend (Node 1) — Interactive Defense Mastery</h1>
+                    <span class="px-2 py-0.5 text-xs rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-mono">React 18 & Canvas</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-0.5">คู่มือเตรียมสอบปากเปล่าวิชา Image Processing: ส่องโค้ดหน้าบ้านทุกบรรทัด, จำลอง Inpainting Canvas, และตะลุยโจทย์ 10 ข้อ</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3 text-xs font-mono">
+            <div class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+                <span class="text-slate-500">Tech:</span> React + Vite + TS + Zustand
+            </div>
+            <div class="px-3 py-1.5 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">
+                Port: 5173
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="flex border-b border-slate-800 text-sm gap-6 overflow-x-auto">
+        <button onclick="switchTab('pipeline')" id="tab-pipeline" class="tab-btn active pb-3 px-2 flex items-center gap-2 whitespace-nowrap">
+            <span>⚡</span> 1. Frontend Lifecycle Simulator (การไหลของ State หน้าบ้าน)
+        </button>
+        <button onclick="switchTab('canvas-lab')" id="tab-canvas-lab" class="tab-btn pb-3 px-2 flex items-center gap-2 text-slate-400 hover:text-slate-200 whitespace-nowrap">
+            <span>🖌️</span> 2. Inpaint Canvas Math Lab (คำนวณสเกลพิกัดและการแปลง Mask)
+        </button>
+        <button onclick="switchTab('code')" id="tab-code" class="tab-btn pb-3 px-2 flex items-center gap-2 text-slate-400 hover:text-slate-200 whitespace-nowrap">
+            <span>📑</span> 3. Line-by-Line Code Inspector (ส่องโค้ดรายบรรทัด & Call Graph)
+        </button>
+        <button onclick="switchTab('exam')" id="tab-exam" class="tab-btn pb-3 px-2 flex items-center gap-2 text-slate-400 hover:text-slate-200 whitespace-nowrap">
+            <span>🎯</span> 4. Defense Exam Simulator (ห้องซ้อมตอบคำถามอาจารย์ 10 ข้อ)
+        </button>
+        <button onclick="switchTab('cheatsheet')" id="tab-cheatsheet" class="tab-btn pb-3 px-2 flex items-center gap-2 text-slate-400 hover:text-slate-200 whitespace-nowrap">
+            <span>🧠</span> 5. Frontend Defense Cheat Sheet (จุดตายที่อาจารย์ชอบถาม)
+        </button>
+    </nav>
+
+    <!-- TAB 1: PIPELINE -->
+    <section id="section-pipeline" class="space-y-6">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <span>⚡</span> จำลองวงจรชีวิตของงานสร้างภาพฝั่ง Client (Client-Side Pipeline)
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">คลิกปุ่มเพื่อดูว่า State ใน Zustand, Canvas, React Query, และ DOM มีการเปลี่ยนแปลงอย่างไรในแต่ละขั้น</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="stepClientPipeline(-1)" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200">◀ ย้อนกลับ</button>
+                    <button onclick="stepClientPipeline(1)" class="px-3 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-xs font-semibold text-slate-950">ถัดไป ▶</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-2 text-center text-xs font-mono" id="pipeline-steps-track"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 bg-slate-950 p-4 rounded-xl border border-slate-800">
+                <div class="lg:col-span-7 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono px-2 py-0.5 rounded bg-sky-500/20 text-sky-300" id="step-badge">STEP 1</span>
+                        <span class="text-[11px] font-mono text-slate-500" id="step-file">GeneratePage.tsx:35</span>
+                    </div>
+                    <h3 class="text-sm font-bold text-white" id="step-title">กำลังโหลด...</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed" id="step-desc">...</p>
+                    <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 font-mono text-xs text-sky-300 overflow-x-auto">
+                        <pre><code id="step-snippet"></code></pre>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 flex flex-col justify-between space-y-3 bg-slate-900/60 p-4 rounded-xl border border-slate-800/80">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 flex items-center gap-1.5 mb-2">
+                            <span>💡</span> <span>จุดที่อาจารย์ชอบถาม (Defense Focus):</span>
+                        </span>
+                        <p class="text-xs text-slate-300 leading-relaxed" id="step-defense-q">...</p>
+                    </div>
+                    <div class="bg-amber-950/30 p-3 rounded-lg border border-amber-500/30 text-[11.5px] text-amber-200/90 leading-relaxed" id="step-defense-a">
+                        ...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAB 2: INPAINT CANVAS LAB -->
+    <section id="section-canvas-lab" class="hidden space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-7 glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
+                <div class="border-b border-slate-800 pb-3">
+                    <h3 class="text-base font-bold text-white flex items-center gap-2">
+                        <span>🖌️</span> การแปลงพิกัดหน้าจอสู่พิกเซลจริง (Coordinate Transform Simulator)
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1">ทดลองลากเมาส์บนกระดานด้านล่าง เพื่อดูการคำนวณจาก Viewport Pixel สู่ Natural Resolution</p>
+                </div>
+                <div class="grid grid-cols-2 gap-4 text-xs font-mono bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <div>
+                        <label class="text-slate-400 block mb-1">ความละเอียดภาพจริง (Natural Size):</label>
+                        <select id="sim-natural-size" onchange="updateCanvasSim()" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-sky-300">
+                            <option value="512x512">512 x 512 px (Square)</option>
+                            <option value="768x512">768 x 512 px (Landscape)</option>
+                            <option value="512x768">512 x 768 px (Portrait)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">ขนาด DOM บนหน้าจอ (Rendered CSS):</label>
+                        <select id="sim-dom-size" onchange="updateCanvasSim()" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-emerald-300">
+                            <option value="320x320">320 x 320 px (Mobile View)</option>
+                            <option value="400x400" selected>400 x 400 px (Tablet/Laptop)</option>
+                            <option value="250x250">250 x 250 px (Small Widget)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center justify-center p-4 bg-slate-950 rounded-xl border border-slate-800">
+                    <div id="canvas-dom-wrapper" class="relative border-2 border-dashed border-sky-500/40 rounded-lg cursor-crosshair overflow-hidden shadow-inner" style="width: 400px; height: 400px; background: #1e293b;">
+                        <canvas id="sim-canvas" width="400" height="400" class="w-full h-full"></canvas>
+                        <div class="absolute top-2 left-2 pointer-events-none px-2 py-1 rounded bg-slate-950/80 text-[10px] font-mono text-slate-300">
+                            ลากเมาส์เพื่อทดลองวาด Mask
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs font-mono text-center">
+                    <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                        <span class="text-slate-500 block text-[10px]">Mouse Client (DOM):</span>
+                        <span class="text-sky-300 font-bold" id="readout-dom">X: 0, Y: 0</span>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                        <span class="text-slate-500 block text-[10px]">Scale Factor (Sx, Sy):</span>
+                        <span class="text-emerald-300 font-bold" id="readout-scale">1.28, 1.28</span>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                        <span class="text-slate-500 block text-[10px]">Natural Pixel (Actual):</span>
+                        <span class="text-amber-300 font-bold" id="readout-natural">X: 0, Y: 0</span>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                        <span class="text-slate-500 block text-[10px]">Mask Color (RGB):</span>
+                        <span class="text-purple-300 font-bold">255, 255, 255</span>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-5 glass-card rounded-2xl p-5 border border-slate-800 flex flex-col justify-between space-y-4">
+                <div class="space-y-4">
+                    <div class="border-b border-slate-800 pb-3">
+                        <h4 class="text-base font-bold text-white flex items-center gap-2">
+                            <span>📐</span> ทฤษฎี Inpaint Mask ในเชิง Image Processing
+                        </h4>
+                        <p class="text-xs text-slate-400 mt-1">สิ่งที่เกิดขึ้นเมื่อส่ง Mask ไปให้โมเดล Latent Diffusion</p>
+                    </div>
+                    <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                            <span class="text-sky-300 font-bold block mb-1">1. สูตรการชดเชยมาตราส่วน (Scaling Math):</span>
+                            X_nat = (X_client - rect.left) * (W_nat / rect.width)<br>
+                            Y_nat = (Y_client - rect.top) * (H_nat / rect.height)<br>
+                            ช่วยให้แม้ผู้ใช้จะซูมหน้าจอ หรือเปิดบนจอมือถือ พิกัดของหัวแปรงจะถูกแมปกลับไปยังตำแหน่งพิกเซลจริงของภาพได้แม่นยำ 100%
+                        </div>
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                            <span class="text-emerald-300 font-bold block mb-1">2. Binary Alpha Masking (ภาพขาว/ดำ):</span>
+                            Output(x,y) = 255 (สีขาว: ให้ AI วาดใหม่) หรือ 0 (สีดำ: ล็อกภาพเดิม)<br>
+                            ภาพ Mask จะถูกส่งเป็น Base64 PNG ไปยัง Backend เพื่อส่งต่อให้ AI Server นำไปคูณแบบ Hadamard Product ใน Latent Space
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-amber-950/40 to-slate-950 p-3.5 rounded-xl border border-amber-500/30 text-xs">
+                    <span class="text-amber-400 font-bold block mb-1">💡 คำถามสอบปากเปล่าประจำหมวด Canvas:</span>
+                    <p class="text-slate-300 text-[11.5px] leading-relaxed">
+                        <b>ถาม:</b> ทำไมถึงไม่ส่งพิกัด Vector ของเส้นไปให้ AI Server เรนเดอร์เอง?<br>
+                        <b>ตอบ:</b> เพราะการเรนเดอร์ Stroke บน Browser ผ่าน Canvas 2D ทำได้แบบเรียลไทม์ และส่งเป็น Rasterized B/W Mask สำเร็จรูป ทำให้ AI Server ไม่ต้องเสียเวลาคำนวณ Path Rasterization ช่วยลดภาระบนการ์ดจอได้ทันที
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAB 3: CODE INSPECTOR -->
+    <section id="section-code" class="hidden space-y-6">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <span>🔍</span> เครื่องมือส่องโค้ดหน้าบ้านทุกบรรทัด (Line-by-Line Code Inspector)
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-0.5">เลือกหมวดหมู่ที่ต้องการศึกษา และคลิกปุ่ม <span class="text-sky-300 font-mono">[ ↗ เจาะลึกโค้ด ]</span> เพื่อกระโดดข้ามฟังก์ชันตาม Call Graph ได้ทันที</p>
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs">
+                    <button onclick="loadFrontendModule('canvas')" id="btn-mod-canvas" class="px-3 py-1.5 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-500/30 font-semibold font-mono flex items-center gap-1.5">
+                        <span>Mask Canvas</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-sky-500/30 text-sky-200">3</span>
+                    </button>
+                    <button onclick="loadFrontendModule('services')" id="btn-mod-services" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
+                        <span>API Services</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">4</span>
+                    </button>
+                    <button onclick="loadFrontendModule('hooks')" id="btn-mod-hooks" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
+                        <span>State & Hooks</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">3</span>
+                    </button>
+                    <button onclick="loadFrontendModule('ui')" id="btn-mod-ui" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
+                        <span>Size & Controls</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">1</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                <div class="lg:col-span-6 bg-slate-950 rounded-xl border border-slate-800 p-3 flex flex-col max-h-[640px]">
+                    <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800/80 text-xs">
+                        <span class="text-slate-400 font-medium" id="module-fn-count">รายการฟังก์ชันในโมดูล</span>
+                        <span class="text-[11px] text-sky-400 font-mono" id="module-file-badge">useMaskEditor.ts</span>
+                    </div>
+                    <div id="code-lines-container" class="space-y-1.5 overflow-y-auto pr-1 flex-1 font-mono text-xs"></div>
+                </div>
+
+                <div class="lg:col-span-6 bg-slate-900/90 rounded-xl border border-slate-800 p-4 flex flex-col justify-between max-h-[640px] overflow-y-auto space-y-4">
+                    <div class="space-y-3">
+                        <div id="inspect-nav-bar" class="hidden items-center justify-between bg-slate-950/90 px-3 py-1.5 rounded-lg border border-slate-800 text-xs">
+                            <div class="flex items-center gap-1.5 text-slate-400 text-[11px] font-mono truncate mr-2">
+                                <span class="text-slate-500">เส้นทาง:</span>
+                                <span id="inspect-breadcrumbs" class="text-sky-300 font-semibold truncate">...</span>
+                            </div>
+                            <button onclick="goBackFrontendFunction()" class="px-2.5 py-1 rounded bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 text-[11px] font-semibold border border-sky-500/30 flex items-center gap-1 shrink-0 transition-all">
+                                <span>◀</span> <span>ย้อนกลับ</span>
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2">
+                            <span class="font-bold text-sky-400 font-mono text-[13px]" id="inspect-line-number">Line 31: useMaskEditor()</span>
+                            <span class="px-2 py-0.5 rounded border font-mono text-[11px]" id="inspect-tag">Canvas Hook</span>
+                        </div>
+                        <div>
+                            <h4 id="inspect-title" class="text-sm font-bold text-white mb-1">Custom Hook จัดการวาด Mask สำหรับงาน Inpainting</h4>
+                            <div class="inline-block px-2 py-0.5 rounded bg-slate-800/80 text-[11px] font-mono text-slate-300 border border-slate-700/50 mb-2" id="inspect-params">naturalWidth: number, naturalHeight: number -> MaskEditor</div>
+                            <div id="inspect-desc" class="text-xs text-slate-300 leading-relaxed">คำอธิบาย...</div>
+                        </div>
+                        <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/80 text-xs">
+                            <div class="text-[11px] font-semibold text-slate-400 flex items-center gap-1.5 mb-1">
+                                <span>⬅️</span> <span>ต้นทางที่เรียกใช้งานฟังก์ชันนี้ (Called By):</span>
+                            </div>
+                            <div id="inspect-caller-content" class="text-slate-300 text-[11.5px] leading-relaxed">GeneratePage.tsx</div>
+                        </div>
+                        <div class="space-y-2 pt-1 border-t border-slate-800/60">
+                            <div class="flex items-center justify-between text-xs font-semibold text-sky-300">
+                                <span class="flex items-center gap-1.5">
+                                    <span>🔗</span> <span>ฟังก์ชันลูกที่ถูกเรียกใช้ต่อ (Callee Execution Flow):</span>
+                                </span>
+                                <span class="text-[10px] text-slate-400 px-2 py-0.2 rounded bg-slate-800 font-mono" id="inspect-subcalls-count">1 คำสั่ง</span>
+                            </div>
+                            <div id="inspect-subcalls-container" class="space-y-2.5 max-h-[250px] overflow-y-auto pr-1"></div>
+                        </div>
+                        <div class="pt-1">
+                            <div class="flex items-center justify-between text-[11px] text-slate-400 mb-1">
+                                <span class="font-semibold text-slate-300">💻 ซอร์สโค้ดจริง (TypeScript / React):</span>
+                                <span class="text-[10px] text-slate-500 font-mono">React 18</span>
+                            </div>
+                            <pre class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-[11.5px] font-mono text-sky-300 overflow-x-auto leading-relaxed"><code id="inspect-snippet"># Snippet</code></pre>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-amber-950/40 to-slate-950 p-3.5 rounded-xl border border-amber-500/30 text-xs">
+                        <div class="flex items-center gap-1.5 text-amber-400 font-bold mb-1">
+                            <span>💡</span> <span>เคล็ดลับการตอบอาจารย์ (Professor Q&A Hint):</span>
+                        </div>
+                        <p id="inspect-tip" class="text-slate-300 text-[11.5px] leading-relaxed">คำแนะนำ...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAB 4: EXAM SIMULATOR -->
+    <section id="section-exam" class="hidden space-y-6">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <span>🎯</span> ห้องซ้อมสอบปากเปล่า: 10 คำถามวัดกึ๋นสถาปัตยกรรม Frontend
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-0.5">จำลองคำถามที่อาจารย์สาย Image Processing และ Web Engineering นิยมถามเพื่อตัดเกรด</p>
+                </div>
+                <div class="flex items-center gap-4 text-xs font-mono">
+                    <span class="text-slate-400">คะแนนปัจจุบัน: <b class="text-emerald-400 text-sm" id="exam-score">0 / 10</b></span>
+                    <button onclick="resetExam()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold">🔄 เริ่มสอบใหม่</button>
+                </div>
+            </div>
+            <div id="exam-cards-container" class="space-y-5"></div>
+        </div>
+    </section>
+
+    <!-- TAB 5: CHEAT SHEET -->
+    <section id="section-cheatsheet" class="hidden space-y-6">
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-6">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                    <span>🧠</span> คลังคำตอบสำเร็จรูป: สรุป 6 จุดตายที่อาจารย์ชอบจี้ถามฝั่ง Frontend
+                </h2>
+                <p class="text-xs text-slate-400 mt-1">จำแนวทางคำตอบ 6 ข้อนี้ไว้ให้ขึ้นใจ ตอบได้อย่างมั่นใจ รับเกรด A ได้แน่นอนครับ</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed">
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-sky-400 font-bold block">1. ทำไมถึงเลือกแปลง Mask บนเบราว์เซอร์แทนที่จะส่ง Vector ไปให้ Backend ทำ?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพื่อลดความซับซ้อนในการคำนวณของ Backend และลดความหน่วง เบราว์เซอร์มี GPU Acceleration ผ่าน HTML5 Canvas 2D อยู่แล้ว การ Export ออกมาเป็น Binary PNG ขาว-ดำขนาดเท่ากับ Natural Resolution ตั้งแต่ต้นทาง ทำให้ Backend และ AI Server รับไปใช้งานได้ทันทีโดยไม่ต้องเสียเวลาทำ Rasterization ซ้ำ</p>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-emerald-400 font-bold block">2. การใช้ Adaptive Polling ดีกว่า WebSocket อย่างไรในโปรเจกต์นี้?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เนื่องจากงานสร้างภาพด้วย Diffusion ใช้เวลาประมวลผลเป็นงานๆ ไป (Discrete Job) ไม่ใช่การแชทแบบ Real-time Streaming การเปิด Persistent WebSocket Connection ค้างไว้จะกิน Socket File Descriptors บนเซิร์ฟเวอร์โดยไม่จำเป็น ขณะที่ Adaptive Polling ทำงานแบบ Stateless หากผู้ใช้ปิดหน้าเว็บหรือเน็ตหลุดจะไม่เกิด Connection Leak และยังสามารถใช้ HTTP Caching และ CDN เข้ามาช่วยลดภาระได้ด้วย</p>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-purple-400 font-bold block">3. หน้าบ้านป้องกันปัญหา Memory Leak จากการแสดงรูปภาพขนาดใหญ่ซ้ำๆ อย่างไร?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เมื่อมีการสร้าง Object URL จากรูปภาพ Base64 หรือ Blob (ผ่าน URL.createObjectURL()) เราจะมีการเรียก URL.revokeObjectURL() เสมอใน Cleanup Function ของ useEffect เมื่อรูปนั้นถูกปิดหรือ Unmount ออกไป เพื่อคืนหน่วยความจำ V8 Heap Memory คืนให้เบราว์เซอร์ทันที</p>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-amber-400 font-bold block">4. ถ้าระหว่าง Polling งานอยู่ แล้วผู้ใช้กด 'Cancel' กลไกทำงานอย่างไร?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เราใช้เทคนิค Optimistic UI โดยสั่งปรับ State ใน React Query ให้กลายเป็น cancelled ในทันทีเพื่อให้หน้าจอแสดงผลว่ายกเลิกแล้ว พร้อมส่งคำขอ POST /api/generations/{id}/cancel ไปยัง Backend เพื่อส่งสัญญาณ Hardware Interrupt ไปตัดงานบนการ์ดจอ RTX 3070 ต่อไป</p>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-rose-400 font-bold block">5. ทำไมถึงต้องบังคับขนาดภาพพรีเซ็ตให้หารด้วย 8 ลงตัว (เช่น 512x680 แทน 512x685)?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพราะโมเดล Stable Diffusion ทำงานบน Latent Space ผ่านโครงข่าย VAE ซึ่งมี Downsampling Factor เท่ากับ 8 เท่า (f=8) หากหน้าบ้านยอมให้ส่งเลข 685 เข้าไป มิติใน Latent Space จะกลายเป็น 85.625 ซึ่งไม่เป็นจำนวนเต็ม ทำให้เกิด Tensor Shape Mismatch ใน UNet Cross-Attention Layers ทันที การกรองตั้งแต่ Frontend จึงเป็นหัวใจของ Data Sanitization</p>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-teal-400 font-bold block">6. ทำไมถึงเก็บ Token ใน LocalStorage/Memory Store แทนที่จะใช้ Cookie ปกติ?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เนื่องจากสถาปัตยกรรมระบบเป็นแบบ Decoupled API (Frontend อยู่พอร์ต 5173, Backend อยู่พอร์ต 8000) ซึ่งข้าม Origin กัน การใช้ Authorization Header แบบ Bearer Token ช่วยป้องกันการโจมตีประเภท CSRF (Cross-Site Request Forgery) ได้อย่างเด็ดขาดโดยไม่ต้องพึ่งพา CSRF Token เสริม</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCRIPT -->
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('section').forEach(sec => sec.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('text-slate-400');
+            });
+            document.getElementById('section-' + tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active');
+            activeBtn.classList.remove('text-slate-400');
+        }
+
+        // =====================================================================
+        // TAB 1: PIPELINE DATA
+        // =====================================================================
+        let currentPipelineStep = 0;
+        const PIPELINE_STEPS = [
+    {
+        "badge": "STEP 1: USER INPUT & DRAFT",
+        "file": "GeneratePage.tsx:32",
+        "title": "1. รับข้อมูล Prompt และบันทึก Draft ลง Zustand Store",
+        "desc": "ผู้ใช้พิมพ์คำสั่ง Prompt และเลือกโหมด (Text2Img, Img2Img, Inpaint) ข้อมูลจะถูกบันทึกแบบ Real-time ลงใน Zustand Draft Store เพื่อไม่ให้ข้อมูลหายแม้ผู้ใช้จะสลับหน้าจอไปดู History",
+        "snippet": "const draft = useDraft();\n// เมื่อพิมพ์ข้อความจะ sync ลง local state ทันที\ndraft.setPrompt(newPrompt);",
+        "defenseQ": "ทำไมถึงใช้ Zustand แทนการใช้ React useState ธรรมดาในหน้านี้?",
+        "defenseA": "เพราะฟอร์มมีขนาดใหญ่และมีหลายคอมโพเนนต์ย่อย (ControlsPanel, ModeFields, SizeControl) การใช้ Zustand ช่วยป้องกันปัญหา Prop Drilling และทำให้ข้อมูลคงอยู่แม้เปลี่ยนหน้าไปมาได้โดยไม่ต้องพึ่ง Context API ที่มักก่อให้เกิดปัญหา Unnecessary Re-renders ครับ"
+    },
+    {
+        "badge": "STEP 2: CANVAS INPAINT MASK",
+        "file": "MaskCanvas.tsx:158",
+        "title": "2. วาดรอยหน้ากากและแปลงเป็น Black/White Mask Base64",
+        "desc": "หากเป็นโหมด Inpaint ระบบจะเปิดกระดาน MaskCanvas ให้ผู้ใช้วาดหัวแปรงสีส้มทึบแสง เมื่อกดส่งงาน จะนำรอยวาดไปเรนเดอร์ลง Offscreen Canvas กลายเป็นภาพขาว-ดำ (#FFFFFF บน #000000) และแปลงเป็น Base64 PNG",
+        "snippet": "const maskBase64 = editor.exportMaskBase64();\npayload.mask_base64 = maskBase64;",
+        "defenseQ": "ทำไมต้องแปลงเป็นภาพขาวดำ ไม่ส่งภาพต้นฉบับที่มีเส้นสีทึบไปตรงๆ?",
+        "defenseA": "เพราะ Inpainting VAE Model ต้องการมิติ 1 Channel Alpha Mask เพื่อใช้เป็นตัวคูณ (Mask Weight) ระบุว่าพิกเซลใดจะถูกเติม Noise ใหม่และพิกเซลใดจะคงภาพเดิม การแยก Mask เป็นไฟล์อิสระขาว-ดำเป็นมาตรฐานของ Stable Diffusion ครับ"
+    },
+    {
+        "badge": "STEP 3: API DISPATCH",
+        "file": "generationService.ts:12",
+        "title": "3. ส่งคำขอสร้างภาพพร้อมแนบ JWT Token (POST /api/generations)",
+        "desc": "เรียกใช้ apiClient ส่ง JSON Payload ไปยัง Backend Node 2 โดยจะดึง Access Token จาก TokenStore มาแนบใน Header 'Authorization: Bearer <token>' อัตโนมัติ",
+        "snippet": "const job = await generationService.create(payload);\n// ได้รับ job.id และ status='queued' กลับมาทันที",
+        "defenseQ": "ทำไมคำขอนี้ถึงตอบกลับอย่างรวดเร็ว (HTTP 201/202) โดยที่ยังไม่ได้รูปภาพ?",
+        "defenseA": "เพราะการสร้างภาพใช้เวลาคำนวณนาน การบล็อก HTTP Connection จะทำให้เกิด Gateway Timeout การตอบรับ Task ID แล้วส่งต่องานเข้าคิว FIFO จึงเป็นรูปแบบ Asynchronous Job Processing ที่ถูกต้องครับ"
+    },
+    {
+        "badge": "STEP 4: OPTIMISTIC RUN STRIP",
+        "file": "ResultStage.tsx:45",
+        "title": "4. แสดงผล Optimistic Card และแถบสถานะการทำงานทันที",
+        "desc": "หน้าจอจะเปลี่ยนสถานะเป็น 'Generating...' ทันที พร้อมแสดงแถบ RunStrip มี Progress Spinner และเวลาที่กำลังนับเดินหน้า (useElapsed Hook) เพื่อให้ผู้ใช้รับรู้ว่าระบบกำลังทำงาน",
+        "snippet": "setRunningTaskId(job.id);\n// แสดง UI กำลังโหลดทันทีโดยไม่ต้องรอ Polling รอบแรก",
+        "defenseQ": "Optimistic UI มีประโยชน์อย่างไรในแง่ของ User Experience?",
+        "defenseA": "ช่วยขจัดความหน่วงของการรับรู้ (Zero Perceived Latency) ผู้ใช้จะเห็นว่าระบบตอบสนองต่อการคลิกทันที ไม่เกิดอาการค้างหรือสงสัยว่าคลิกติดหรือไม่ครับ"
+    },
+    {
+        "badge": "STEP 5: ADAPTIVE POLLING",
+        "file": "useGenerationJob.ts:38",
+        "title": "5. เริ่มต้นลูป Polling ถามสถานะงานด้วยความถี่แบบ Adaptive Backoff",
+        "desc": "Hook useGenerationJob จะทำการสอบถาม GET /api/generations/{id} ทุกๆ 1s ในช่วงแรก แล้วค่อยๆ ขยายความถี่เป็น 2s และ 5s เพื่อลดโหลดของเซิร์ฟเวอร์ พร้อมดึงเปอร์เซ็นต์ Denoising Progress มาแสดง",
+        "snippet": "refetchInterval: (query) => computeAdaptiveInterval(query.state.data),\n// 1s -> 2s -> 5s จนกว่า status จะเป็น completed",
+        "defenseQ": "ถ้างานค้างหรือเซิร์ฟเวอร์ตาย หน้าบ้านจะรู้ได้อย่างไร?",
+        "defenseA": "เรามี Stalled Watchdog ใน useGenerationJob หากเวลาที่ผ่านไปเกิน 120 วินาที ระบบจะแจ้งเตือนว่างานค้าง และเปิดปุ่มให้ผู้ใช้กดยกเลิกหรือส่งใหม่ได้ทันทีครับ"
+    },
+    {
+        "badge": "STEP 6: RESULT RENDERING",
+        "file": "ResultStage.tsx:112",
+        "title": "6. แสดงผลลัพธ์ภาพที่สำเร็จ และจัดเก็บลงแคช React Query",
+        "desc": "เมื่อได้รับ status='completed' ระบบจะดึง URL ภาพมาแสดงผลผ่านคอมโพเนนต์ ImageViewer พร้อมปุ่มดาวน์โหลด, สลับดู Seed ที่ใช้, และปุ่มส่งภาพนี้ต่อไปยังแท็บ Image Tools ได้ทันที",
+        "snippet": "<ImageViewer src={imageUrl} alt=\"Generated Result\" />\nqueryClient.invalidateQueries(['generations']);",
+        "defenseQ": "ภาพที่ได้จากเซิร์ฟเวอร์เป็นฟอร์แมตอะไร และเบราว์เซอร์แสดงผลได้ดีแค่ไหน?",
+        "defenseA": "เป็นภาพฟอร์แมต WebP ที่บีบอัดมาจาก AI Server ซึ่งเบราว์เซอร์สมัยใหม่รองรับแบบ Native 100% มีขนาดไฟล์เบากว่า PNG ถึง 80% ทำให้โหลดขึ้นจอได้เร็วกว่ามากครับ"
+    }
+];
+
+        function renderPipelineTrack() {
+            const track = document.getElementById('pipeline-steps-track');
+            track.innerHTML = '';
+            PIPELINE_STEPS.forEach((st, idx) => {
+                const el = document.createElement('div');
+                const isActive = idx === currentPipelineStep;
+                el.className = `p-2 rounded-lg cursor-pointer transition-all border ${isActive ? 'bg-sky-500/20 border-sky-500/60 text-sky-300 font-bold' : 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700'}`;
+                el.innerText = `${idx + 1}. ${st.badge.split(':')[0]}`;
+                el.onclick = () => { currentPipelineStep = idx; updatePipelineUI(); };
+                track.appendChild(el);
+            });
+        }
+
+        function updatePipelineUI() {
+            const st = PIPELINE_STEPS[currentPipelineStep];
+            document.getElementById('step-badge').innerText = st.badge;
+            document.getElementById('step-file').innerText = st.file;
+            document.getElementById('step-title').innerText = st.title;
+            document.getElementById('step-desc').innerText = st.desc;
+            document.getElementById('step-snippet').innerText = st.snippet;
+            document.getElementById('step-defense-q').innerText = st.defenseQ;
+            document.getElementById('step-defense-a').innerText = st.defenseA;
+            renderPipelineTrack();
+        }
+
+        function stepClientPipeline(delta) {
+            currentPipelineStep = (currentPipelineStep + delta + PIPELINE_STEPS.length) % PIPELINE_STEPS.length;
+            updatePipelineUI();
+        }
+
+        // =====================================================================
+        // TAB 2: CANVAS SIMULATOR
+        // =====================================================================
+        function initCanvasSim() {
+            const canvas = document.getElementById('sim-canvas');
+            const ctx = canvas.getContext('2d');
+            let drawing = false;
+
+            canvas.addEventListener('mousedown', (e) => { drawing = true; drawPoint(e); });
+            canvas.addEventListener('mousemove', (e) => { if (drawing) drawPoint(e); updateReadout(e); });
+            window.addEventListener('mouseup', () => { drawing = false; });
+
+            function drawPoint(e) {
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                ctx.fillStyle = '#f97316';
+                ctx.beginPath();
+                ctx.arc(x, y, 16, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            function updateReadout(e) {
+                const rect = canvas.getBoundingClientRect();
+                const domX = Math.round(e.clientX - rect.left);
+                const domY = Math.round(e.clientY - rect.top);
+                document.getElementById('readout-dom').innerText = `X: ${domX}, Y: ${domY}`;
+
+                const natVal = document.getElementById('sim-natural-size').value.split('x');
+                const natW = parseInt(natVal[0]), natH = parseInt(natVal[1]);
+                const scaleX = (natW / rect.width).toFixed(2);
+                const scaleY = (natH / rect.height).toFixed(2);
+                document.getElementById('readout-scale').innerText = `${scaleX}, ${scaleY}`;
+
+                const naturalX = Math.round(domX * (natW / rect.width));
+                const naturalY = Math.round(domY * (natH / rect.height));
+                document.getElementById('readout-natural').innerText = `X: ${naturalX}, Y: ${naturalY}`;
+            }
+        }
+
+        function updateCanvasSim() {
+            const domVal = document.getElementById('sim-dom-size').value.split('x');
+            const wrapper = document.getElementById('canvas-dom-wrapper');
+            const canvas = document.getElementById('sim-canvas');
+            wrapper.style.width = domVal[0] + 'px';
+            wrapper.style.height = domVal[1] + 'px';
+            canvas.width = parseInt(domVal[0]);
+            canvas.height = parseInt(domVal[1]);
+        }
+
+        // =====================================================================
+        // TAB 3: CODE INSPECTOR
+        // =====================================================================
+        const FRONTEND_MODULES_DATA = {
+    "canvas": [
+        {
+            "line": 31,
+            "name": "useMaskEditor(naturalWidth, naturalHeight)",
+            "tag": "Canvas Hook",
+            "tag_color": "bg-amber-950/60 text-amber-300 border-amber-500/30",
+            "title": "Custom Hook จัดการวาด Mask สำหรับงาน Inpainting",
+            "params": "naturalWidth: number, naturalHeight: number -> MaskEditor",
+            "desc": "หัวใจหลักของเครื่องมือ Inpaint ในฝั่งหน้าบ้าน: ควบคุม Canvas 2D Context, เก็บลำดับประวัติเส้นวาด (Stroke History Stack) สำหรับ Undo/Redo, ควบคุมขนาดหัวแปรงและโหมด Brush/Eraser, และมีฟังก์ชันส่งออก Mask เป็น Base64 ภาพขาว/ดำเพื่อส่งให้ AI Node",
+            "snippet": "export function useMaskEditor(naturalWidth: number, naturalHeight: number) {\n  const canvasRef = useRef<HTMLCanvasElement | null>(null);\n  const strokes = useRef<Stroke[]>([]);\n  const redoStack = useRef<Stroke[]>([]);\n  const active = useRef<Stroke | null>(null);\n  // จัดการวาดเส้น Brush / Eraser ลงบน Canvas Context\n  return { canvasRef, startStroke, addPoint, endStroke, undo, redo, exportMaskBase64 };\n}",
+            "called_by": "คอมโพเนนต์ <code>GeneratePage.tsx</code> (บรรทัด 58) และส่งต่อให้ <code>MaskCanvas.tsx</code>",
+            "subcalls": [
+                {
+                    "targetMod": "canvas",
+                    "targetFn": "exportMaskBase64",
+                    "label": "editor.exportMaskBase64()",
+                    "why": "เพื่อสกัดภาพ Mask ที่ผู้ใช้วาดออกมาเป็น Base64 Data URL ก่อนแนบไปกับคำขอสร้างภาพ",
+                    "what": "สร้าง Offscreen Canvas ➔ เทสีพื้นหลังเป็นสีดำสนิท (#000000) ➔ เรนเดอร์รอยแปรงทับด้วยสีขาวบริสุทธิ์ (#FFFFFF) ➔ ส่งออกเป็น image/png Base64",
+                    "callsNext": "ส่ง Base64 สตริงต่อไปให้ generationService.create()"
+                }
+            ],
+            "tip": "อาจารย์ถาม: ทำไม Mask ต้องส่งออกเป็นสีขาว-ดำ (White on Black) แทนที่จะเป็นสีโปร่งใส (Alpha)? ตอบว่า: เพราะมาตรฐาน Inpainting ของโมเดล Diffusion (VAE Inpaint Layer) กำหนดให้พิกเซลสีขาว (ค่าความสว่าง 255) คือบริเวณที่ต้องการให้ AI วาดใหม่ ส่วนสีดำ (ค่า 0) คือบริเวณที่ต้องคงสภาพเดิมไว้ครับ"
+        },
+        {
+            "line": 158,
+            "name": "exportMaskBase64(format = 'image/png')",
+            "tag": "Mask Export",
+            "tag_color": "bg-amber-950/60 text-amber-300 border-amber-500/30",
+            "title": "แปลงรอยวาดบน Canvas เป็น Black/White Mask Base64",
+            "params": "format: string -> string (Data URL Base64)",
+            "desc": "สร้าง Offscreen Canvas ขนาดเท่ากับ Natural Resolution ของภาพต้นฉบับ วาดพื้นหลังสีดำสนิท และวาดเฉพาะ Stroke ที่เป็นสีขาวทับลงไป จากนั้นเรียก toDataURL('image/png') เพื่อให้ได้ไบนารี Mask ที่แม่นยำระดับพิกเซล",
+            "snippet": "const exportMaskBase64 = useCallback(() => {\n  const canvas = document.createElement('canvas');\n  canvas.width = naturalWidth;\n  canvas.height = naturalHeight;\n  const ctx = canvas.getContext('2d');\n  // พ่นสีดำเป็นพื้นหลัง (ส่วนคงเดิม)\n  ctx.fillStyle = '#000000';\n  ctx.fillRect(0, 0, naturalWidth, naturalHeight);\n  // พ่นสีขาวเฉพาะบริเวณ Stroke (ส่วนที่ต้องการแต่งใหม่)\n  renderStrokesToContext(ctx, strokes.current, '#ffffff');\n  return canvas.toDataURL('image/png');\n}, [naturalWidth, naturalHeight]);",
+            "called_by": "ฟังก์ชัน handleSubmit() ใน GeneratePage.tsx ตอนกดยืนยันสร้างภาพโหมด Inpaint",
+            "subcalls": [],
+            "tip": "อาจารย์ถาม: ทำไมต้องวาดลงบน Offscreen Canvas อีกตัวที่มีขนาด naturalWidth แทนที่จะดึงจาก Canvas ที่แสดงอยู่บนหน้าจอตรงๆ? ตอบ: เพราะ Canvas บนหน้าจอถูกย่อ-ขยายด้วย CSS (Responsive Scaling) ทำให้ขนาด DOM ไม่ตรงกับภาพจริง การวาดซ้ำลง Offscreen Canvas ขนาด Natural Size ช่วยรักษา Resolution ดั้งเดิมของภาพ ไม่ทำให้ Mask คลาดเคลื่อนตำแหน่งครับ"
+        },
+        {
+            "line": 26,
+            "name": "MaskCanvas({ editor, sourceUrl, onNaturalSize })",
+            "tag": "Canvas UI",
+            "tag_color": "bg-yellow-950/60 text-yellow-300 border-yellow-500/30",
+            "title": "คอมโพเนนต์กระดานวาด Mask พร้อมระบบแปลงพิกัด Pointer",
+            "params": "Props: { editor, sourceUrl, onNaturalSize } -> JSX.Element",
+            "desc": "แสดงผลภาพต้นฉบับเป็น Background และซ้อน Canvas สำหรับวาด Mask ไว้ด้านบน ดักจับ Pointer Events (pointerdown, pointermove, pointerup) และทำการแปลงพิกัด (Coordinate Normalization) จากขนาดจอแสดงผลกลับไปเป็นขนาดพิกเซลจริงของภาพ",
+            "snippet": "export function MaskCanvas({ editor, sourceUrl, onNaturalSize }: Props) {\n  const handlePointerMove = (e: ReactPointerEvent<HTMLCanvasElement>) => {\n    const rect = e.currentTarget.getBoundingClientRect();\n    const scaleX = editor.naturalWidth / rect.width;\n    const scaleY = editor.naturalHeight / rect.height;\n    const x = (e.clientX - rect.left) * scaleX;\n    const y = (e.clientY - rect.top) * scaleY;\n    editor.addPoint({ x, y });\n  };\n  return <div className=\"mask-canvas-wrapper\">...</div>;\n}",
+            "called_by": "GeneratePage.tsx ในส่วนแสดงผลหน้าจอฝั่ง Canvas Editor",
+            "subcalls": [
+                {
+                    "targetMod": "canvas",
+                    "targetFn": "useMaskEditor",
+                    "label": "editor.addPoint({ x, y })",
+                    "why": "เพื่อบันทึกพิกัดจุดลากเส้นลงใน Stroke ปัจจุบัน",
+                    "what": "รับพิกัดจุด Natural (X, Y) เข้าไปในอาร์เรย์ points ของเส้นวาด",
+                    "callsNext": "สั่งวาดเส้นเชื่อมโยงด้วย ctx.lineTo(x, y)"
+                }
+            ],
+            "tip": "หัวใจคณิตศาสตร์ Image Processing บนเว็บ: สูตรคำนวณ X_nat = (X_client - rect.left) * (W_nat / rect.width) สำคัญอย่างไร? ตอบว่าเป็นการชดเชยอัตราส่วนการย่อ-ขยาย (Aspect-ratio scale transformation) ระหว่าง Viewport พิกเซลบนเบราว์เซอร์กับพิกเซลจริงของภาพ เพื่อให้ตำแหน่งหัวแปรงตรงกับพิกเซลในรูปภาพเสมอ ไม่ว่าผู้ใช้จะเปิดจอมือถือหรือจอ 4K"
+        }
+    ],
+    "services": [
+        {
+            "line": 35,
+            "name": "apiUrl(path, query)",
+            "tag": "URL Builder",
+            "tag_color": "bg-blue-950/60 text-blue-300 border-blue-500/30",
+            "title": "สร้าง URL ปลายทางเชื่อมต่อกับ Backend Node 2",
+            "params": "path: string, query?: Record<string, any> -> string",
+            "desc": "รวม Base URL (จาก VITE_API_BASE_URL) เข้ากับ Endpoint Path และต่อเติม Query Parameters อย่างถูกต้องตามมาตรฐาน RFC 3986 ป้องกันข้อผิดพลาดเรื่อง Trailing Slashes หรือ Double Slashes",
+            "snippet": "export function apiUrl(path: string, query?: RequestOptions['query']): string {\n  const base = env.apiBaseUrl.replace(/\\/+$/, '');\n  const normalizedPath = path.replace(/^\\/+/, '');\n  const url = new URL(`${base}/${normalizedPath}`);\n  if (query) {\n    Object.entries(query).forEach(([k, v]) => {\n      if (v !== undefined && v !== null) url.searchParams.set(k, String(v));\n    });\n  }\n  return url.toString();\n}",
+            "called_by": "ฟังก์ชัน apiClient() ใน apiClient.ts",
+            "subcalls": [],
+            "tip": "ช่วยให้ Frontend สามารถสลับ Environment ระหว่าง Local Development (http://localhost:8000) กับ Production Server ได้อย่างไร้รอยต่อผ่านตัวแปร Environment Variable เพียงตัวเดียว"
+        },
+        {
+            "line": 78,
+            "name": "apiClient(path, options)",
+            "tag": "HTTP Core",
+            "tag_color": "bg-blue-950/60 text-blue-300 border-blue-500/30",
+            "title": "ตัวกลางยิง HTTP Requests พร้อมระบบดักจับ Token & Errors",
+            "params": "path: string, options: RequestOptions -> Promise<T>",
+            "desc": "Fetch Wrapper ประจำระบบ: แนบ Authorization: Bearer <token> อัตโนมัติจาก LocalStorage/TokenStore, แปลง JSON Payload, รองรับ AbortSignal สำหรับยกเลิก Request, และแปลง HTTP Status Code Error ออกมาเป็นโครงสร้าง ApiError ที่มีข้อความสองภาษา (TH/EN)",
+            "snippet": "export async function apiClient<T>(path: string, options: RequestOptions = {}): Promise<T> {\n  const token = tokenStore.getAccessToken();\n  const headers = new Headers(options.headers);\n  if (token && !headers.has('Authorization')) {\n    headers.set('Authorization', `Bearer ${token}`);\n  }\n  const response = await fetch(apiUrl(path, options.query), { ...options, headers });\n  if (!response.ok) throw await normalizeError(response);\n  return response.json();\n}",
+            "called_by": "ถูกเรียกใช้โดยทุก Service ในระบบ: generationService, authService, uploadService",
+            "subcalls": [
+                {
+                    "targetMod": "services",
+                    "targetFn": "apiUrl",
+                    "label": "apiUrl(path, options.query)",
+                    "why": "เพื่อสร้าง URL ปลายทางที่สมบูรณ์",
+                    "what": "ผูก Base URL เข้ากับ Path และพารามิเตอร์",
+                    "callsNext": "ส่ง URL ให้ฟังก์ชันมาตรฐาน fetch()"
+                }
+            ],
+            "tip": "อาจารย์ถาม: ทำไมถึงเขียน Fetch Wrapper เองแทนที่จะใช้ Axios สำเร็จรูป? ตอบ: เพื่อลด Bundle Size ของโปรเจกต์ลงกว่า 40KB และทำให้เราสามารถควบคุม Custom Interceptor เช่น การดักจับ HTTP 401 เพื่อสั่งล้าง Session หรือการแปลงข้อความ Error ให้รองรับสองภาษา (i18n) ได้อย่างกระชับตรงจุดตามสถาปัตยกรรม Micro-frontend ครับ"
+        },
+        {
+            "line": 11,
+            "name": "generationService.create(payload)",
+            "tag": "API Client",
+            "tag_color": "bg-emerald-950/60 text-emerald-300 border-emerald-500/30",
+            "title": "ยิงคำขอสร้างภาพใหม่ไปยัง Backend (POST /api/generations)",
+            "params": "payload: CreateGenerationRequest -> Promise<Generation>",
+            "desc": "ส่งคำขอสร้างภาพ (รองรับ Text2Img, Img2Img, Inpaint) ไปยัง Backend Node 2 โดยจะได้รับ Object ข้อมูล Task กลับมาพร้อมสถานะเริ่มต้นเป็น queued",
+            "snippet": "export const generationService = {\n  create(payload: CreateGenerationRequest, signal?: AbortSignal): Promise<Generation> {\n    return apiClient<Generation>('/api/generations', {\n      method: 'POST',\n      body: payload,\n      signal,\n    });\n  },\n  // get, list, cancel, getProgress ...\n};",
+            "called_by": "ฟังก์ชัน useGenerationJob.ts และ GeneratePage.tsx",
+            "subcalls": [
+                {
+                    "targetMod": "services",
+                    "targetFn": "apiClient",
+                    "label": "apiClient('/api/generations', { method: 'POST', ... })",
+                    "why": "ส่งข้อมูล Payload ไปบันทึกและจัดคิวบน Backend",
+                    "what": "แนบ JWT Token และยิง HTTP POST ไปที่พอร์ต 8000",
+                    "callsNext": "Backend จะตอบกลับ JSON งานที่มี status='queued'"
+                }
+            ],
+            "tip": "เน้นย้ำเรื่อง Asynchronous Decoupling: หน้าบ้านไม่ได้รอรับรูปภาพกลับมาในคำขอนี้ทันที แต่รับ Generation ID กลับมา เพื่อนำไปใช้เริ่มกระบวนการ Polling หรือรอฟัง Webhook ต่อไป"
+        },
+        {
+            "line": 38,
+            "name": "generationService.cancel(id)",
+            "tag": "API Client",
+            "tag_color": "bg-rose-950/60 text-rose-300 border-rose-500/30",
+            "title": "ส่งคำขอยกเลิกงานสร้างภาพ (POST /api/generations/{id}/cancel)",
+            "params": "id: string -> Promise<CancelResponse>",
+            "desc": "ส่งคำขอสั่งยกเลิกงานที่กำลังประมวลผลอยู่ โดย Backend จะส่งต่อไปสั่ง Hardware Interrupt บน GPU ของ AI Node 3 ให้หยุดทันที",
+            "snippet": "cancel(id: string): Promise<CancelResponse> {\n  return apiClient<CancelResponse>(`/api/generations/${id}/cancel`, {\n    method: 'POST',\n  });\n}",
+            "called_by": "Hook useCancelRun.ts เมื่อผู้ใช้กดปุ่ม 'Cancel Generation'",
+            "subcalls": [
+                {
+                    "targetMod": "services",
+                    "targetFn": "apiClient",
+                    "label": "apiClient(`/api/generations/${id}/cancel`, { method: 'POST' })",
+                    "why": "ส่งสัญญาณยกเลิกงานไปยังเซิร์ฟเวอร์",
+                    "what": "ยิง POST ตัดงานในระบบ",
+                    "callsNext": "Backend จะอัปเดต DB และสั่งตัด GPU"
+                }
+            ],
+            "tip": "แสดงถึงการออกแบบ UX ที่ใส่ใจผู้ใช้ เมื่อผู้ใช้รู้ว่าพิมพ์ Prompt ผิดหรือเปลี่ยนใจ สามารถกดยกเลิกเพื่อไม่ให้ค้างรอและประหยัดการ์ดจอได้ทันที"
+        }
+    ],
+    "hooks": [
+        {
+            "line": 30,
+            "name": "useGenerationJob(id, startedAt)",
+            "tag": "State Machine",
+            "tag_color": "bg-purple-950/60 text-purple-300 border-purple-500/30",
+            "title": "State Machine ควบคุมวงจรชีวิตของงานสร้างภาพแบบ Real-time",
+            "params": "id: string | null, startedAt: number | null -> JobView",
+            "desc": "จัดการสถานะงาน: สั่ง Polling ข้อมูลสถานะจาก Backend แบบ Adaptive Interval (เริ่มจาก 1s ➔ 2s ➔ 5s), จัดการ Optimistic UI, ตรวจจับงานค้าง (Stalled Task Watchdog), และเรียกใช้ Invalidate Queries ของ React Query เมื่อสถานะเปลี่ยนเป็น Terminal State (completed หรือ failed)",
+            "snippet": "export function useGenerationJob(id: string | null, startedAt: number | null): JobView {\n  const queryClient = useQueryClient();\n  const [stalled, setStalled] = useState(false);\n  const { data: job, error } = useQuery({\n    queryKey: ['generation', id],\n    queryFn: () => generationService.get(id!),\n    enabled: Boolean(id),\n    refetchInterval: (query) => computeAdaptiveInterval(query.state.data),\n  });\n  // ตรวจสอบ Terminal State\n  return { job, status: job?.status, stalled, isTerminal: isTerminal(job?.status) };\n}",
+            "called_by": "คอมโพเนนต์ ResultStage.tsx และ RunStrip.tsx ในหน้าสร้างภาพ",
+            "subcalls": [
+                {
+                    "targetMod": "services",
+                    "targetFn": "generationService.create",
+                    "label": "generationService.get(id)",
+                    "why": "ดึงข้อมูลสถานะงานล่าสุดจาก Backend",
+                    "what": "ส่งคำขอ GET /api/generations/{id}",
+                    "callsNext": "ส่งข้อมูลเข้า React Query Cache"
+                }
+            ],
+            "tip": "อาจารย์ถาม: ทำไมถึงใช้ Adaptive Polling แทนที่จะตั้ง setInterval คงที่ทุก 1 วินาที? ตอบ: เพราะงาน Diffusion ใช้เวลารัน 5-15 วินาที การ Polling ถี่ๆ ทุก 1 วิ ตลอดเวลาจะสร้างภาระ Network Overhead ให้กับเซิร์ฟเวอร์มหาศาล การใช้ Adaptive Polling (เริ่มเร็ว 1s แล้วค่อยๆ ขยายเป็น 2s-3s) ช่วยประหยัด Request ได้กว่า 60% โดยที่ผู้ใช้แทบไม่รู้สึกถึงความล่าช้าครับ"
+        },
+        {
+            "line": 17,
+            "name": "useCancelRun(onCancelled)",
+            "tag": "Action Hook",
+            "tag_color": "bg-rose-950/60 text-rose-300 border-rose-500/30",
+            "title": "จัดการยกเลิกงานพร้อม Optimistic Update และ Toast Alert",
+            "params": "onCancelled?: () => void -> { cancelRun, isCancelling }",
+            "desc": "ควบคุมกระบวนการกดยกเลิกงาน: ส่ง Mutation ไปที่ generationService.cancel(id), ทำการอัปเดตแคชใน React Query เป็นสถานะ cancelled ล่วงหน้าทันที (Optimistic Update) เพื่อให้ UI ตอบสนองในเสี้ยววินาที, และแสดง Toast แจ้งเตือน",
+            "snippet": "export function useCancelRun(onCancelled?: () => void) {\n  const queryClient = useQueryClient();\n  const showToast = useToasts((state) => state.show);\n  const mutation = useMutation({\n    mutationFn: (id: string) => generationService.cancel(id),\n    onMutate: async (id) => {\n      // Optimistic Update ปรับสถานะหน้าจอทันที\n      queryClient.setQueryData(['generation', id], (old: any) => ({ ...old, status: 'cancelled' }));\n    },\n    onSuccess: () => showToast({ type: 'info', message: 'Task cancelled' })\n  });\n  return { cancelRun: mutation.mutate, isCancelling: mutation.isPending };\n}",
+            "called_by": "ปุ่มยกเลิกใน ResultStage.tsx และ RunStrip.tsx",
+            "subcalls": [
+                {
+                    "targetMod": "services",
+                    "targetFn": "generationService.cancel",
+                    "label": "generationService.cancel(id)",
+                    "why": "ส่งคำขอยกเลิกไปยัง Backend",
+                    "what": "เรียก POST /api/generations/{id}/cancel",
+                    "callsNext": "Backend ส่งต่อคำสั่ง Hardware Interrupt ไปที่ AI Server"
+                }
+            ],
+            "tip": "อธิบายเรื่อง Optimistic UI: ผู้ใช้ไม่ต้องรอให้สัญญาณเดินทางไปถึงการ์ดจอแล้วส่งกลับมา หน้าเว็บจะเปลี่ยนสถานะเป็น 'Cancelled' ทันที ทำให้รู้สึกลื่นไหล ไม่ค้างหน่วง (Zero perceived latency)"
+        },
+        {
+            "line": 14,
+            "name": "decodeJwt(token)",
+            "tag": "Auth Security",
+            "tag_color": "bg-indigo-950/60 text-indigo-300 border-indigo-500/30",
+            "title": "ถอดรหัส Payload ของ JWT Access Token ฝั่ง Client",
+            "params": "token: string -> JwtPayload | null",
+            "desc": "ทำการแยก Base64Url ส่วนที่ 2 (Payload) ของ JSON Web Token ออกมา แล้วทำการ Decode เป็น JSON Object เพื่ออ่านค่า exp (Expiration Timestamp) และ sub (User ID / Role) ใช้สำหรับตรวจสอบว่า Session หมดอายุหรือยังก่อนส่งคำขอ",
+            "snippet": "export function decodeJwt(token: string): JwtPayload | null {\n  try {\n    const parts = token.split('.');\n    if (parts.length !== 3) return null;\n    const payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');\n    const json = decodeURIComponent(\n      atob(payload).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')\n    );\n    return JSON.parse(json);\n  } catch {\n    return null;\n  }\n}",
+            "called_by": "ระบบ Route Guard guards.tsx และ sessionStore.ts",
+            "subcalls": [],
+            "tip": "อาจารย์ถาม: การ Decode JWT ฝั่ง Frontend มีความเสี่ยงด้านความปลอดภัยหรือไม่? ตอบ: ไม่มีครับ เพราะ Frontend ทำหน้าที่แค่อ่านค่า exp เพื่อเตือนผู้ใช้หรือ Redirect ไปหน้า Login เท่านั้น แต่ไม่ได้ใช้ Signature Verification เพื่ออนุมัติสิทธิ์ การตรวจสอบสิทธิ์ที่แท้จริงจะเกิดขึ้นบน Backend ด้วย Secret Key เสมอตามหลัก Client-Server Separation ครับ"
+        }
+    ],
+    "ui": [
+        {
+            "line": 45,
+            "name": "SizeControl({ width, height, onChange })",
+            "tag": "IP Control",
+            "tag_color": "bg-teal-950/60 text-teal-300 border-teal-500/30",
+            "title": "ตัวควบคุมอัตราส่วนและมิติภาพตามกฎ VAE f=8",
+            "params": "Props: { width, height, onChange } -> JSX.Element",
+            "desc": "เรนเดอร์ปุ่ม Preset อัตราส่วนภาพยอดนิยม: Square (1:1 - 512x512), Portrait (3:4 - 512x680), Landscape (4:3 - 680x512) โดยมีกลไกตรวจสอบให้มิติกว้างและยาวเป็นจำนวนเต็มที่หารด้วย 8 ลงตัวเสมอ",
+            "snippet": "export function SizeControl({ width, height, onChange }: Props) {\n  const presets = [\n    { label: 'Square', ratio: '1:1', w: 512, h: 512 },\n    { label: 'Portrait', ratio: '3:4', w: 512, h: 680 }, // (680 % 8 === 0)\n    { label: 'Landscape', ratio: '4:3', w: 680, h: 512 },\n  ];\n  return <div className=\"size-presets-grid\">...</div>;\n}",
+            "called_by": "คอมโพเนนต์ ControlsPanel.tsx ในหน้าสร้างภาพ",
+            "subcalls": [],
+            "tip": "ชี้แจงให้อาจารย์เห็นว่า Frontend มีการทำ Client-side Validation ร่วมกับทฤษฎี Image Processing โดยไม่ยอมให้ผู้ใช้พิมพ์ตัวเลขแปลกๆ ที่หาร 8 ไม่ลงตัวเข้ามาตั้งแต่ต้นทาง ช่วยป้องกัน 422 Error และ Tensor Mismatch ได้ 100%"
+        }
+    ]
+};
+        let currentFrontendMod = 'canvas';
+        let currentFrontendItem = null;
+        let frontendNavHistory = [];
+
+        function loadFrontendModule(mod, clearHistory = true) {
+            currentFrontendMod = mod;
+            if (clearHistory) {
+                frontendNavHistory = [];
+                updateFrontendNavUI();
+            }
+
+            ['canvas', 'services', 'hooks', 'ui'].forEach(m => {
+                const b = document.getElementById('btn-mod-' + m);
+                if (!b) return;
+                if (m === mod) {
+                    b.className = "px-3 py-1.5 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-500/30 font-semibold font-mono flex items-center gap-1.5";
+                } else {
+                    b.className = "px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5";
+                }
+            });
+
+            const fileNames = {
+                canvas: 'useMaskEditor.ts / MaskCanvas.tsx',
+                services: 'apiClient.ts / generationService.ts',
+                hooks: 'useGenerationJob.ts / useCancelRun.ts',
+                ui: 'SizeControl.tsx'
+            };
+            document.getElementById('module-file-badge').innerText = fileNames[mod] || mod;
+
+            const lines = FRONTEND_MODULES_DATA[mod] || [];
+            document.getElementById('module-fn-count').innerText = `พบ ${lines.length} ฟังก์ชัน/คอมโพเนนต์ในหมวดนี้`;
+
+            const container = document.getElementById('code-lines-container');
+            container.innerHTML = '';
+
+            lines.forEach((item, idx) => {
+                const el = document.createElement('div');
+                const isFirst = idx === 0;
+                el.id = `fe-item-${mod}-${item.line}`;
+                el.className = `p-2.5 rounded-lg cursor-pointer hover:bg-slate-900 border border-transparent hover:border-slate-800 flex items-center justify-between transition-all ${isFirst ? 'bg-slate-900/90 border-sky-500/40 border-l-4 border-l-sky-400 shadow-sm' : 'bg-slate-950/60'}`;
+                const badgeColor = item.tag_color || 'bg-slate-800 text-sky-300 border-slate-700';
+
+                el.innerHTML = `
+                    <div class="flex items-center gap-2.5 min-w-0 pr-2">
+                        <span class="text-slate-500 font-mono w-10 text-right shrink-0">#${item.line}</span>
+                        <div class="truncate">
+                            <span class="text-slate-200 font-mono font-semibold text-xs block truncate">${item.name}</span>
+                            <span class="text-[11px] text-slate-400 font-sans block truncate">${item.title}</span>
+                        </div>
+                    </div>
+                    <span class="text-[10px] px-2 py-0.5 rounded border ${badgeColor} shrink-0">${item.tag}</span>
+                `;
+                el.onclick = () => {
+                    document.querySelectorAll('#code-lines-container > div').forEach(d => {
+                        d.className = "p-2.5 rounded-lg cursor-pointer hover:bg-slate-900 border border-transparent hover:border-slate-800 flex items-center justify-between transition-all bg-slate-950/60";
+                    });
+                    el.className = "p-2.5 rounded-lg cursor-pointer bg-slate-900/90 border-sky-500/40 border-l-4 border-l-sky-400 flex items-center justify-between transition-all shadow-sm";
+                    inspectFrontendCode(item);
+                };
+                container.appendChild(el);
+            });
+
+            if (lines.length > 0 && clearHistory) {
+                inspectFrontendCode(lines[0]);
+            }
+        }
+
+        function inspectFrontendCode(item) {
+            currentFrontendItem = item;
+            document.getElementById('inspect-line-number').innerText = `Line ${item.line}: ${item.name}`;
+            const tagEl = document.getElementById('inspect-tag');
+            tagEl.innerText = item.tag;
+            tagEl.className = `px-2 py-0.5 rounded border font-mono text-[11px] ${item.tag_color || 'bg-slate-800 text-sky-300 border-slate-700'}`;
+
+            document.getElementById('inspect-title').innerText = item.title;
+            document.getElementById('inspect-params').innerText = item.params || 'None';
+            document.getElementById('inspect-desc').innerHTML = item.desc;
+            document.getElementById('inspect-snippet').innerText = item.snippet;
+            document.getElementById('inspect-tip').innerHTML = item.tip;
+            document.getElementById('inspect-caller-content').innerHTML = item.called_by || 'ไม่มี Caller';
+
+            // Subcalls
+            const subContainer = document.getElementById('inspect-subcalls-container');
+            const subCountEl = document.getElementById('inspect-subcalls-count');
+            subContainer.innerHTML = '';
+            const subcalls = item.subcalls || [];
+            subCountEl.innerText = `${subcalls.length} คำสั่ง`;
+
+            if (subcalls.length === 0) {
+                subContainer.innerHTML = `
+                    <div class="bg-slate-950/40 p-3 rounded-lg border border-slate-800/60 text-slate-400 text-xs flex items-center gap-2">
+                        <span>🍃</span>
+                        <span><b>ฟังก์ชันปลายทาง (Leaf Action):</b> ทำงานเสร็จสิ้นภายในฟังก์ชัน ไม่มีการเรียกต่อยอดไปยัง Service อื่น</span>
+                    </div>
+                `;
+            } else {
+                subcalls.forEach(sub => {
+                    const card = document.createElement('div');
+                    card.className = "bg-slate-950 p-3 rounded-xl border border-slate-800/90 hover:border-slate-700 transition-all space-y-2";
+                    card.innerHTML = `
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/80 pb-2">
+                            <span class="font-mono font-bold text-xs text-sky-300 flex items-center gap-1.5">
+                                <span class="text-amber-400">⚡</span>
+                                <code>${sub.label}</code>
+                            </span>
+                            <button onclick="jumpFrontendFunction('${sub.targetMod}', '${sub.targetFn}')" class="px-2.5 py-1 rounded bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 text-[11px] font-semibold border border-sky-500/40 flex items-center gap-1 shrink-0 transition-all">
+                                <span>↗ เจาะลึกโค้ด</span>
+                            </button>
+                        </div>
+                        <div class="space-y-1.5 text-xs text-slate-300">
+                            <div><span class="text-amber-400 font-semibold">🎯 ทำไมต้องเรียกคำสั่งนี้:</span> ${sub.why}</div>
+                            <div><span class="text-emerald-400 font-semibold">⚙️ ฟังก์ชันนี้เข้าไปทำอะไรบ้าง:</span> ${sub.what}</div>
+                            <div class="bg-slate-900/60 p-2 rounded border border-slate-800/60 text-[11.5px]"><span class="text-purple-400 font-semibold">🔄 เรียกต่อยอด:</span> <span class="font-mono text-slate-300">${sub.callsNext}</span></div>
+                        </div>
+                    `;
+                    subContainer.appendChild(card);
+                });
+            }
+            updateFrontendNavUI();
+        }
+
+        function jumpFrontendFunction(targetMod, targetFn) {
+            if (currentFrontendMod && currentFrontendItem) {
+                frontendNavHistory.push({ mod: currentFrontendMod, item: currentFrontendItem });
+            }
+            loadFrontendModule(targetMod, false);
+            const lines = FRONTEND_MODULES_DATA[targetMod] || [];
+            const target = lines.find(it => it.name.includes(targetFn) || it.name.startsWith(targetFn));
+            if (target) {
+                inspectFrontendCode(target);
+                setTimeout(() => {
+                    document.querySelectorAll('#code-lines-container > div').forEach(d => {
+                        d.className = "p-2.5 rounded-lg cursor-pointer hover:bg-slate-900 border border-transparent hover:border-slate-800 flex items-center justify-between transition-all bg-slate-950/60";
+                    });
+                    const el = document.getElementById(`fe-item-${targetMod}-${target.line}`);
+                    if (el) {
+                        el.className = "p-2.5 rounded-lg cursor-pointer bg-slate-900/90 border-sky-500/40 border-l-4 border-l-sky-400 flex items-center justify-between transition-all shadow-sm";
+                        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                }, 50);
+            }
+            updateFrontendNavUI();
+        }
+
+        function goBackFrontendFunction() {
+            if (frontendNavHistory.length === 0) return;
+            const prev = frontendNavHistory.pop();
+            loadFrontendModule(prev.mod, false);
+            inspectFrontendCode(prev.item);
+            setTimeout(() => {
+                document.querySelectorAll('#code-lines-container > div').forEach(d => {
+                    d.className = "p-2.5 rounded-lg cursor-pointer hover:bg-slate-900 border border-transparent hover:border-slate-800 flex items-center justify-between transition-all bg-slate-950/60";
+                });
+                const el = document.getElementById(`fe-item-${prev.mod}-${prev.item.line}`);
+                if (el) {
+                    el.className = "p-2.5 rounded-lg cursor-pointer bg-slate-900/90 border-sky-500/40 border-l-4 border-l-sky-400 flex items-center justify-between transition-all shadow-sm";
+                    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 50);
+            updateFrontendNavUI();
+        }
+
+        function updateFrontendNavUI() {
+            const navBar = document.getElementById('inspect-nav-bar');
+            const breadcrumbsEl = document.getElementById('inspect-breadcrumbs');
+            if (!navBar || !breadcrumbsEl) return;
+            if (frontendNavHistory.length > 0) {
+                navBar.classList.remove('hidden');
+                navBar.classList.add('flex');
+                const trail = frontendNavHistory.map(h => h.item.name.split('(')[0]).concat([
+                    currentFrontendItem ? currentFrontendItem.name.split('(')[0] : ''
+                ]);
+                breadcrumbsEl.innerText = trail.join(' ➔ ');
+            } else {
+                navBar.classList.add('hidden');
+                navBar.classList.remove('flex');
+            }
+        }
+
+        // =====================================================================
+        // TAB 4: EXAM QUESTIONS
+        // =====================================================================
+        const FRONTEND_EXAM = [
+    {
+        "id": 1,
+        "q": "ทำไมการแปลงพิกัด Pointer จากหน้าจอไปสู่ Canvas ต้องนำค่า (e.clientX - rect.left) ไปคูณกับ (naturalWidth / rect.width)?",
+        "options": [
+            "เพื่อให้การ์ดจอสามารถเรนเดอร์สีแบบ 32-bit float ได้",
+            "เพื่อชดเชยการย่อ-ขยายด้วย CSS ทำให้ตำแหน่งเมาส์ตรงกับพิกเซลจริงของภาพต้นฉบับ",
+            "เพื่อป้องกันการเกิด Memory Leak บน React Virtual DOM",
+            "เป็นข้อกำหนดของฟอร์แมตไฟล์ WebP บนเบราว์เซอร์"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! เมื่อภาพถูกแสดงผลบนหน้าจอ ขนาดของ HTML Element (DOM Rect) จะเปลี่ยนไปตามขนาดหน้าจอและ CSS แต่ภาพจริงมีขนาดคงที่ (Natural Size) จึงต้องคูณด้วยอัตราส่วน Scale Factor เพื่อให้พิกัดรอยวาดตรงกับพิกเซลจริงของรูปภาพ"
+    },
+    {
+        "id": 2,
+        "q": "ในโหมด Inpainting ทำไมหน้าบ้านต้องส่งออก Mask เป็นภาพขาว-ดำ (#FFFFFF บน #000000) แทนที่จะส่งเป็นภาพโปร่งใส?",
+        "options": [
+            "เพราะโปรแกรม Node.js ไม่รองรับ Alpha Channel",
+            "เพราะตัวเข้ารหัส VAE ของโมเดล Diffusion ใช้ค่าความสว่าง 255 (สีขาว) เป็นตัวแทนบริเวณที่ต้องสร้างใหม่ และ 0 (สีดำ) สำหรับส่วนเดิม",
+            "เพื่อลดขนาดไฟล์ Base64 ให้ไม่เกิน 1 KB",
+            "เพื่อให้เบราว์เซอร์สามารถทำ Hardware Acceleration ได้"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! ในทฤษฎี Image Processing ของ Latent Inpainting โมเดลต้องการ Binary Weight Mask ในการผสม Noise หากเป็นสีขาว (255) โมเดลจะ Denoise สร้างภาพใหม่ทับลงไป หากเป็นสีดำ (0) โมเดลจะล็อก Latent เดิมไว้คงเดิม"
+    },
+    {
+        "id": 3,
+        "q": "เหตุใดระบบจึงเลือกใช้ Adaptive Polling (ความถี่แบบ 1s ➔ 2s ➔ 5s) แทนการใช้ setInterval คงที่ทุก 1 วินาที?",
+        "options": [
+            "เพราะ setInterval ถูกห้ามใช้ใน React 18 Strict Mode",
+            "เพื่อลด Network Overhead และภาระของเซิร์ฟเวอร์ โดยไม่กระทบต่อประสบการณ์ของผู้ใช้ที่รอรับผล",
+            "เพื่อให้เบราว์เซอร์มีเวลาล้าง Garbage Collection ใน RAM",
+            "เพื่อป้องกันไม่ให้ฐานข้อมูล SQLite เกิด Table Lock"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! งานสร้างภาพใช้เวลาหลายวินาที การ Polling ถี่ๆ ทุก 1 วินาทีตลอดเวลาจะทำให้เซิร์ฟเวอร์รับคำขอซ้ำซ้อนมหาศาล การใช้ Exponential/Adaptive Backoff ช่วยลด Request ลงกว่า 60% โดยที่ผู้ใช้แทบไม่รู้สึกถึงความแตกต่าง"
+    },
+    {
+        "id": 4,
+        "q": "เมื่อผู้ใช้กด 'Cancel' งานสร้างภาพ หน้าบ้านทำไมถึงปรับสถานะเป็น 'cancelled' บนหน้าจอทันทีก่อนที่ API จะตอบกลับ (Optimistic UI)?",
+        "options": [
+            "เพื่อหลอกเบราว์เซอร์ไม่ให้ปิดแท็บ",
+            "เพื่อขจัดความหน่วงของการรับรู้ (Zero Perceived Latency) ให้ผู้ใช้รู้สึกว่าระบบตอบสนองทันที",
+            "เพื่อให้ React Query สามารถบันทึกแคชลง LocalStorage ได้",
+            "เพื่อป้องกันไม่ให้เกิด CORS Error"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! Optimistic UI เป็นรูปแบบการออกแบบที่อัปเดตสถานะล่วงหน้าทันที เพื่อให้ประสบการณ์ใช้งานลื่นไหลและทันใจที่สุด"
+    },
+    {
+        "id": 5,
+        "q": "ฟังก์ชัน decodeJwt() ในหน้าบ้าน มีจุดประสงค์หลักเพื่ออะไร?",
+        "options": [
+            "ตรวจสอบความถูกต้องของลายเซ็น HMAC-SHA256 ด้วย Secret Key",
+            "อ่านค่า Timestamp หมดอายุ (exp) เพื่อแจ้งเตือนหรือ Redirect ไปหน้า Login เมื่อ Session หมดอายุ",
+            "เข้ารหัสรหัสผ่านของผู้ใช้ก่อนส่งข้ามเครือข่าย",
+            "ดึงภาพโปรไฟล์ของผู้ใช้จากฐานข้อมูล"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! Frontend ทำการ Decode Base64 Payload เพื่ออ่านวันหมดอายุ (exp) ในการบริหารจัดการหน้าจอเท่านั้น แต่การยืนยันความถูกต้องของ Signature เพื่อความปลอดภัยจะเกิดขึ้นที่ Backend เสมอ"
+    },
+    {
+        "id": 6,
+        "q": "ทำไมคอมโพเนนต์ SizeControl จึงบังคับให้ขนาดพิกเซลของภาพหารด้วย 8 ลงตัวเสมอ (เช่น 512x680 แทน 512x682)?",
+        "options": [
+            "เพื่อไม่ให้ขนาดภาพเกินกว่าความจุของ RAM เบราว์เซอร์",
+            "เพราะโครงข่าย VAE ใน Stable Diffusion ย่อภาพลง 8 เท่า (f=8) หากไม่หาร 8 ลงตัว มิติเทนเซอร์ใน Latent Space จะเกิดทศนิยมและเกิดข้อผิดพลาด",
+            "เป็นข้อบังคับของ CSS Grid System",
+            "เพื่อให้การแสดงผลบนจอ Retina Display คมชัดขึ้น"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! VAE Downsampling Factor f=8 ทำให้ขนาดภาพในพิกเซลต้องสอดคล้องกับขนาดเทนเซอร์ใน Latent Space เสมอ การคัดกรองตั้งแต่หน้าบ้านจึงเป็นหัวใจของการป้องกันบั๊ก"
+    },
+    {
+        "id": 7,
+        "q": "ใน useMaskEditor ทำไมถึงใช้ useRef ในการเก็บ Stroke History แทนการใช้ useState?",
+        "options": [
+            "เพราะ useRef เร็วกว่าและไม่ทำให้เกิด Re-render ทุกครั้งที่มีการลากเมาส์เพิ่มพิกัดจุด (High-frequency pointer events)",
+            "เพราะ useState ไม่สามารถเก็บข้อมูลประเภท Object ได้",
+            "เพื่อป้องกันไม่ให้ข้อมูลใน Canvas หายไปเมื่อรีเฟรชหน้าเว็บ",
+            "เป็นข้อกำหนดของ TypeScript"
+        ],
+        "correct": 0,
+        "rationale": "ถูกต้อง! การลากเมาส์วาดภาพจะปล่อย Event ถี่มาก (60-120 ครั้งต่อวินาที) หากใช้ useState คอมโพเนนต์จะเกิด Re-render ถี่ยิบจนกระตุก การใช้ useRef และสั่งวาดตรงลง Context จึงให้ประสิทธิภาพสูงสุดระดับ 60 FPS"
+    },
+    {
+        "id": 8,
+        "q": "เมื่อมีการสร้าง Object URL ผ่าน URL.createObjectURL() ในหน้าบ้าน ต้องระวังเรื่องใดมากที่สุด?",
+        "options": [
+            "การเกิด XSS Attack",
+            "การเกิด Memory Leak หากไม่สั่ง revokeObjectURL() เมื่อรูปถูกปิดหรือเลิกใช้งาน",
+            "การถูกบล็อกโดย AdBlocker",
+            "ขนาดไฟล์จะขยายใหญ่ขึ้น 33%"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! Object URL จะตรึง Blob ไบนารีไว้ในหน่วยความจำ RAM ของเบราว์เซอร์จนกว่าจะปิดหน้าต่าง การสั่ง URL.revokeObjectURL() จึงจำเป็นเพื่อปลดปล่อย RAM ทันที"
+    },
+    {
+        "id": 9,
+        "q": "หากผู้ใช้ปิดแท็บเบราว์เซอร์ขณะที่ AI กำลังประมวลผล จะเกิดอะไรขึ้นในสถาปัตยกรรมนี้?",
+        "options": [
+            "เซิร์ฟเวอร์จะล่มทันที",
+            "งานบน Backend และ AI Server จะยังคงรันต่อไปจนเสร็จและบันทึกลง Database เมื่อผู้ใช้เปิดหน้า History ในภายหลังก็จะเห็นรูปภาพตามปกติ",
+            "ภาพจะสูญหายถาวร",
+            "ฐานข้อมูลจะ Rollback ข้อมูลทั้งหมดทิ้ง"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! เพราะระบบถูกออกแบบด้วยสถาปัตยกรรม Decoupled Asynchronous Processing งานรันอยู่บนโหนดเซิร์ฟเวอร์และบันทึกผลลง Database อย่างอิสระจาก Client Session"
+    },
+    {
+        "id": 10,
+        "q": "ทำไม apiClient จึงแนบ Token ผ่าน Header 'Authorization: Bearer' แทนการพึ่งพา Cookie ในโปรเจกต์นี้?",
+        "options": [
+            "เพราะ Cookie ถูกยกเลิกใช้งานแล้วในเว็บสมัยใหม่",
+            "เพราะ Frontend (พอร์ต 5173) และ Backend (พอร์ต 8000) รันคนละ Origin การใช้ Bearer Token ป้องกันปัญหา CSRF และ Third-party Cookie Blocking ได้อย่างเด็ดขาด",
+            "เพื่อให้ส่งข้อมูลข้ามเครือข่ายได้เร็วกว่า",
+            "เพื่อไม่ให้เบราว์เซอร์ต้องใช้ HTTPS"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! การใช้ Bearer Token เหมาะกับ Cross-origin Microservices Architecture อย่างยิ่ง ป้องกันปัญหาเรื่อง Third-party Cookie และการโจมตี CSRF"
+    }
+];
+
+        let userAnswers = {};
+        function renderExam() {
+            const container = document.getElementById('exam-cards-container');
+            container.innerHTML = '';
+            FRONTEND_EXAM.forEach((item, qIdx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3";
+                
+                let optHtml = '';
+                item.options.forEach((opt, optIdx) => {
+                    const isSelected = userAnswers[item.id] === optIdx;
+                    const isSubmitted = userAnswers[item.id] !== undefined;
+                    let optStyle = "bg-slate-900 border-slate-800 hover:border-slate-700 text-slate-300";
+                    if (isSubmitted) {
+                        if (optIdx === item.correct) {
+                            optStyle = "bg-emerald-950/60 border-emerald-500/80 text-emerald-300 font-semibold";
+                        } else if (isSelected) {
+                            optStyle = "bg-rose-950/60 border-rose-500/80 text-rose-300";
+                        }
+                    }
+                    optHtml += `
+                        <div onclick="selectExamOption(${item.id}, ${optIdx})" class="p-3 rounded-lg border text-xs cursor-pointer transition-all flex items-center justify-between ${optStyle}">
+                            <span>${String.fromCharCode(65 + optIdx)}. ${opt}</span>
+                            ${isSubmitted && optIdx === item.correct ? '<span class="text-emerald-400 font-bold">✓ คำตอบที่ถูกต้อง</span>' : ''}
+                            ${isSubmitted && isSelected && optIdx !== item.correct ? '<span class="text-rose-400 font-bold">✗ คุณเลือกข้อนี้</span>' : ''}
+                        </div>
+                    `;
+                });
+
+                let rationaleHtml = '';
+                if (userAnswers[item.id] !== undefined) {
+                    rationaleHtml = `
+                        <div class="mt-3 p-3.5 rounded-lg bg-slate-900/90 border border-slate-800 text-xs text-slate-300 leading-relaxed">
+                            <span class="font-bold text-sky-400 block mb-1">📖 คำอธิบายทางวิศวกรรม:</span>
+                            ${item.rationale}
+                        </div>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
+                        <span class="text-xs font-mono font-bold text-sky-400">คำถามข้อที่ ${qIdx + 1} / 10</span>
+                        <span class="text-[11px] font-mono text-slate-500">Image Processing & Web UI</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-white leading-relaxed">${item.q}</h4>
+                    <div class="space-y-2 pt-1">
+                        ${optHtml}
+                    </div>
+                    ${rationaleHtml}
+                `;
+                container.appendChild(card);
+            });
+            updateExamScore();
+        }
+
+        function selectExamOption(qId, optIdx) {
+            if (userAnswers[qId] !== undefined) return;
+            userAnswers[qId] = optIdx;
+            renderExam();
+        }
+
+        function updateExamScore() {
+            let score = 0;
+            FRONTEND_EXAM.forEach(item => {
+                if (userAnswers[item.id] === item.correct) score++;
+            });
+            document.getElementById('exam-score').innerText = `${score} / ${FRONTEND_EXAM.length}`;
+        }
+
+        function resetExam() {
+            userAnswers = {};
+            renderExam();
+        }
+
+        // Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            renderPipelineTrack();
+            updatePipelineUI();
+            initCanvasSim();
+            loadFrontendModule('canvas');
+            renderExam();
+        });
+    </script>
+</body>
+</html>

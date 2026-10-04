@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMA Distributed AI Platform — Academic Defense Mastery Hub</title>
+    <!-- Tailwind CSS allowlisted CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Sarabun', 'TH Sarabun New', 'sans-serif'],
+                        mono: ['Fira Code', 'Courier New', 'monospace']
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            background: #090d16;
+            color: #f1f5f9;
+            font-family: 'Sarabun', sans-serif;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.25);
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 md:p-8 space-y-8">
+
+    <div class="max-w-7xl mx-auto w-full space-y-8">
+        <!-- Top Hero Section -->
+        <header class="glass-card rounded-3xl p-6 md:p-10 border border-slate-800 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <span class="px-3 py-1 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/30 text-xs font-mono font-semibold">
+                            🎓 Academic Oral Defense Preparation Hub
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-semibold">
+                            ⚡ Distributed AI Architecture
+                        </span>
+                    </div>
+                    <h1 class="text-2xl md:text-4xl font-extrabold text-white tracking-tight leading-snug">
+                        LUMA Platform — Defense Mastery Hub
+                    </h1>
+                    <p class="text-slate-300 text-sm md:text-base max-w-3xl leading-relaxed">
+                        ศูนย์รวมสื่อการเรียนรู้เชิงโต้ตอบ (Interactive Mastery Web Applications) สำหรับเตรียมความพร้อมสอบปากเปล่าวิชา Image Processing เจาะลึกสถาปัตยกรรม 3 โหนด ส่องซอร์สโค้ดจริงทุกบรรทัด พร้อมห้องแล็บคณิตศาสตร์และแบบฝึกซ้อมสอบ
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row lg:flex-col gap-3 font-mono text-xs shrink-0">
+                    <div class="px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between gap-4">
+                        <span class="text-slate-400">Target System:</span>
+                        <span class="text-sky-300 font-bold">LUMA 3-Node Cluster</span>
+                    </div>
+                    <div class="px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between gap-4">
+                        <span class="text-slate-400">Offline Ready:</span>
+                        <span class="text-emerald-300 font-bold">100% Standalone Support</span>
+                    </div>
+                    <div class="px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between gap-4">
+                        <span class="text-slate-400">Access Mode:</span>
+                        <span class="text-purple-300 font-bold">Mobile & Desktop Web</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Multi-Node Architecture Flow -->
+        <section class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+            <div class="border-b border-slate-800/80 pb-3 flex items-center justify-between">
+                <h2 class="text-base font-bold text-white flex items-center gap-2">
+                    <span>⚡</span> แผนผังการทำงานร่วมกันของ 3 โหนด (Multi-Node Distributed Architecture)
+                </h2>
+                <span class="text-xs text-slate-400 font-mono hidden sm:inline">Event-Driven Asynchronous Pipeline</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+                <!-- Node 1 -->
+                <div class="bg-slate-950 p-4 rounded-xl border border-sky-500/30 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sky-400 font-bold">Node 1: Frontend Client</span>
+                        <span class="px-2 py-0.5 rounded bg-sky-950 text-sky-300 text-[10px]">Port 5173</span>
+                    </div>
+                    <p class="text-slate-300 font-sans text-xs">
+                        วาด Mask ขาว-ดำ (#FFFFFF บน #000000) สำหรับ Inpainting ➔ ล็อกพิกัดด้วย Coordinate Transform ➔ ส่งคำขอพร้อม JWT ➔ แสดง Optimistic UI ➔ Adaptive Polling
+                    </p>
+                </div>
+
+                <!-- Node 2 -->
+                <div class="bg-slate-950 p-4 rounded-xl border border-emerald-500/30 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-emerald-400 font-bold">Node 2: Backend Core</span>
+                        <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 text-[10px]">Port 8000</span>
+                    </div>
+                    <p class="text-slate-300 font-sans text-xs">
+                        ตรวจสอบ JWT Auth ➔ บันทึกงาน queued ลง SQLite WAL ➔ ยิง HTTP ข้ามโหนดไป AI ➔ รองรับ OpenCV Pencil Sketch (Color Dodge) ➔ รับผลลัพธ์ผ่าน Webhook
+                    </p>
+                </div>
+
+                <!-- Node 3 -->
+                <div class="bg-slate-950 p-4 rounded-xl border border-purple-500/30 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-purple-400 font-bold">Node 3: AI Inference Server</span>
+                        <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 text-[10px]">Port 7860 & 7861</span>
+                    </div>
+                    <p class="text-slate-300 font-sans text-xs">
+                        ตรวจ Secret Header ➔ FIFO Queue ➔ แทรก LoRA ➔ รัน Latent Diffusion บน RTX 3070 ➔ บีบอัดภาพเป็น WebP Method 6 ลดขนาด 80% ➔ เคลียร์ VRAM 8GB คืนระบบ
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 Primary Interactive Mastery Cards -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1: Frontend -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 glow-hover transition-all flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-2xl">
+                            🌐
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-sky-950/60 text-sky-300 border border-sky-500/30 text-xs font-mono">
+                            Node 1
+                        </span>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Frontend Defense Mastery</h3>
+                        <p class="text-xs text-sky-400 font-mono mt-0.5">React 18 + Vite + Inpaint Canvas + Zustand</p>
+                    </div>
+
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        คู่มือเตรียมสอบสำหรับฝ่ายหน้าบ้าน: เจาะลึกระบบ Inpainting Canvas, การแปลงสเกลพิกัด Viewport กับ Natural Size, การส่งออก Black/White Mask และ Adaptive Polling
+                    </p>
+
+                    <ul class="text-xs text-slate-400 space-y-1.5 font-sans">
+                        <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> ⚡ Frontend Lifecycle Simulator</li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> 🖌️ Inpaint Canvas Coordinate Math Lab</li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> 📑 Line-by-Line Code Inspector & Call Graph</li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> 🎯 Defense Exam Simulator (10 ข้อ)</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-2 pt-2 border-t border-slate-800">
+                    <a href="./frontend.html" class="w-full py-2.5 px-4 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-sky-500/20">
+                        <span>🚀</span> <span>เปิดใช้งานเว็บแอป (Live App)</span>
+                    </a>
+                    <a href="./downloads/LUMA_Frontend_Defense_Mastery.zip" class="w-full py-2 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 font-mono text-xs flex items-center justify-center gap-2 border border-slate-800 transition-all">
+                        <span>📦</span> <span>ดาวน์โหลด Offline ZIP</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2: Backend -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 glow-hover transition-all flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-2xl">
+                            ⚙️
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-emerald-950/60 text-emerald-300 border border-emerald-500/30 text-xs font-mono">
+                            Node 2
+                        </span>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Backend Defense Mastery</h3>
+                        <p class="text-xs text-emerald-400 font-mono mt-0.5">FastAPI + SQLAlchemy WAL + OpenCV Tools</p>
+                    </div>
+
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        คู่มือเตรียมสอบสำหรับฝ่ายหลังบ้าน: เจาะลึกสูตร Color Dodge Pencil Sketch, Color Splash HSV, สถาปัตยกรรม Webhook Receiver และการแก้ Database Lock ด้วย SQLite WAL
+                    </p>
+
+                    <ul class="text-xs text-slate-400 space-y-1.5 font-sans">
+                        <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> ⚡ Multi-Node Webhook Pipeline Simulator</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 🧪 OpenCV Color Dodge Formula Math Lab</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 📑 Line-by-Line Code Inspector & Call Graph</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 🎯 Defense Exam Simulator (10 ข้อ)</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-2 pt-2 border-t border-slate-800">
+                    <a href="./backend.html" class="w-full py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-500/20">
+                        <span>🚀</span> <span>เปิดใช้งานเว็บแอป (Live App)</span>
+                    </a>
+                    <a href="./downloads/LUMA_Backend_Defense_Mastery.zip" class="w-full py-2 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 font-mono text-xs flex items-center justify-center gap-2 border border-slate-800 transition-all">
+                        <span>📦</span> <span>ดาวน์โหลด Offline ZIP</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 3: AI Server -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 glow-hover transition-all flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-2xl">
+                            🤖
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-purple-950/60 text-purple-300 border border-purple-500/30 text-xs font-mono">
+                            Node 3
+                        </span>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-white">AI Server Defense Mastery</h3>
+                        <p class="text-xs text-purple-400 font-mono mt-0.5">Forge API + Latent Diffusion + WebP + VRAM Guard</p>
+                    </div>
+
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        คู่มือเตรียมสอบสำหรับฝ่าย AI Server: โค้ดจริง 100% ครบ 35 ฟังก์ชัน, แผนภาพจำลอง ASCII ให้เห็นภาพ, Dual-mode Cancellation, Watchdog Timeout และ VRAM 3-tier Purge
+                    </p>
+
+                    <ul class="text-xs text-slate-400 space-y-1.5 font-sans">
+                        <li class="flex items-center gap-2"><span class="text-purple-400">✓</span> 🎬 6-Step Distributed AI Pipeline Simulator</li>
+                        <li class="flex items-center gap-2"><span class="text-purple-400">✓</span> 🔬 Latent Space & Lanczos Resampling Lab</li>
+                        <li class="flex items-center gap-2"><span class="text-purple-400">✓</span> 📑 35 Verbatim Functions with Visual Mental Models</li>
+                        <li class="flex items-center gap-2"><span class="text-purple-400">✓</span> 🎯 Defense Exam Simulator (10 ข้อ)</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-2 pt-2 border-t border-slate-800">
+                    <a href="./ai-server.html" class="w-full py-2.5 px-4 rounded-xl bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-purple-500/20">
+                        <span>🚀</span> <span>เปิดใช้งานเว็บแอป (Live App)</span>
+                    </a>
+                    <a href="./downloads/LUMA_AI_Server_Defense_Mastery.zip" class="w-full py-2 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 font-mono text-xs flex items-center justify-center gap-2 border border-slate-800 transition-all">
+                        <span>📦</span> <span>ดาวน์โหลด Offline ZIP</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Academic Defense Strategies -->
+        <section class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <span>💡</span> เคล็ดลับ 4 เสาหลักในการตอบคำถามอาจารย์วิชา Image Processing
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
+                    <span class="font-bold text-sky-400">1. ทฤษฎี Latent Space ($f=8$)</span>
+                    <p class="text-slate-300">
+                        อธิบายว่า VAE ย่อภาพลง 8 เท่า ($512\times 512 \rightarrow 64\times 64$) ทำให้คำนวณเร็วขึ้นเกือบ 50 เท่า และขนาดภาพต้องหารด้วย 8 ลงตัวเสมอ
+                    </p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
+                    <span class="font-bold text-emerald-400">2. สูตร Color Dodge Blending</span>
+                    <p class="text-slate-300">
+                        อธิบายสูตร: $\text{Dodge}(I, B) = \min(255, (I \times 256) / (255 - B + 1))$ และชี้แจงว่า cv2.divide ช่วยป้องกันการหารด้วยศูนย์ในระดับฮาร์ดแวร์
+                    </p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
+                    <span class="font-bold text-purple-400">3. WebP Image Compression</span>
+                    <p class="text-slate-300">
+                        ชี้แจงว่าไฟล์ PNG มีขนาด 2-4MB การบีบอัดด้วย libwebp Method 6 (Quality 92) ช่วยลดขนาดไฟล์ลง ~80% เหลือ 200-400KB ลดภาระเน็ตเวิร์กมหาศาล
+                    </p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
+                    <span class="font-bold text-amber-400">4. Asynchronous Webhook Architecture</span>
+                    <p class="text-slate-300">
+                        ตอบให้ชัดเจนว่าทำไมไม่บล็อก HTTP Connection: เพราะการสร้างภาพใช้เวลานาน การใช้ FIFO Queue + Webhook เป็น Event-driven Pattern ที่ถูกต้อง
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="max-w-7xl mx-auto w-full pt-6 border-t border-slate-800/80 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
+        <div>
+            LUMA Distributed AI Project — 3rd Year Image Processing Academic Defense Hub
+        </div>
+        <div class="flex items-center gap-4">
+            <span>Authored by: Apisak Kongphakdee</span>
+            <span>•</span>
+            <span class="text-sky-400">GitHub Pages Online Ready</span>
+        </div>
+    </footer>
+
+</body>
+</html>

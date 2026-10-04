@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMA Backend (Node 2) — Interactive Defense Mastery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Sarabun', 'TH Sarabun New', 'sans-serif'],
+                        mono: ['Fira Code', 'Courier New', 'monospace']
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            background: #0b0f19;
+            color: #f1f5f9;
+            font-family: 'Sarabun', sans-serif;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .tab-btn.active {
+            color: #10b981;
+            border-bottom: 2px solid #10b981;
+            font-weight: 600;
+        }
+        pre code {
+            font-family: 'Fira Code', monospace;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 space-y-6">
+
+<!-- Universal Top Navigation Bar (GitHub Pages) -->
+<div class="bg-slate-950/90 border-b border-slate-800/80 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs font-mono sticky top-0 z-50 backdrop-blur-md">
+    <div class="flex items-center gap-2">
+        <a href="./index.html" class="flex items-center gap-1.5 text-slate-300 hover:text-white font-bold transition-colors">
+            <span>🏠</span> <span>LUMA Mastery Hub</span>
+        </a>
+        <span class="text-slate-600">/</span>
+        <span class="text-sky-400 font-semibold">Node 2: Backend Core</span>
+    </div>
+    <div class="flex items-center gap-2">
+        <a href="./frontend.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800">
+            <span>🌐</span> <span>Node 1: Frontend</span>
+        </a>
+        <a href="./backend.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-emerald-500/20 text-emerald-300 border-emerald-500/50 font-bold">
+            <span>⚙️</span> <span>Node 2: Backend</span>
+        </a>
+        <a href="./ai-server.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800">
+            <span>🤖</span> <span>Node 3: AI Server</span>
+        </a>
+    </div>
+</div>
+
+
+
+    <!-- Header Navigation -->
+    <header class="glass-card rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-emerald-500/20 shadow-xl">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-2xl shadow-lg shadow-emerald-500/20">
+                ⚙️
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h1 class="text-xl font-bold text-white tracking-wide">LUMA Backend (Node 2) — Interactive Defense Mastery</h1>
+                    <span class="px-2 py-0.5 text-xs rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono">FastAPI & OpenCV</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-0.5">คู่มือเตรียมสอบปากเปล่าวิชา Image Processing: ส่องโค้ด Backend ทุกฟังก์ชัน, เจาะลึก OpenCV Color Dodge, และตะลุยโจทย์ 10 ข้อ</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3 text-xs font-mono">
+            <div class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+                <span class="text-slate-500">Tech:</span> FastAPI + SQLAlchemy + OpenCV
+            </div>
+            <div class="px-3 py-1.5 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">
+                Port: 8000
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="flex border-b border-slate-800 text-sm gap-6 overflow-x-auto">
+        <button onclick="switchTab('pipeline')" id="tab-pipeline" class="tab-btn active pb-3 px-2 flex items-center gap-2 whitespace-nowrap">
+            <span>⚡</span> 1. Multi-Node Webhook Pipeline (โฟลว์งานข้ามเซิร์ฟเวอร์)
+        </button>
+        <button onclick="switchTab('opencv-lab')" id="tab-opencv-lab" class="tab-btn pb-3 px-2 flex items-center gap-2 text-slate-400 hover:text-slate-200 whitespace-nowrap">
+            <span>🧪</span> 2. OpenCV Image Processing Lab (แล็บสูตร Pencil Sketch & HSV)
+        </button>
+        <button onclick="switchTab('code')" id="tab-code" class="tab-btn pb-3 px-2 flex items-center gap-2 text-slate-400 hover:text-slate-200 whitespace-nowrap">
+            <span>📑</span> 3. Line-by-Line Code Inspector (ส่องโค้ดรายบรรทัด & Call Graph)
+        </button>
+        <button onclick="switchTab('exam')" id="tab-exam" class="tab-btn pb-3 px-2 flex items-center gap-2 text-slate-400 hover:text-slate-200 whitespace-nowrap">
+            <span>🎯</span> 4. Defense Exam Simulator (ห้องซ้อมตอบคำถามอาจารย์ 10 ข้อ)
+        </button>
+        <button onclick="switchTab('cheatsheet')" id="tab-cheatsheet" class="tab-btn pb-3 px-2 flex items-center gap-2 text-slate-400 hover:text-slate-200 whitespace-nowrap">
+            <span>🧠</span> 5. Backend Defense Cheat Sheet (จุดตายที่อาจารย์ชอบถาม)
+        </button>
+    </nav>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 1: BACKEND PIPELINE -->
+    <!-- ===================================================================== -->
+    <section id="section-pipeline" class="space-y-6">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <span>⚡</span> จำลองการทำงานข้ามโหนดตั้งแต่รับงานจนถึง Webhook (Backend Flow)
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">ดูว่า Database Transactions, JWT Authentication, และ Webhook Callback เชื่อมต่อกันอย่างไร</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="stepBackendPipeline(-1)" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200">◀ ย้อนกลับ</button>
+                    <button onclick="stepBackendPipeline(1)" class="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-xs font-semibold text-slate-950">ถัดไป ▶</button>
+                </div>
+            </div>
+
+            <!-- Steps Progress Track -->
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-2 text-center text-xs font-mono" id="b-pipeline-steps-track">
+                <!-- Rendered by JS -->
+            </div>
+
+            <!-- Current Step Details -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 bg-slate-950 p-4 rounded-xl border border-slate-800">
+                <div class="lg:col-span-7 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300" id="b-step-badge">STEP 1</span>
+                        <span class="text-[11px] font-mono text-slate-500" id="b-step-file">generation.py:25</span>
+                    </div>
+                    <h3 class="text-sm font-bold text-white" id="b-step-title">รับคำขอและตรวจสอบสิทธิ์ JWT</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed" id="b-step-desc">รายละเอียด...</p>
+                    <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 font-mono text-xs text-emerald-300 overflow-x-auto">
+                        <pre><code id="b-step-snippet"># Snippet</code></pre>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 flex flex-col justify-between space-y-3 bg-slate-900/60 p-4 rounded-xl border border-slate-800/80">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 flex items-center gap-1.5 mb-2">
+                            <span>💡</span> <span>จุดที่อาจารย์ชอบถาม (Defense Focus):</span>
+                        </span>
+                        <p class="text-xs text-slate-300 leading-relaxed" id="b-step-defense-q">คำถาม...</p>
+                    </div>
+                    <div class="bg-amber-950/30 p-3 rounded-lg border border-amber-500/30 text-[11.5px] text-amber-200/90 leading-relaxed" id="b-step-defense-a">
+                        แนวทางการตอบ...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 2: OPENCV LAB -->
+    <!-- ===================================================================== -->
+    <section id="section-opencv-lab" class="hidden space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Left: Interactive Pencil Sketch & Dodge Math -->
+            <div class="lg:col-span-7 glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
+                <div class="border-b border-slate-800 pb-3">
+                    <h3 class="text-base font-bold text-white flex items-center gap-2">
+                        <span>🧪</span> แล็บคณิตศาสตร์ Color Dodge Blending (สูตรสร้างภาพร่างดินสอ)
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1">ทดลองปรับค่า Gaussian Blur Kernel และความสว่างภาพต้นฉบับ เพื่อสังเกตผลลัพธ์ Color Dodge</p>
+                </div>
+
+                <!-- Sliders -->
+                <div class="space-y-4 bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs font-mono">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-slate-400">ค่าความสว่างพิกเซลภาพ Grayscale (I):</span>
+                            <span class="text-sky-300 font-bold" id="val-pixel-i">180</span>
+                        </div>
+                        <input type="range" min="0" max="255" value="180" id="slider-i" oninput="updateDodgeLab()" class="w-full accent-sky-500">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-slate-400">ค่าความสว่างภาพ Inverted Blur (B):</span>
+                            <span class="text-emerald-300 font-bold" id="val-pixel-b">120</span>
+                        </div>
+                        <input type="range" min="0" max="254" value="120" id="slider-b" oninput="updateDodgeLab()" class="w-full accent-emerald-500">
+                    </div>
+                </div>
+
+                <!-- Math Calculation Result Card -->
+                <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 space-y-3 font-mono text-xs">
+                    <div class="text-slate-400 border-b border-slate-800 pb-2">
+                        สูตรคำนวณ Color Dodge: <code class="text-amber-300 font-bold">min(255, (I * 256) / (255 - B + 1))</code>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 text-center">
+                        <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                            <span class="text-slate-500 block text-[10px]">ตัวเศษ (I * 256):</span>
+                            <span class="text-sky-300 font-bold" id="res-numerator">46,080</span>
+                        </div>
+                        <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                            <span class="text-slate-500 block text-[10px]">ตัวส่วน (255 - B + 1):</span>
+                            <span class="text-emerald-300 font-bold" id="res-denominator">136</span>
+                        </div>
+                        <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                            <span class="text-slate-500 block text-[10px]">ผลลัพธ์พิกเซล Dodge:</span>
+                            <span class="text-amber-400 font-bold text-sm" id="res-dodge">255 (กระดาษขาว)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs text-slate-300 leading-relaxed">
+                    <span class="text-sky-400 font-bold block mb-1">ทำไมสูตรนี้ถึงสร้างลายเส้นดินสอได้?</span>
+                    เมื่อภาพ Invert ถูกเบลอด้วย Gaussian Filter บริเวณที่เป็น "ขอบของวัตถุ" (High-frequency edge) จะมีค่าตัวส่วนต่ำมาก ทำให้การหารผลักค่าพิกเซลบริเวณนั้นลงมาเป็นสีเข้ม (เกิดเส้นดินสอ) ส่วนบริเวณที่เป็นพื้นผิวเรียบจะถูกเร่งค่าเข้าใกล้ 255 (กลายเป็นกระดาษขาว)
+                </div>
+            </div>
+
+            <!-- Right: Color Splash & WAL Architecture -->
+            <div class="lg:col-span-5 space-y-4">
+                <!-- Color Splash -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
+                    <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                        <span>🎨</span> ทฤษฎี Color Splash (ดูดสีเด่นผ่านระบบสี HSV)
+                    </h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        ทำไมต้องแปลง BGR ➔ HSV? เพราะระบบสี HSV แยก <b>Hue (เนื้อสี 0-179)</b> ออกจากความสว่าง ทำให้สร้าง Mask คัดกรองสีได้แม่นยำแม้ในจุดที่มีเงาตกกระทบ
+                    </p>
+                    <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 font-mono text-[11px] text-purple-300 space-y-1">
+                        <div>hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)</div>
+                        <div>mask = cv2.inRange(hsv, lower_bound, upper_bound)</div>
+                        <div>color_part = cv2.bitwise_and(bgr, bgr, mask=mask)</div>
+                        <div>gray_part = cv2.bitwise_and(gray_bgr, gray_bgr, mask=~mask)</div>
+                        <div>result = cv2.add(color_part, gray_part)</div>
+                    </div>
+                </div>
+
+                <!-- SQLite WAL Mode -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
+                    <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                        <span>🛡️</span> Concurrency Guard: SQLite WAL Mode
+                    </h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        ในการทำงานแบบมัลติโหนด Webhook จะทำการ Write ผลลัพธ์กลับลง DB ขณะที่ Frontend Polling กำลัง Read อย่างต่อเนื่อง หากใช้โหมดปกติ SQLite จะเกิดปัญหา <code>database is locked</code>
+                    </p>
+                    <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 font-mono text-[11px] text-emerald-300">
+                        <div>PRAGMA journal_mode = WAL;</div>
+                        <div>PRAGMA synchronous = NORMAL;</div>
+                        <div>PRAGMA busy_timeout = 5000;</div>
+                        <div class="text-slate-400 text-[10px] mt-1.5 font-sans">
+                            💡 WAL (Write-Ahead Logging) ยอมให้คำสั่ง Read ทำงานพร้อมกับคำสั่ง Write ได้ โดยผู้อ่านจะอ่านจากสแนปช็อตเดิมและผู้เขียนจะเขียนลง Log ไฟล์แยก
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 3: CODE INSPECTOR -->
+    <!-- ===================================================================== -->
+    <section id="section-code" class="hidden space-y-6">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
+            <!-- Module Switcher -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <span>📑</span> Line-by-Line Code Inspector & Interactive Call Graph
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">คลิกเลือกฟังก์ชันเพื่อดูการทำงาน และกดปุ่ม [ ↗ เจาะลึกโค้ด ] เพื่อกระโดดตามเส้นทางการทำงานได้จริง</p>
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs">
+                    <button onclick="loadBackendModule('api')" id="btn-mod-api" class="px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold font-mono flex items-center gap-1.5">
+                        <span>API Endpoints</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-500/30 text-emerald-200">4</span>
+                    </button>
+                    <button onclick="loadBackendModule('tools')" id="btn-mod-tools" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
+                        <span>Image Tools</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">2</span>
+                    </button>
+                    <button onclick="loadBackendModule('services')" id="btn-mod-services" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
+                        <span>Services & Logic</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">3</span>
+                    </button>
+                    <button onclick="loadBackendModule('security')" id="btn-mod-security" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
+                        <span>Security & JWT</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">2</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Inspector Display Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                <!-- Left: Function List -->
+                <div class="lg:col-span-6 bg-slate-950 rounded-xl border border-slate-800 p-3 flex flex-col max-h-[640px]">
+                    <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800/80 text-xs">
+                        <span class="text-slate-400 font-medium" id="b-module-fn-count">รายการฟังก์ชันในหมวดนี้</span>
+                        <span class="text-[11px] text-emerald-400 font-mono" id="b-module-file-badge">generation.py</span>
+                    </div>
+                    <div id="b-code-lines-container" class="space-y-1.5 overflow-y-auto pr-1 flex-1 font-mono text-xs">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- Right: Detailed Panel & Call Graph -->
+                <div class="lg:col-span-6 bg-slate-900/90 rounded-xl border border-slate-800 p-4 flex flex-col justify-between max-h-[640px] overflow-y-auto space-y-4">
+                    <div class="space-y-3">
+                        <!-- Breadcrumb & Back Navigation -->
+                        <div id="b-inspect-nav-bar" class="hidden items-center justify-between bg-slate-950/90 px-3 py-1.5 rounded-lg border border-slate-800 text-xs">
+                            <div class="flex items-center gap-1.5 text-slate-400 text-[11px] font-mono truncate mr-2">
+                                <span class="text-slate-500">เส้นทาง:</span>
+                                <span id="b-inspect-breadcrumbs" class="text-emerald-300 font-semibold truncate">...</span>
+                            </div>
+                            <button onclick="goBackBackendFunction()" class="px-2.5 py-1 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 text-[11px] font-semibold border border-emerald-500/30 flex items-center gap-1 shrink-0 transition-all">
+                                <span>◀</span> <span>ย้อนกลับ</span>
+                            </button>
+                        </div>
+
+                        <!-- Header Info -->
+                        <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2">
+                            <span class="font-bold text-emerald-400 font-mono text-[13px]" id="b-inspect-line-number">Line 25: create_generation()</span>
+                            <span class="px-2 py-0.5 rounded border font-mono text-[11px]" id="b-inspect-tag">API Route</span>
+                        </div>
+
+                        <!-- Title & Contract -->
+                        <div>
+                            <h4 id="b-inspect-title" class="text-sm font-bold text-white mb-1">
+                                Endpoint รับคำขอสร้างภาพ (POST /api/generations)
+                            </h4>
+                            <div class="inline-block px-2 py-0.5 rounded bg-slate-800/80 text-[11px] font-mono text-slate-300 border border-slate-700/50 mb-2" id="b-inspect-params">
+                                payload: GenerationCreateRequest, db: Session, current_user: User -> GenerationResponse
+                            </div>
+                            <div id="b-inspect-desc" class="text-xs text-slate-300 leading-relaxed">
+                                คำอธิบาย...
+                            </div>
+                        </div>
+
+                        <!-- Inbound Caller Box -->
+                        <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/80 text-xs">
+                            <div class="text-[11px] font-semibold text-slate-400 flex items-center gap-1.5 mb-1">
+                                <span>⬅️</span> <span>ต้นทางที่เรียกใช้งานฟังก์ชันนี้ (Called By):</span>
+                            </div>
+                            <div id="b-inspect-caller-content" class="text-slate-300 text-[11.5px] leading-relaxed">
+                                Frontend generationService.create()
+                            </div>
+                        </div>
+
+                        <!-- Sub-calls Chain -->
+                        <div class="space-y-2 pt-1 border-t border-slate-800/60">
+                            <div class="flex items-center justify-between text-xs font-semibold text-emerald-300">
+                                <span class="flex items-center gap-1.5">
+                                    <span>🔗</span> <span>ฟังก์ชันลูกที่ถูกเรียกใช้ต่อ (Callee Execution Flow):</span>
+                                </span>
+                                <span class="text-[10px] text-slate-400 px-2 py-0.2 rounded bg-slate-800 font-mono" id="b-inspect-subcalls-count">2 คำสั่ง</span>
+                            </div>
+                            <div id="b-inspect-subcalls-container" class="space-y-2.5 max-h-[250px] overflow-y-auto pr-1">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Source Code Snippet -->
+                        <div class="pt-1">
+                            <div class="flex items-center justify-between text-[11px] text-slate-400 mb-1">
+                                <span class="font-semibold text-slate-300">💻 ซอร์สโค้ดจริง (Python 3.11+ / FastAPI):</span>
+                                <span class="text-[10px] text-slate-500 font-mono">FastAPI</span>
+                            </div>
+                            <pre class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-[11.5px] font-mono text-emerald-300 overflow-x-auto leading-relaxed"><code id="b-inspect-snippet"># Snippet</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Defense Tip -->
+                    <div class="bg-gradient-to-r from-amber-950/40 to-slate-950 p-3.5 rounded-xl border border-amber-500/30 text-xs">
+                        <div class="flex items-center gap-1.5 text-amber-400 font-bold mb-1">
+                            <span>💡</span> <span>เคล็ดลับการตอบอาจารย์ (Professor Q&A Hint):</span>
+                        </div>
+                        <div id="b-inspect-tip" class="text-amber-200/90 leading-relaxed text-[11.5px]">
+                            เคล็ดลับ...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 4: EXAM SIMULATOR -->
+    <!-- ===================================================================== -->
+    <section id="section-exam" class="hidden space-y-6">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-5">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <span>🎯</span> ห้องซ้อมตอบคำถามปากเปล่าสำหรับฝ่าย Backend (10 คำถามยอดฮิต)
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">คัดสรรประเด็นที่คณะกรรมการสอบมักจะจี้ถาม: FastAPI, Webhook, OpenCV Blending, และ Database Optimization</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="text-xs font-mono px-3 py-1.5 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">
+                        คะแนนของคุณ: <span id="b-exam-score" class="font-bold">0 / 10</span>
+                    </div>
+                    <button onclick="resetBackendExam()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 transition-all">
+                        🔄 เริ่มสอบใหม่
+                    </button>
+                </div>
+            </div>
+
+            <!-- Exam Questions List -->
+            <div id="b-exam-cards-container" class="space-y-4">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 5: CHEAT SHEET -->
+    <!-- ===================================================================== -->
+    <section id="section-cheatsheet" class="hidden space-y-6">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
+            <div class="border-b border-slate-800 pb-3">
+                <h3 class="text-base font-bold text-white flex items-center gap-2">
+                    <span>🧠</span> คลังจุดตายที่อาจารย์มักจะเจาะถามฝ่าย Backend (Defense Cheat Sheet)
+                </h3>
+                <p class="text-xs text-slate-400 mt-1">ท่องจำ 6 ประเด็นนี้ไว้ให้ขึ้นใจ รับรองตอบได้อย่างมั่นใจและได้คะแนนเต็ม</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-emerald-400 font-bold block">1. ทำไมถึงเลือกใช้ Webhook แทนที่จะให้ Backend ทำ Polling วนลูปถาม AI Server?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพราะการสร้างภาพใช้เวลาหลายวินาที การให้ Backend Polling ตลอดเวลาจะกิน CPU, Bandwidth และเพิ่ม Connection Overhead มหาศาล การใช้สถาปัตยกรรมแบบ Event-Driven Webhook ช่วยให้ทั้งสองระบบเป็นอิสระต่อกัน (Decoupled) และส่งผลลัพธ์กลับมาทันทีที่ GPU ทำงานเสร็จในระดับมิลลิวินาที</p>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-sky-400 font-bold block">2. ในการทำ Color Dodge ใน OpenCV ทำไมถึงต้องใช้ cv2.divide แทนการเขียนสูตรคณิตศาสตร์ใน Python ตรงๆ?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพราะฟังก์ชัน <code>cv2.divide()</code> ถูกคอมไพล์ในระดับ C++ ด้วยคำสั่ง SIMD/AVX ทำให้ประมวลผลเมทริกซ์พิกเซลระดับล้านพิกเซลได้เร็วกว่าลูป Python กว่า 100 เท่า และมีกลไกป้องกันการหารด้วยศูนย์ (Zero-division saturation) ในระดับฮาร์ดแวร์โดยอัตโนมัติ</p>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-purple-400 font-bold block">3. ทำไมถึงเก็บไฟล์ภาพผลลัพธ์ลงบน Disk แทนที่จะเก็บเป็น Binary BLOB ใน Database?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพื่อป้องกันปัญหา Database Bloat และลด Memory Pressure บนฐานข้อมูล การเก็บไฟล์ลง Disk ทำให้สามารถส่งไฟล์ผ่าน Static File Streaming ได้รวดเร็ว และง่ายต่อการย้ายไปเชื่อมต่อกับ Object Storage อย่าง AWS S3 หรือ MinIO ในอนาคต</p>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-amber-400 font-bold block">4. ทำไมถึงใช้ secrets.compare_digest() ในการตรวจสอบ Secret Key แทนการใช้ == ปกติ?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพื่อป้องกันช่องโหว่ด้าน Timing Attack ครับ ตัวดำเนินการ == จะหยุดทำงานทันทีที่พบตัวอักษรแรกที่ไม่ตรง ทำให้ผู้โจมตีสามารถจับเวลาความเร็วของการตอบสนองเพื่อเดารหัสผ่านได้ แต่ compare_digest จะใช้เวลาเท่ากันเสมอทุกครั้งไม่ว่าจะตรงหรือไม่ตรง</p>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-rose-400 font-bold block">5. หาก AI Server เกิดดับหรือแฮงก์ไประหว่างประมวลผล Backend มีกลไกรับมืออย่างไร?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เรามีระบบ Stalled Watchdog และ Timeout Guard ในฟังก์ชัน <code>_check_and_apply_timeout()</code> หากงานใดค้างอยู่ในสถานะ 'processing' เกินกว่าเวลาที่กำหนด (เช่น 120 วินาที) ระบบจะอัปเดตสถานะเป็น 'failed' พร้อมระบุข้อผิดพลาด Timeout อัตโนมัติ ป้องกันไม่ให้ออเดอร์ค้างในระบบตลอดกาล</p>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-teal-400 font-bold block">6. ทำไมถึงรันงาน Image Tools ผ่าน ThreadPoolExecutor แทนการรันบน Async Loop ปกติ?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพราะการประมวลผลภาพใน OpenCV เป็นงานแบบ CPU-bound Synchronous Computation หากรันบน Async Event Loop หลักของ FastAPI จะเกิดการบล็อกเธรด ทำให้ไม่สามารถรับคำขอ HTTP ของผู้ใช้คนอื่นได้ การส่งไปรันใน ThreadPool ผ่าน <code>_run_in_pool()</code> จึงเป็นไปตามข้อปฏิบัติ Non-blocking I/O ที่ถูกต้อง</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('section').forEach(sec => sec.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('text-slate-400');
+            });
+            document.getElementById('section-' + tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active');
+            activeBtn.classList.remove('text-slate-400');
+        }
+
+        // =====================================================================
+        // TAB 1: BACKEND PIPELINE DATA & LOGIC
+        // =====================================================================
+        let currentBackendStep = 0;
+        const BACKEND_PIPELINE_STEPS = [
+    {
+        "badge": "STEP 1: INGESTION & AUTH",
+        "file": "api/generation.py:25",
+        "title": "1. รับคำขอ POST /api/generations & ตรวจสอบสิทธิ์ JWT",
+        "desc": "FastAPI แกะ Bearer Token ผ่าน Depends(get_current_user) ➔ ถอดรหัส JWT และตรวจสอบวันหมดอายุ ➔ ตรวจสอบ Payload ผ่าน Pydantic DTO (Validation Layer)",
+        "snippet": "@router.post(\"/\")\nasync def create_generation(payload, db: Session, current_user: User):\n    job = await create_generation_job(payload, db, current_user.id)\n    return job",
+        "defenseQ": "หากผู้ใช้ส่ง width = 2000 เข้ามา Backend จะทำอย่างไร?",
+        "defenseA": "Pydantic Schema จะทำ Data Sanitization และปฏิเสธคำขอทันทีด้วย HTTP 422 Unprocessable Entity โดยไม่ให้งานหลุดไปสร้างภาระแก่ฐานข้อมูลหรือ AI Server ครับ"
+    },
+    {
+        "badge": "STEP 2: DB TRANSACTION",
+        "file": "services/generation.py:410",
+        "title": "2. บันทึกข้อมูลงานลงฐานข้อมูลด้วยสถานะ 'queued'",
+        "desc": "สร้าง Task ID ด้วย UUIDv4 ➔ เพิ่มข้อมูลลงตาราง generation_tasks ➔ สั่ง db.commit() เพื่อรับประกันความคงทนของข้อมูล (Durability) ก่อนส่งต่อไปยัง AI Server",
+        "snippet": "task = GenerationTask(id=task_id, status=\"queued\", ...)\ndb.add(task); db.commit()",
+        "defenseQ": "ทำไมถึงต้อง commit ลงฐานข้อมูลก่อนยิงไป AI Server แทนที่จะยิงก่อนแล้วค่อยบันทึก?",
+        "defenseA": "เพื่อให้แน่ใจว่างานมีตัวตนอยู่ในระบบอย่างสมบูรณ์ หาก AI Server ตอบกลับ Callback มาเร็วมากก่อนที่ DB จะ Commit จะเกิดข้อผิดพลาด Task Not Found ได้ การบันทึกล่วงหน้าจึงป้องกัน Race Condition นี้ได้ครับ"
+    },
+    {
+        "badge": "STEP 3: AI NODE DISPATCH",
+        "file": "services/generation.py:512",
+        "title": "3. ส่งคำขอข้ามเครื่องไปยัง AI Node 3 (POST /ai/generate)",
+        "desc": "สร้าง Background Task ผ่าน asyncio.create_task() ➔ ยิงคำขอไปยัง http://127.0.0.1:7860/ai/generate พร้อม Header X-LUMA-INTERNAL-SECRET และระบุ callback_url ชี้กลับมาที่ Node 2",
+        "snippet": "headers = {\"X-LUMA-INTERNAL-SECRET\": settings.LUMA_INTERNAL_SECRET}\npayload[\"callback_url\"] = \"http://127.0.0.1:8000/api/callback\"\nawait client.post(\"http://127.0.0.1:7860/ai/generate\", json=payload, headers=headers)",
+        "defenseQ": "ทำไมคำขอนี้ถึงไม่บล็อกรอรับรูปภาพกลับมาเลย?",
+        "defenseA": "เพราะการสร้างภาพใช้เวลาคำนวณบนการ์ดจอหลายวินาที การเปิด Connection รอจะทำให้เกิด Connection Pool Exhaustion จึงใช้รูปแบบ Asynchronous Event-Driven แล้วรอรับผลผ่าน Webhook แทนครับ"
+    },
+    {
+        "badge": "STEP 4: WEBHOOK RECEIVER",
+        "file": "api/callback.py:36",
+        "title": "4. รับสัญญาณผลลัพธ์ผ่าน Webhook (POST /api/callback)",
+        "desc": "เมื่อ AI Server บน RTX 3070 สร้างภาพเสร็จ จะยิงข้อมูล JSON กลับมาที่พอร์ต 8000 ➔ ตรวจสอบ Secret Token ➔ ส่งต่อให้ process_ai_callback() ทันที",
+        "snippet": "@router.post(\"/callback\")\nasync def ai_callback(payload, db: Session, secret: Header):\n    verify_callback_secret(secret)\n    await process_ai_callback(payload, db)",
+        "defenseQ": "ถ้ามีใครแอบยิงข้อมูลมั่วๆ เข้ามาที่ /api/callback จะเกิดอะไรขึ้น?",
+        "defenseA": "ระบบมีฟังก์ชัน verify_callback_secret() คอยตรวจเช็ค X-LUMA-INTERNAL-SECRET หากไม่ตรงจะโยน HTTP 403 Forbidden ทันที ป้องกันการแอบสวมรอยแก้งานในระบบครับ"
+    },
+    {
+        "badge": "STEP 5: DISK STORAGE SYNC",
+        "file": "services/generation.py:715",
+        "title": "5. ถอดรหัส WebP Base64 และบันทึกไฟล์ภาพลง Disk Storage",
+        "desc": "ถอดรหัส Base64 สตริงออกมาเป็น Raw Bytes ➔ เขียนไฟล์ลงใน outputs/<task_id>/output.webp ➔ กำหนด Path เพื่อเตรียมส่งให้ผู้ใช้",
+        "snippet": "img_bytes = base64.b64decode(payload.image_base64)\nimg_path = Path(\"outputs\") / task_id / \"output.webp\"\nimg_path.write_bytes(img_bytes)",
+        "defenseQ": "ทำไมถึงเก็บเป็นไฟล์บน Disk แทนที่จะเก็บเป็น BLOB ใน Database?",
+        "defenseA": "เพราะการเก็บ Binary ขนาดใหญ่ใน Database จะทำให้ขนาดฐานข้อมูลขยายตัวรวดเร็ว (DB Bloat) และกิน Buffer Pool การเก็บเป็นไฟล์ช่วยให้ส่งข้อมูลแบบ Static File Streaming ผ่าน Web Server ได้เร็วกว่ามากครับ"
+    },
+    {
+        "badge": "STEP 6: TERMINAL UPDATE",
+        "file": "services/generation.py:735",
+        "title": "6. อัปเดตสถานะ DB เป็น 'completed' และบันทึก Seed จริง",
+        "desc": "ปรับสถานะ task.status = 'completed' ➔ บันทึก Seed ที่สุ่มได้จริงและระยะเวลาที่ใช้ ➔ commit ลง DB เพื่อให้ผู้ใช้ที่ทำ Polling ได้รับผลลัพธ์ที่สมบูรณ์",
+        "snippet": "task.status = \"completed\"\ntask.seed = payload.seed\ntask.execution_time = payload.execution_time\ndb.commit()",
+        "defenseQ": "การบันทึก Seed จริงที่ AI Server สุ่มขึ้นมามีประโยชน์อย่างไร?",
+        "defenseA": "เพื่อให้ได้คุณสมบัติ Deterministic Reproducibility ครับ ผู้ใช้สามารถนำ Seed เดิมไปสร้างภาพซ้ำหรือต่อยอดงานเดิมได้ 100% โดยที่ภาพยังมีองค์ประกอบเหมือนเดิม"
+    }
+];
+
+        function renderBackendPipelineTrack() {
+            const track = document.getElementById('b-pipeline-steps-track');
+            track.innerHTML = '';
+            BACKEND_PIPELINE_STEPS.forEach((st, idx) => {
+                const el = document.createElement('div');
+                const isActive = idx === currentBackendStep;
+                el.className = `p-2 rounded-lg cursor-pointer transition-all border ${isActive ? 'bg-emerald-500/20 border-emerald-500/60 text-emerald-300 font-bold' : 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700'}`;
+                el.innerText = `${idx + 1}. ${st.badge.split(':')[0]}`;
+                el.onclick = () => { currentBackendStep = idx; updateBackendPipelineUI(); };
+                track.appendChild(el);
+            });
+        }
+
+        function updateBackendPipelineUI() {
+            const st = BACKEND_PIPELINE_STEPS[currentBackendStep];
+            document.getElementById('b-step-badge').innerText = st.badge;
+            document.getElementById('b-step-file').innerText = st.file;
+            document.getElementById('b-step-title').innerText = st.title;
+            document.getElementById('b-step-desc').innerText = st.desc;
+            document.getElementById('b-step-snippet').innerText = st.snippet;
+            document.getElementById('b-step-defense-q').innerText = st.defenseQ;
+            document.getElementById('b-step-defense-a').innerText = st.defenseA;
+            renderBackendPipelineTrack();
+        }
+
+        function stepBackendPipeline(delta) {
+            currentBackendStep = (currentBackendStep + delta + BACKEND_PIPELINE_STEPS.length) % BACKEND_PIPELINE_STEPS.length;
+            updateBackendPipelineUI();
+        }
+
+        // =====================================================================
+        // TAB 2: OPENCV LAB LOGIC
+        // =====================================================================
+        function updateDodgeLab() {
+            const i = parseInt(document.getElementById('slider-i').value);
+            const b = parseInt(document.getElementById('slider-b').value);
+            document.getElementById('val-pixel-i').innerText = i;
+            document.getElementById('val-pixel-b').innerText = b;
+
+            const numerator = i * 256;
+            const denominator = 255 - b + 1;
+            const dodgeVal = Math.min(255, Math.floor(numerator / denominator));
+
+            document.getElementById('res-numerator').innerText = numerator.toLocaleString();
+            document.getElementById('res-denominator').innerText = denominator;
+            document.getElementById('res-dodge').innerText = `${dodgeVal} ${dodgeVal >= 250 ? '(กระดาษขาว)' : dodgeVal <= 50 ? '(เส้นดินสอดำ)' : '(เส้นเงาเทา)'}`;
+        }
+
+        // =====================================================================
+        // TAB 3: CODE INSPECTOR LOGIC
+        // =====================================================================
+        const BACKEND_MODULES_DATA = {
+    "api": [
+        {
+            "line": 25,
+            "name": "create_generation(payload, db, current_user)",
+            "tag": "API Ingestion",
+            "tag_color": "bg-sky-950/60 text-sky-300 border-sky-500/30",
+            "title": "Endpoint รับคำขอสร้างภาพ (POST /api/generations)",
+            "params": "payload: GenerationCreateRequest, db: Session, current_user: User -> GenerationResponse",
+            "desc": "รับคำขอจากหน้าบ้าน ➔ ตรวจสอบสิทธิ์ผู้ใช้ด้วย OAuth2 JWT ➔ ส่งต่อให้ <code>create_generation_job()</code> บันทึกงานลง DB และยิงคำขอไปยัง AI Node 3 ใน Background ➔ ตอบกลับ HTTP 201/202 พร้อมข้อมูลงานสถานะ queued ทันที",
+            "snippet": "@router.post(\"/\", response_model=GenerationResponse, status_code=status.HTTP_201_CREATED)\nasync def create_generation(\n    payload: GenerationCreateRequest,\n    db: Session = Depends(get_db),\n    current_user: User = Depends(get_current_user)\n):\n    # 1. สร้างงานและส่งต่อไป AI Node 3\n    job = await create_generation_job(payload, db, current_user.id)\n    return job",
+            "called_by": "Frontend Service <code>generationService.create()</code> เมื่อผู้ใช้กด Generate",
+            "subcalls": [
+                {
+                    "targetMod": "security",
+                    "targetFn": "get_current_user",
+                    "label": "Depends(get_current_user)",
+                    "why": "เพื่อถอดรหัส JWT Token ใน Header และยืนยันตัวตนของผู้ใช้",
+                    "what": "ดึง Bearer Token ➔ ตรวจสอบ Signature ➔ ค้นหา User ID ใน Database",
+                    "callsNext": "ส่งอ็อบเจกต์ User ให้กับ Handler หรือโยน 401 Unauthorized"
+                },
+                {
+                    "targetMod": "services",
+                    "targetFn": "create_generation_job",
+                    "label": "generation_service.create_generation_job(...)",
+                    "why": "เพื่อบันทึกงานลงฐานข้อมูลและกระจายคำขอไปยัง AI Node 3",
+                    "what": "สร้าง Record ใน DB พร้อมสถานะ 'queued' ➔ สั่ง Background Task ยิง HTTP ไป AI Server",
+                    "callsNext": "เรียกต่อ ➔ process_generation_task() เพื่อส่งงานข้ามเครือข่าย"
+                }
+            ],
+            "tip": "อาจารย์ถาม: ทำไมถึงออกแบบให้บันทึกงานลงฐานข้อมูลก่อนส่งไป AI Server? ตอบ: เพื่อความคงทนของข้อมูล (Durability) หากระบบเครือข่ายระหว่าง Node 2 กับ Node 3 มีปัญหาชั่วคราว ข้อมูลคำขอของผู้ใช้จะไม่สูญหาย และเราสามารถมีระบบ Retry หรือแจ้งเตือนความล้มเหลวได้อย่างถูกต้องครับ"
+        },
+        {
+            "line": 36,
+            "name": "ai_callback(payload, db, secret_token)",
+            "tag": "Webhook Gate",
+            "tag_color": "bg-emerald-950/60 text-emerald-300 border-emerald-500/30",
+            "title": "Webhook Receiver รับผลลัพธ์ภาพจาก AI Server (POST /api/callback)",
+            "params": "payload: AICallbackPayload, db: Session, secret: Header -> dict",
+            "desc": "จุดรับผลลัพธ์แบบ Asynchronous Event-Driven: ตรวจสอบความถูกต้องของ <code>X-LUMA-INTERNAL-SECRET</code> ใน Header ➔ ส่งต่อให้ <code>process_ai_callback()</code> บันทึกไฟล์ภาพ WebP ลง Disk และอัปเดตสถานะงานใน DB เป็น completed",
+            "snippet": "@router.post(\"/callback\", status_code=status.HTTP_200_OK)\nasync def ai_callback(\n    payload: AICallbackPayload,\n    db: Session = Depends(get_db),\n    secret_token: Optional[str] = Header(None, alias=\"X-LUMA-INTERNAL-SECRET\")\n):\n    verify_callback_secret(secret_token)\n    await process_ai_callback(payload, db)\n    return {\"status\": \"received\", \"task_id\": payload.task_id}",
+            "called_by": "Worker Loop <code>_process_queue()</code> ใน AI Node 3 เมื่อประมวลผลบน GPU เสร็จสิ้น",
+            "subcalls": [
+                {
+                    "targetMod": "api",
+                    "targetFn": "verify_callback_secret",
+                    "label": "verify_callback_secret(secret_token)",
+                    "why": "ป้องกันไม่ให้ผู้ใช้ภายนอกแอบยิง Callback ปลอมเพื่อแก้ไขสถานะงานในฐานข้อมูล",
+                    "what": "เปรียบเทียบ Token แบบ Constant-Time Comparison กับ Environment Variable",
+                    "callsNext": "โยน 403 Forbidden ทันทีหากไม่ตรงกัน"
+                },
+                {
+                    "targetMod": "services",
+                    "targetFn": "process_ai_callback",
+                    "label": "process_ai_callback(payload, db)",
+                    "why": "ประมวลผลจัดเก็บไฟล์รูปภาพและปิดสถานะงานใน DB",
+                    "what": "แปลง WebP Base64 ลงในโฟลเดอร์ outputs/<task_id>/output.webp ➔ อัปเดตสถานะเป็น completed",
+                    "callsNext": "Commit ข้อมูลลง Database เสร็จสิ้นสมบูรณ์"
+                }
+            ],
+            "tip": "นี่คือจุดตัดเกรดของ Backend! ทำไมถึงใช้ Webhook แทนที่จะให้ Backend ทำ Polling ถาม AI Server ตลอดเวลา? ตอบว่า: เพราะสถาปัตยกรรม Webhook เป็น Event-Driven แบบ Push Notification ทำให้ Backend ไม่ต้องเสียทรัพยากร CPU และ Network I/O ไปวนลูปถามเซิร์ฟเวอร์ AI และทำให้ผลลัพธ์ถูกส่งกลับมาทันทีในระดับมิลลิวินาทีหลัง GPU ทำงานเสร็จครับ"
+        },
+        {
+            "line": 16,
+            "name": "verify_callback_secret(token)",
+            "tag": "Security Guard",
+            "tag_color": "bg-red-950/60 text-red-300 border-red-500/30",
+            "title": "ด่านตรวจความปลอดภัย Secret Key ของ Webhook",
+            "params": "token: Optional[str] -> None (Raises HTTPException 403)",
+            "desc": "ใช้ฟังก์ชัน <code>secrets.compare_digest()</code> ตรวจสอบ Secret Token เพื่อป้องกันช่องโหว่ด้าน Timing Attack ในระดับเครือข่ายคลัสเตอร์",
+            "snippet": "def verify_callback_secret(token: Optional[str]):\n    expected = os.getenv(\"LUMA_INTERNAL_SECRET\", \"luma-internal-secret-2026\")\n    if not token or not secrets.compare_digest(token, expected):\n        raise HTTPException(status_code=403, detail=\"Forbidden: Invalid internal secret\")",
+            "called_by": "Endpoint <code>ai_callback()</code> ใน <code>callback.py</code>",
+            "subcalls": [],
+            "tip": "อาจารย์ถาม: ทำไมถึงใช้ secrets.compare_digest() แทนการใช้ == ปกติ? ตอบ: เพราะตัวดำเนินการ == จะหยุดเปรียบเทียบทันทีที่เจอตัวอักษรแรกที่ไม่ตรงกัน ทำให้ผู้ไม่หวังดีสามารถจับเวลาความเร็วในการตอบสนอง (Timing Attack) เพื่อคาดเดารหัสผ่านได้ ส่วน compare_digest จะใช้เวลาเท่ากันเสมอทุกครั้งไม่ว่าจะตรงหรือไม่ตรงครับ"
+        },
+        {
+            "line": 164,
+            "name": "cancel_generation(id, db, current_user)",
+            "tag": "API Ingestion",
+            "tag_color": "bg-rose-950/60 text-rose-300 border-rose-500/30",
+            "title": "Endpoint สั่งยกเลิกงาน (POST /api/generations/{id}/cancel)",
+            "params": "id: str, db: Session, current_user: User -> CancelResponse",
+            "desc": "ตรวจสอบความเป็นเจ้าของงาน ➔ สั่งยกเลิกงานใน DB ➔ ยิงคำขอ POST ไปที่ <code>/ai/cancel/{task_id}</code> ของ AI Node 3 เพื่อตัดงานบน GPU ทันที",
+            "snippet": "@router.post(\"/{id}/cancel\", response_model=CancelResponse)\nasync def cancel_generation(\n    id: str,\n    db: Session = Depends(get_db),\n    current_user: User = Depends(get_current_user)\n):\n    return await generation_service.cancel_generation(id, db, current_user.id)",
+            "called_by": "Frontend Service <code>generationService.cancel(id)</code>",
+            "subcalls": [
+                {
+                    "targetMod": "services",
+                    "targetFn": "cancel_generation",
+                    "label": "generation_service.cancel_generation(id, db, user_id)",
+                    "why": "ส่งสัญญาณตัดงานทั้งในฐานข้อมูลและบนเครื่องการ์ดจอ",
+                    "what": "ปรับสถานะใน DB เป็น cancelled ➔ ยิงคำขอยกเลิกไปยัง AI Node 3 พอร์ต 7860",
+                    "callsNext": "AI Server จะทำการ Soft/Hard Cancel ทันที"
+                }
+            ],
+            "tip": "อธิบายให้อาจารย์เห็นความร่วมมือข้ามโหนด: Backend ไม่ได้เปลี่ยนแค่สถานะในฐานข้อมูลของตัวเอง แต่ส่งสัญญาณไปยัง AI Server เพื่อปลดปล่อย VRAM บน RTX 3070 คืนให้ระบบด้วย"
+        }
+    ],
+    "tools": [
+        {
+            "line": 156,
+            "name": "create_pencil_sketch(file, blur_ksize, dodge_strength)",
+            "tag": "OpenCV Tool",
+            "tag_color": "bg-amber-950/60 text-amber-300 border-amber-500/30",
+            "title": "API แปลงภาพถ่ายเป็นภาพวาดลายเส้นดินสอ (Pencil Sketch)",
+            "params": "file: UploadFile, blur_ksize=21, dodge=256 -> ToolResultResponse",
+            "desc": "ประมวลผล Image Processing ใน ThreadPool: แปลงภาพเป็น Grayscale ➔ Invert กลับค่าความสว่าง ➔ Gaussian Blur ➔ Color Dodge Blending ให้ได้ลายเส้นดินสอสมจริง",
+            "snippet": "@router.post(\"/pencil-sketch\")\nasync def create_pencil_sketch(file: UploadFile = File(...), blur_ksize: int = 21):\n    image_bytes = await file.read()\n    result_path = await _run_in_pool(\n        image_tools_service.generate_pencil_sketch, image_bytes, blur_ksize\n    )\n    return {\"status\": \"success\", \"result_url\": f\"/api/tools/results/{result_path}\"}",
+            "called_by": "Frontend เมนู Image Processing Studio ➔ Pencil Sketch",
+            "subcalls": [
+                {
+                    "targetMod": "services",
+                    "targetFn": "generate_pencil_sketch",
+                    "label": "image_tools_service.generate_pencil_sketch(...)",
+                    "why": "คำนวณอัลกอริทึม Color Dodge บน OpenCV",
+                    "what": "รันใน ThreadPool เพื่อไม่ให้การประมวลผลภาพบล็อก Event Loop ของ FastAPI",
+                    "callsNext": "บันทึกภาพผลลัพธ์ลง Disk และคืนค่า Path"
+                }
+            ],
+            "tip": "อาจารย์วิชา Image Processing ต้องถามสูตรนี้แน่นอน! Color Dodge Blend คำนวณอย่างไร? ตอบ: Dodge(I, B) = min(255, (I * 256) / (255 - B + 1)) โดย I คือภาพ Grayscale ดั้งเดิม และ B คือภาพ Inverted ที่ผ่านการทำ Gaussian Blur ครับ"
+        },
+        {
+            "line": 206,
+            "name": "create_color_splash(file, target_color, tolerance)",
+            "tag": "OpenCV Tool",
+            "tag_color": "bg-purple-950/60 text-purple-300 border-purple-500/30",
+            "title": "API ทำภาพดูดสีเด่นเฉพาะจุด (Color Splash via HSV)",
+            "params": "file: UploadFile, target_color: str, tolerance: int -> ToolResultResponse",
+            "desc": "แปลงระบบสีจาก BGR เป็น HSV (Hue, Saturation, Value) ➔ สร้าง Color Threshold Mask ตามช่วงองศาของสีเป้าหมาย ➔ แยกภาพพื้นหลังเป็น Grayscale ➔ ผสานภาพเฉพาะจุดด้วย Bitwise Operations",
+            "snippet": "@router.post(\"/color-splash\")\nasync def create_color_splash(file: UploadFile = File(...), target_color: str = \"red\"):\n    image_bytes = await file.read()\n    result_path = await _run_in_pool(\n        image_tools_service.apply_color_splash, image_bytes, target_color\n    )\n    return {\"status\": \"success\", \"result_url\": f\"/api/tools/results/{result_path}\"}",
+            "called_by": "Frontend เมนู Image Processing Studio ➔ Color Splash",
+            "subcalls": [
+                {
+                    "targetMod": "services",
+                    "targetFn": "apply_color_splash",
+                    "label": "image_tools_service.apply_color_splash(...)",
+                    "why": "คำนวณการคัดกรองสีในปริภูมิสี HSV",
+                    "what": "ใช้ cv2.cvtColor(img, cv2.COLOR_BGR2HSV) และ cv2.inRange()",
+                    "callsNext": "ผสานผลลัพธ์ผ่าน cv2.bitwise_and()"
+                }
+            ],
+            "tip": "ทำไมต้องแปลงเป็นระบบสี HSV แทนที่จะกรองสีบน RGB ตรงๆ? ตอบ: เพราะในระบบ RGB ความสว่างของแสง (Illumination) จะส่งผลต่อค่าสีทั้ง 3 ช่อง ทำให้กรองสีภายใต้แสงเงาได้ยาก แต่ใน HSV ช่อง Hue (H) จะเก็บค่าเนื้อสีที่แท้จริงแยกออกจากความอิ่มตัว (S) และความสว่าง (V) ทำให้ตัดสีได้แม่นยำกว่ามากครับ"
+        }
+    ],
+    "services": [
+        {
+            "line": 406,
+            "name": "create_generation_job(payload, db, user_id)",
+            "tag": "Orchestrator",
+            "tag_color": "bg-indigo-950/60 text-indigo-300 border-indigo-500/30",
+            "title": "บริการสร้างงานและสั่งการ AI Node ในเบื้องหลัง",
+            "params": "payload: GenerationCreateRequest, db: Session, user_id: int -> GenerationTask",
+            "desc": "1. สร้าง Task ID แบบ UUIDv4<br>2. บันทึกแถวข้อมูลลงในตาราง `generation_tasks` ด้วยสถานะ `queued`<br>3. สั่งรันฟังก์ชัน <code>process_generation_task()</code> เป็น Background Task เพื่อยิงไปยัง AI Server พอร์ต 7860",
+            "snippet": "async def create_generation_job(payload, db, user_id):\n    task_id = str(uuid.uuid4())\n    task = GenerationTask(\n        id=task_id, user_id=user_id, prompt=payload.prompt,\n        status=\"queued\", width=payload.width, height=payload.height\n    )\n    db.add(task); db.commit(); db.refresh(task)\n    asyncio.create_task(process_generation_task(task_id, payload))\n    return task",
+            "called_by": "Endpoint <code>create_generation()</code> ใน <code>generation.py</code>",
+            "subcalls": [
+                {
+                    "targetMod": "services",
+                    "targetFn": "process_generation_task",
+                    "label": "process_generation_task(task_id, payload)",
+                    "why": "ส่งคำขอสร้างภาพข้ามโหนดไปยัง AI Server (Node 3)",
+                    "what": "จัดทำ HTTP Payload ➔ ยิง POST ไปที่ http://127.0.0.1:7860/ai/generate",
+                    "callsNext": "ส่ง Header X-LUMA-INTERNAL-SECRET และรอรับ Callback"
+                }
+            ],
+            "tip": "การแยกการทำงานด้วย asyncio.create_task() ทำให้ Endpoint ตอบกลับไปยังหน้าบ้านได้ภายในไม่กี่มิลลิวินาที โดยไม่ต้องรอการเชื่อมต่อเครือข่ายไปยัง AI Server"
+        },
+        {
+            "line": 691,
+            "name": "process_ai_callback(payload, db)",
+            "tag": "File & DB Sync",
+            "tag_color": "bg-emerald-950/60 text-emerald-300 border-emerald-500/30",
+            "title": "บริการบันทึกไฟล์ภาพ WebP และอัปเดต Database เมื่อ AI ทำงานเสร็จ",
+            "params": "payload: AICallbackPayload, db: Session -> None",
+            "desc": "ถอดรหัส Base64 ของภาพ WebP ➔ บันทึกลงในไฟล์ <code>outputs/<task_id>/output.webp</code> ➔ ค้นหา Task ใน DB และปรับสถานะเป็น `completed` พร้อมบันทึก Seed จริงและระยะเวลาประมวลผล",
+            "snippet": "async def process_ai_callback(payload: AICallbackPayload, db: Session):\n    task = db.query(GenerationTask).filter(GenerationTask.id == payload.task_id).first()\n    if not task: return\n    if payload.status == \"completed\" and payload.image_base64:\n        out_dir = Path(\"outputs\") / payload.task_id\n        out_dir.mkdir(parents=True, exist_ok=True)\n        img_path = out_dir / \"output.webp\"\n        img_bytes = base64.b64decode(payload.image_base64)\n        img_path.write_bytes(img_bytes)\n        task.status = \"completed\"\n        task.image_path = str(img_path)\n        task.seed = payload.seed\n    db.commit()",
+            "called_by": "Endpoint <code>ai_callback()</code> ใน <code>callback.py</code>",
+            "subcalls": [],
+            "tip": "ทำไมถึงเก็บไฟล์ภาพไว้บน Disk Filesystem แล้วบันทึกเฉพาะ Path ลงใน Database แทนที่จะเก็บเป็น BLOB ใน DB? ตอบว่า: เพื่อป้องกันไม่ให้ Database บวมและลดภาระ I/O ของฐานข้อมูล การเก็บไฟล์บน Filesystem ทำให้สามารถส่งไฟล์ผ่าน Nginx หรือ Web Server Static Serving ได้เร็วกว่ามาก และสามารถขยายไปสู่ S3/Cloud Storage ได้ง่ายครับ"
+        },
+        {
+            "line": 186,
+            "name": "generate_pencil_sketch(image_bytes, ksize=21)",
+            "tag": "OpenCV Math",
+            "tag_color": "bg-amber-950/60 text-amber-300 border-amber-500/30",
+            "title": "อัลกอริทึม Color Dodge Pencil Sketch ใน OpenCV",
+            "params": "image_bytes: bytes, ksize: int = 21 -> str (Path)",
+            "desc": "ประมวลผล 4 ขั้นตอน: 1. `cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)` 2. Invert: `255 - gray` 3. Gaussian Blur: `cv2.GaussianBlur(inv, (ksize, ksize), 0)` 4. Color Dodge Formula: `cv2.divide(gray, 255 - blur, scale=256)`",
+            "snippet": "def generate_pencil_sketch(image_bytes: bytes, ksize: int = 21) -> str:\n    img = cv2.imdecode(np.frombuffer(image_bytes, np.uint8), cv2.IMREAD_COLOR)\n    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)\n    inv = 255 - gray\n    blur = cv2.GaussianBlur(inv, (ksize, ksize), 0)\n    # Color Dodge Blending Formula\n    sketch = cv2.divide(gray, 255 - blur, scale=256)\n    return save_tool_result(sketch, \"sketch.png\")",
+            "called_by": "Endpoint <code>create_pencil_sketch()</code> ใน <code>tools.py</code>",
+            "subcalls": [],
+            "tip": "คำสั่ง cv2.divide(gray, 255 - blur, scale=256) คือการทำ Color Dodge ที่หลีกเลี่ยงการหารด้วยศูนย์ (Division by zero) ในระดับ C++ ที่มีประสิทธิภาพสูงกว่าการเขียนลูป Python ทั่วไปกว่า 100 เท่า"
+        }
+    ],
+    "security": [
+        {
+            "line": 54,
+            "name": "create_access_token(data, expires_delta)",
+            "tag": "JWT Engine",
+            "tag_color": "bg-indigo-950/60 text-indigo-300 border-indigo-500/30",
+            "title": "สร้าง JWT Access Token พร้อมเข้ารหัส HMAC-SHA256",
+            "params": "data: dict, expires_delta: Optional[timedelta] -> str",
+            "desc": "นำข้อมูล User Payload (เช่น User ID, Username, Role) มารวมกับวันเวลาหมดอายุ (Expiration Timestamp) แล้วเซ็นกำกับด้วย Secret Key โดยใช้อัลกอริทึม HS256",
+            "snippet": "def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:\n    to_encode = data.copy()\n    expire = datetime.utcnow() + (expires_delta or timedelta(minutes=60))\n    to_encode.update({\"exp\": expire})\n    return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=\"HS256\")",
+            "called_by": "Endpoint <code>login()</code> ใน <code>auth.py</code> ตอนผู้ใช้ล็อกอินสำเร็จ",
+            "subcalls": [],
+            "tip": "การกำหนด Expiration Time ให้กับ Token มีความสำคัญอย่างยิ่งเพื่อจำกัดความเสียหายหาก Token ถูกขโมย (Replay Attack) โดยระบบของเราตั้งค่าไว้ที่ 60 นาทีครับ"
+        },
+        {
+            "line": 80,
+            "name": "get_current_user(token, db)",
+            "tag": "Auth Guard",
+            "tag_color": "bg-red-950/60 text-red-300 border-red-500/30",
+            "title": "Dependency ตรวจสอบความถูกต้องของ JWT Token ในทุก Request",
+            "params": "token: str = Depends(oauth2_scheme), db: Session -> User",
+            "desc": "ถอดรหัส Token ➔ ตรวจสอบ Signature ด้วย SECRET_KEY ➔ ดึง User ID ➔ ค้นหา User ใน Database หากไม่พบหรือ Token หมดอายุจะโยน <code>HTTP 401 Unauthorized</code> ทันที",
+            "snippet": "async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)) -> User:\n    payload = decode_token(token)\n    user_id = payload.get(\"sub\")\n    user = db.query(User).filter(User.id == user_id).first()\n    if not user:\n        raise HTTPException(status_code=401, detail=\"Could not validate credentials\")\n    return user",
+            "called_by": "Endpoint เกือบทั้งหมดที่ต้องมีการยืนยันตัวตน เช่น <code>create_generation</code>, <code>get_me</code>, <code>cancel_generation</code>",
+            "subcalls": [],
+            "tip": "การใช้ FastAPI Depends(get_current_user) คือตัวอย่างของ Dependency Injection Pattern ที่ช่วยให้โค้ดสะอาด ไม่ต้องเขียนเช็ค Auth ซ้ำๆ ในทุกฟังก์ชัน"
+        }
+    ]
+};
+        let currentBackendMod = 'api';
+        let currentBackendItem = null;
+        let backendNavHistory = [];
+
+        function loadBackendModule(mod, clearHistory = true) {
+            currentBackendMod = mod;
+            if (clearHistory) {
+                backendNavHistory = [];
+                updateBackendNavUI();
+            }
+
+            ['api', 'tools', 'services', 'security'].forEach(m => {
+                const b = document.getElementById('btn-mod-' + m);
+                if (!b) return;
+                if (m === mod) {
+                    b.className = "px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold font-mono flex items-center gap-1.5";
+                } else {
+                    b.className = "px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5";
+                }
+            });
+
+            const fileNames = {
+                api: 'api/generation.py / api/callback.py',
+                tools: 'api/tools.py',
+                services: 'services/generation.py / services/image_tools.py',
+                security: 'core/security.py'
+            };
+            document.getElementById('b-module-file-badge').innerText = fileNames[mod] || mod;
+
+            const lines = BACKEND_MODULES_DATA[mod] || [];
+            document.getElementById('b-module-fn-count').innerText = `พบ ${lines.length} ฟังก์ชันในหมวดนี้`;
+
+            const container = document.getElementById('b-code-lines-container');
+            container.innerHTML = '';
+
+            lines.forEach((item, idx) => {
+                const el = document.createElement('div');
+                const isFirst = idx === 0;
+                el.id = `be-item-${mod}-${item.line}`;
+                el.className = `p-2.5 rounded-lg cursor-pointer hover:bg-slate-900 border border-transparent hover:border-slate-800 flex items-center justify-between transition-all ${isFirst ? 'bg-slate-900/90 border-emerald-500/40 border-l-4 border-l-emerald-400 shadow-sm' : 'bg-slate-950/60'}`;
+                const badgeColor = item.tag_color || 'bg-slate-800 text-emerald-300 border-slate-700';
+
+                el.innerHTML = `
+                    <div class="flex items-center gap-2.5 min-w-0 pr-2">
+                        <span class="text-slate-500 font-mono text-[11px] shrink-0">L${item.line}</span>
+                        <span class="font-bold text-slate-200 truncate text-xs">${item.name}</span>
+                    </div>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-mono border ${badgeColor} shrink-0">${item.tag}</span>
+                `;
+
+                el.onclick = () => {
+                    document.querySelectorAll('#b-code-lines-container > div').forEach(d => {
+                        d.className = "p-2.5 rounded-lg cursor-pointer hover:bg-slate-900 border border-transparent hover:border-slate-800 flex items-center justify-between transition-all bg-slate-950/60";
+                    });
+                    el.className = "p-2.5 rounded-lg cursor-pointer bg-slate-900/90 border-emerald-500/40 border-l-4 border-l-emerald-400 flex items-center justify-between transition-all shadow-sm";
+                    inspectBackendCode(item);
+                };
+
+                container.appendChild(el);
+            });
+
+            if (lines.length > 0) {
+                inspectBackendCode(lines[0]);
+            }
+        }
+
+        function inspectBackendCode(item) {
+            currentBackendItem = item;
+            document.getElementById('b-inspect-line-number').innerText = `Line ${item.line}: ${item.name.split('(')[0]}`;
+            document.getElementById('b-inspect-tag').innerText = item.tag;
+            document.getElementById('b-inspect-tag').className = `px-2 py-0.5 rounded border font-mono text-[11px] ${item.tag_color}`;
+            document.getElementById('b-inspect-title').innerText = item.title;
+            document.getElementById('b-inspect-params').innerText = item.params;
+            document.getElementById('b-inspect-desc').innerHTML = item.desc;
+            document.getElementById('b-inspect-snippet').innerText = item.snippet;
+            document.getElementById('b-inspect-caller-content').innerHTML = item.called_by || 'เรียกจากภายนอกหรือระบบเริ่มต้น';
+            document.getElementById('b-inspect-tip').innerText = item.tip;
+
+            const subContainer = document.getElementById('b-inspect-subcalls-container');
+            const subcalls = item.subcalls || [];
+            document.getElementById('b-inspect-subcalls-count').innerText = `${subcalls.length} คำสั่ง`;
+            subContainer.innerHTML = '';
+
+            if (subcalls.length === 0) {
+                subContainer.innerHTML = `
+                    <div class="p-3 rounded-lg bg-slate-950/60 border border-slate-800/60 text-slate-500 text-xs text-center font-mono">
+                        ฟังก์ชันนี้เป็น Leaf Function (คำนวณภายในหรือคืนผลลัพธ์โดยตรง ไม่ได้แตกกิ่งฟังก์ชันย่อยต่อ)
+                    </div>
+                `;
+            } else {
+                subcalls.forEach(sub => {
+                    const card = document.createElement('div');
+                    card.className = "bg-slate-950 p-3 rounded-xl border border-slate-800/90 hover:border-slate-700 transition-all space-y-2";
+                    card.innerHTML = `
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/80 pb-2">
+                            <span class="font-mono font-bold text-xs text-emerald-300 flex items-center gap-1.5">
+                                <span class="text-amber-400">⚡</span>
+                                <code>${sub.label}</code>
+                            </span>
+                            <button onclick="jumpBackendFunction('${sub.targetMod}', '${sub.targetFn}')" class="px-2.5 py-1 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 text-[11px] font-semibold border border-emerald-500/40 flex items-center gap-1 shrink-0 transition-all">
+                                <span>↗ เจาะลึกโค้ด</span>
+                            </button>
+                        </div>
+                        <div class="space-y-1.5 text-xs text-slate-300">
+                            <div><span class="text-amber-400 font-semibold">🎯 ทำไมต้องเรียกคำสั่งนี้:</span> ${sub.why}</div>
+                            <div><span class="text-emerald-400 font-semibold">⚙️ ฟังก์ชันนี้เข้าไปทำอะไรบ้าง:</span> ${sub.what}</div>
+                            <div class="bg-slate-900/60 p-2 rounded border border-slate-800/60 text-[11.5px]"><span class="text-purple-400 font-semibold">🔄 เรียกต่อยอด:</span> <span class="font-mono text-slate-300">${sub.callsNext}</span></div>
+                        </div>
+                    `;
+                    subContainer.appendChild(card);
+                });
+            }
+            updateBackendNavUI();
+        }
+
+        function jumpBackendFunction(targetMod, targetFn) {
+            if (currentBackendMod && currentBackendItem) {
+                backendNavHistory.push({ mod: currentBackendMod, item: currentBackendItem });
+            }
+            loadBackendModule(targetMod, false);
+            const lines = BACKEND_MODULES_DATA[targetMod] || [];
+            const target = lines.find(it => it.name.includes(targetFn) || it.name.startsWith(targetFn));
+            if (target) {
+                inspectBackendCode(target);
+                setTimeout(() => {
+                    document.querySelectorAll('#b-code-lines-container > div').forEach(d => {
+                        d.className = "p-2.5 rounded-lg cursor-pointer hover:bg-slate-900 border border-transparent hover:border-slate-800 flex items-center justify-between transition-all bg-slate-950/60";
+                    });
+                    const el = document.getElementById(`be-item-${targetMod}-${target.line}`);
+                    if (el) {
+                        el.className = "p-2.5 rounded-lg cursor-pointer bg-slate-900/90 border-emerald-500/40 border-l-4 border-l-emerald-400 flex items-center justify-between transition-all shadow-sm";
+                        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                }, 50);
+            }
+            updateBackendNavUI();
+        }
+
+        function goBackBackendFunction() {
+            if (backendNavHistory.length === 0) return;
+            const prev = backendNavHistory.pop();
+            loadBackendModule(prev.mod, false);
+            inspectBackendCode(prev.item);
+            setTimeout(() => {
+                document.querySelectorAll('#b-code-lines-container > div').forEach(d => {
+                    d.className = "p-2.5 rounded-lg cursor-pointer hover:bg-slate-900 border border-transparent hover:border-slate-800 flex items-center justify-between transition-all bg-slate-950/60";
+                });
+                const el = document.getElementById(`be-item-${prev.mod}-${prev.item.line}`);
+                if (el) {
+                    el.className = "p-2.5 rounded-lg cursor-pointer bg-slate-900/90 border-emerald-500/40 border-l-4 border-l-emerald-400 flex items-center justify-between transition-all shadow-sm";
+                    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 50);
+            updateBackendNavUI();
+        }
+
+        function updateBackendNavUI() {
+            const navBar = document.getElementById('b-inspect-nav-bar');
+            const breadcrumbsEl = document.getElementById('b-inspect-breadcrumbs');
+            if (!navBar || !breadcrumbsEl) return;
+            if (backendNavHistory.length > 0) {
+                navBar.classList.remove('hidden');
+                navBar.classList.add('flex');
+                const trail = backendNavHistory.map(h => h.item.name.split('(')[0]).concat([
+                    currentBackendItem ? currentBackendItem.name.split('(')[0] : ''
+                ]);
+                breadcrumbsEl.innerText = trail.join(' ➔ ');
+            } else {
+                navBar.classList.add('hidden');
+                navBar.classList.remove('flex');
+            }
+        }
+
+        // =====================================================================
+        // TAB 4: EXAM QUESTIONS (10 QUESTIONS)
+        // =====================================================================
+        const BACKEND_EXAM = [
+    {
+        "id": 1,
+        "q": "ในอัลกอริทึม Pencil Sketch การผสมผสานภาพแบบ Color Dodge คำนวณด้วยสูตรใดในเชิงคณิตศาสตร์?",
+        "options": [
+            "Dodge(I, B) = I + B - 255",
+            "Dodge(I, B) = min(255, (I * 256) / (255 - B + 1))",
+            "Dodge(I, B) = sqrt(I^2 + B^2)",
+            "Dodge(I, B) = (I * B) / 255"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! Color Dodge มีสูตรทางคณิตศาสตร์คือ min(255, (I * 256) / (255 - B + 1)) ซึ่งนำภาพ Grayscale ต้นฉบับมาหารด้วยค่าผกผันของภาพที่ผ่านการ Gaussian Blur ทำให้ขอบวัตถุที่มีความต่างของแสงถูกเน้นเป็นเส้นดินสอสีเข้ม"
+    },
+    {
+        "id": 2,
+        "q": "ทำไมระบบจึงเลือกใช้สถาปัตยกรรม Webhook Callback แทนที่จะให้ Backend ทำ Polling วนลูปถาม AI Server?",
+        "options": [
+            "เพราะ FastAPI ไม่รองรับการยิงคำขอแบบ HTTP GET",
+            "เพราะ Webhook เป็น Event-Driven ช่วยลดภาระ CPU/Network Overhead และทำให้ได้ผลลัพธ์ทันทีเมื่อ GPU ทำงานเสร็จ",
+            "เพื่อให้สามารถทำงานบนเครื่องที่ไม่มีการ์ดจอได้",
+            "เพื่อหลีกเลี่ยงการเปิดพอร์ตบนไฟร์วอลล์"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! การใช้ Webhook ช่วยให้ทั้งสองระบบทำงานแบบ Loose-coupling และ Event-driven ไม่ต้องเสียทรัพยากรไป Polling ซ้ำๆ บนเครือข่าย"
+    },
+    {
+        "id": 3,
+        "q": "ทำไมถึงเก็บไฟล์ภาพที่สร้างเสร็จแล้วไว้บน Disk Storage (/outputs/...) แทนที่จะเก็บลงฐานข้อมูลแบบ BLOB?",
+        "options": [
+            "เพราะฐานข้อมูล SQLite ไม่รองรับข้อมูลประเภทไบนารี",
+            "เพื่อป้องกัน Database Bloat และลด Memory Pressure ทำให้สามารถสตรีมรูปผ่าน Static File Serving ได้รวดเร็วกว่า",
+            "เพื่อให้รูปภาพปลอดภัยจากการถูกลบโดยไม่ตั้งใจ",
+            "เพราะระบบปฏิบัติการ Windows บังคับให้เก็บไฟล์บนดิสก์เท่านั้น"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! การเก็บไฟล์ขนาดใหญ่ลงใน Database จะทำให้ Buffer Pool บวม และการสำรองข้อมูล (Backup) ทำได้ช้า การเก็บ Path ใน DB และตัวไฟล์บน Disk เป็น Best Practice ในระดับ Production"
+    },
+    {
+        "id": 4,
+        "q": "ฟังก์ชัน secrets.compare_digest() มีความสำคัญอย่างไรในแง่ของความปลอดภัยทางไซเบอร์?",
+        "options": [
+            "ช่วยบีบอัดขนาดของ Secret Token ให้เล็กลง",
+            "ป้องกันการโจมตีแบบ Timing Attack โดยใช้เวลาเปรียบเทียบข้อมูลเท่ากันเสมอไม่ว่าค่าจะตรงหรือไม่ตรง",
+            "ช่วยเข้ารหัสรหัสผ่านด้วยอัลกอริทึม SHA-512",
+            "ช่วยตรวจสอบว่า Token มีอักขระพิเศษหรือไม่"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! การเปรียบเทียบแบบ Constant-Time ป้องกันไม่ให้แฮกเกอร์ตรวจจับเวลาความเร็วของการส่งกลับเพื่อคาดเดารหัสผ่านทีละตัวอักษรได้"
+    },
+    {
+        "id": 5,
+        "q": "ใน Color Splash Tool ทำไมถึงต้องแปลงระบบสีเป็น HSV ก่อนทำการตัดสี (Color Masking)?",
+        "options": [
+            "เพราะ HSV ใช้พื้นที่หน่วยความจำน้อยกว่า RGB 50%",
+            "เพราะ HSV แยกเนื้อสี (Hue) ออกจากความสว่างของแสง (Value) ทำให้คัดกรองสีได้แม่นยำแม้ในบริเวณที่มีแสงเงา",
+            "เพื่อให้ภาพมีความคมชัดระดับ 4K",
+            "เป็นข้อกำหนดของไลบรารี Pillow"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! ในระบบ RGB ความสว่างจะปนอยู่ในทุกแชนเนล (R, G, B) ทำให้แยกสียาก แต่ HSV แยกเนื้อสี (H) ออกมาเป็นองศาอิสระ ทำให้ตั้งช่วงสี (Tolerance Range) ได้แม่นยำกว่ามาก"
+    },
+    {
+        "id": 6,
+        "q": "ทำไมคำสั่ง Image Processing ของ OpenCV ถึงต้องถูกส่งไปรันผ่าน _run_in_pool() ด้วย ThreadPoolExecutor?",
+        "options": [
+            "เพราะ OpenCV ไม่สามารถรันบนระบบปฏิบัติการ 64-bit ได้",
+            "เพราะ OpenCV เป็นงานคำนวณแบบ CPU-bound หากรันบน Async Loop หลักจะบล็อกการตอบสนองของเซิร์ฟเวอร์ต่อผู้ใช้คนอื่น",
+            "เพื่อป้องกันไม่ให้ RAM ของการ์ดจอ RTX 3070 เต็ม",
+            "เพื่อให้ OpenCV สามารถเข้าถึงฐานข้อมูลได้"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! ใน FastAPI/AsyncIO หากรันคำสั่ง CPU-bound หนักๆ บน Main Thread จะทำให้ Event Loop หยุดชะงัก การ Offload ไปยัง ThreadPool จึงช่วยรักษาความลื่นไหลของระบบ"
+    },
+    {
+        "id": 7,
+        "q": "กลไก PRAGMA journal_mode=WAL ใน SQLite ช่วยแก้ปัญหาใดในการทำงานร่วมกับ Webhook?",
+        "options": [
+            "ช่วยบีบอัดฐานข้อมูลให้อัตโนมัติ",
+            "อนุญาตให้มีคำสั่งอ่าน (Readers) ทำงานพร้อมกับคำสั่งเขียน (Writer) ได้โดยไม่เกิดปัญหา Database Locked",
+            "ช่วยเข้ารหัสไฟล์ฐานข้อมูลด้วย AES-256",
+            "ช่วยสำรองข้อมูลขึ้นคลาวด์"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! Write-Ahead Logging (WAL) Mode ช่วยเพิ่ม Concurrency มหาศาล ทำให้ขณะที่ Webhook กำลัง Write ผลลัพธ์ลง DB หน้าบ้านยังคง Read Polling ข้อมูลได้โดยไม่ติด Lock"
+    },
+    {
+        "id": 8,
+        "q": "ทำไมถึงต้องมีการบันทึกแถวข้อมูลลงใน generation_tasks (status='queued') ก่อนที่จะส่งคำขอไปยัง AI Server?",
+        "options": [
+            "เพื่อป้องกันไม่ให้ผู้ใช้เปิดแท็บใหม่",
+            "เพื่อรับประกันความคงทนของข้อมูล (Durability) และป้องกัน Race Condition กรณีที่ AI Server ตอบกลับมาเร็วกว่าการ Commit",
+            "เพื่อให้การ์ดจอมีเวลาเตรียมโมเดล",
+            "เป็นข้อบังคับของ Pydantic"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! การรับประกันสถานะงานในฐานข้อมูลก่อนยิงข้ามเครือข่ายช่วยให้ระบบมี Transaction State ที่แน่นอน และสามารถติดตามสถานะงานได้เสมอแม้เครือข่ายจะขัดข้อง"
+    },
+    {
+        "id": 9,
+        "q": "หากการ์ดจอใน AI Node 3 ประมวลผลงานค้างเกินเวลา Backend มีกลไกรับมืออย่างไร?",
+        "options": [
+            "ระบบจะรีบูตเครื่องเซิร์ฟเวอร์ใหม่ทันที",
+            "ฟังก์ชัน _check_and_apply_timeout() จะตรวจสอบและเปลี่ยนสถานะงานที่ค้างเกินกำหนดให้เป็น 'failed' พร้อมบันทึกข้อผิดพลาด",
+            "ระบบจะส่งคำสั่งลบผู้ใช้นั้นออกจากระบบ",
+            "งานจะค้างรอต่อไปตลอดกาล"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! ระบบมี Watchdog Timeout คอยเคลียร์งานที่ค้างนานเกินกำหนดให้กลายเป็น 'failed' เพื่อให้ระบบมี Fault Tolerance และผู้ใช้ไม่ค้างรอตลอดไป"
+    },
+    {
+        "id": 10,
+        "q": "ทำไมในฟังก์ชัน create_access_token() ถึงต้องกำหนด Expiration Time ให้กับ JWT เสมอ?",
+        "options": [
+            "เพื่อให้บราวเซอร์สามารถลบประวัติการท่องเว็บได้",
+            "เพื่อจำกัดความเสียหายหาก Token ถูกดักจับหรือขโมยไป (Mitigating Replay Attacks)",
+            "เพื่อให้ Token มีขนาดไฟล์เล็กลง",
+            "เพื่อไม่ให้เซิร์ฟเวอร์ต้องต่ออินเทอร์เน็ต"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! การตั้งวันหมดอายุให้ Access Token เป็นหลักการความปลอดภัยพื้นฐาน เพื่อป้องกันไม่ให้ผู้ไม่ประสงค์ดีนำ Token ที่รั่วไหลไปใช้งานต่อได้อย่างไม่มีกำหนด"
+    }
+];
+        let bUserAnswers = {};
+
+        function renderBackendExam() {
+            const container = document.getElementById('b-exam-cards-container');
+            container.innerHTML = '';
+            BACKEND_EXAM.forEach((item, qIdx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3";
+                
+                let optHtml = '';
+                item.options.forEach((opt, optIdx) => {
+                    const isSelected = bUserAnswers[item.id] === optIdx;
+                    const isSubmitted = bUserAnswers[item.id] !== undefined;
+                    let optStyle = "bg-slate-900 border-slate-800 hover:border-slate-700 text-slate-300";
+                    if (isSubmitted) {
+                        if (optIdx === item.correct) {
+                            optStyle = "bg-emerald-950/60 border-emerald-500/80 text-emerald-300 font-semibold";
+                        } else if (isSelected) {
+                            optStyle = "bg-rose-950/60 border-rose-500/80 text-rose-300";
+                        }
+                    }
+                    optHtml += `
+                        <div onclick="selectBackendExamOption(${item.id}, ${optIdx})" class="p-3 rounded-lg border text-xs cursor-pointer transition-all flex items-center justify-between ${optStyle}">
+                            <span>${String.fromCharCode(65 + optIdx)}. ${opt}</span>
+                            ${isSubmitted && optIdx === item.correct ? '<span class="text-emerald-400 font-bold">✓ คำตอบที่ถูกต้อง</span>' : ''}
+                            ${isSubmitted && isSelected && optIdx !== item.correct ? '<span class="text-rose-400 font-bold">✗ คุณเลือกข้อนี้</span>' : ''}
+                        </div>
+                    `;
+                });
+
+                let rationaleHtml = '';
+                if (bUserAnswers[item.id] !== undefined) {
+                    rationaleHtml = `
+                        <div class="mt-3 p-3.5 rounded-lg bg-slate-900/90 border border-slate-800 text-xs text-slate-300 leading-relaxed">
+                            <span class="font-bold text-emerald-400 block mb-1">📖 คำอธิบายทางวิศวกรรม:</span>
+                            ${item.rationale}
+                        </div>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
+                        <span class="text-xs font-mono font-bold text-emerald-400">คำถามข้อที่ ${qIdx + 1} / 10</span>
+                        <span class="text-[11px] font-mono text-slate-500">FastAPI, OpenCV & Architecture</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-white leading-relaxed">${item.q}</h4>
+                    <div class="space-y-2 pt-1">
+                        ${optHtml}
+                    </div>
+                    ${rationaleHtml}
+                `;
+                container.appendChild(card);
+            });
+            updateBackendExamScore();
+        }
+
+        function selectBackendExamOption(qId, optIdx) {
+            if (bUserAnswers[qId] !== undefined) return;
+            bUserAnswers[qId] = optIdx;
+            renderBackendExam();
+        }
+
+        function updateBackendExamScore() {
+            let score = 0;
+            BACKEND_EXAM.forEach(item => {
+                if (bUserAnswers[item.id] === item.correct) score++;
+            });
+            document.getElementById('b-exam-score').innerText = `${score} / ${BACKEND_EXAM.length}`;
+        }
+
+        function resetBackendExam() {
+            bUserAnswers = {};
+            renderBackendExam();
+        }
+
+        // Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            renderBackendPipelineTrack();
+            updateBackendPipelineUI();
+            updateDodgeLab();
+            loadBackendModule('api');
+            renderBackendExam();
+        });
+    </script>
+</body>
+</html>
