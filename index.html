@@ -265,15 +265,15 @@
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
                 <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
-                    <span class="font-bold text-sky-400">1. ทฤษฎี Latent Space ($f=8$)</span>
+                    <span class="font-bold text-sky-400">1. ทฤษฎี Latent Space (ย่อขนาด f = 8 เท่า)</span>
                     <p class="text-slate-300">
-                        อธิบายว่า VAE ย่อภาพลง 8 เท่า ($512\times 512 \rightarrow 64\times 64$) ทำให้คำนวณเร็วขึ้นเกือบ 50 เท่า และขนาดภาพต้องหารด้วย 8 ลงตัวเสมอ
+                        อธิบายว่า VAE ย่อภาพลง 8 เท่า (จาก 512×512 พิกเซล เหลือ 64×64 ใน Latent Space) ทำให้คำนวณเร็วขึ้นเกือบ 50 เท่า และขนาดภาพต้องหารด้วย 8 ลงตัวเสมอ
                     </p>
                 </div>
                 <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
                     <span class="font-bold text-emerald-400">2. สูตร Color Dodge Blending</span>
                     <p class="text-slate-300">
-                        อธิบายสูตร: $\text{Dodge}(I, B) = \min(255, (I \times 256) / (255 - B + 1))$ และชี้แจงว่า cv2.divide ช่วยป้องกันการหารด้วยศูนย์ในระดับฮาร์ดแวร์
+                        อธิบายสูตร: <code>Dodge(I, B) = min(255, (I × 256) / (255 - B + 1))</code> และชี้แจงว่า <code>cv2.divide</code> ช่วยป้องกันการหารด้วยศูนย์ในระดับฮาร์ดแวร์ C++
                     </p>
                 </div>
                 <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">

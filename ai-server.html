@@ -319,7 +319,7 @@ return {
                 </div>
 
                 <div class="p-3 rounded-xl bg-sky-500/10 border border-sky-500/20 text-xs text-slate-300">
-                    <span class="font-bold text-sky-400">ทฤษฎีในข้อสอบ:</span> ใน Latent Diffusion Model (LDM) ตัว VAE Encoder จะบีบอัดภาพด้วยอัตราส่วน 8 เท่า ($f=8$) เพื่อลดมิติในการคำนวณจาก $512\times 512\times 3$ ($786,432$ ค่า) เหลือเพียง $64\times 64\times 4$ ($16,384$ ค่า) ทำให้ประหยัดการคำนวณถึง 48 เท่า! หากขนาดไม่หาร 8 ลงตัว ตัวเลขมิติ Latent จะเกิดเศษทศนิยม ทำให้ Tensor Shape แตกทันที
+                    <span class="font-bold text-sky-400">ทฤษฎีในข้อสอบ:</span> ใน Latent Diffusion Model (LDM) ตัว VAE Encoder จะบีบอัดภาพด้วยอัตราส่วน 8 เท่า (f = 8) เพื่อลดมิติในการคำนวณจาก 512×512×3 (786,432 ค่าใน Pixel Space) เหลือเพียง 64×64×4 (16,384 ค่าใน Latent Space) ทำให้ประหยัดการคำนวณถึง 48 เท่า! หากขนาดภาพไม่หาร 8 ลงตัว ตัวเลขมิติ Latent จะเกิดเศษทศนิยม ทำให้ Tensor Shape เกิด Dimension Mismatch ทันที
                 </div>
             </div>
 
@@ -411,7 +411,7 @@ return {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 text-xs text-slate-300">
                 <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
                     <span class="font-bold text-rose-400 block mb-1">ทำไมภาพขนาด 1024x1024 ถึงแครชบน 8GB?</span>
-                    เนื่องจากการคำนวณ Self-Attention ใน UNet เพิ่มขึ้นแบบ Exponential $O(N^2)$ ตามจำนวนพิกเซล การเพิ่มขนาดภาพจาก 512 เป็น 1024 จะเพิ่มจำนวน Latent Token ขึ้น 4 เท่า ส่งผลให้ Attention Map กิน VRAM พุ่งขึ้นเกิน 8GB ทันที (CUDA OOM)
+                    เนื่องจากการคำนวณ Self-Attention ใน UNet เพิ่มขึ้นแบบก้าวกระโดด O(N²) ตามจำนวนพิกเซล การเพิ่มขนาดภาพจาก 512 เป็น 1024 จะเพิ่มจำนวน Latent Token ขึ้น 4 เท่า ส่งผลให้ Attention Map กิน VRAM พุ่งขึ้นเกิน 8GB ทันที (CUDA OOM)
                 </div>
                 <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
                     <span class="font-bold text-emerald-400 block mb-1">วิธีที่ Node 3 ป้องกัน VRAM แตก:</span>
@@ -605,7 +605,7 @@ return {
                     <span>⚠️</span> Q2: "ทำไมขนาดภาพต้องหารด้วย 8 ลงตัวเสมอใน Image Processing?"
                 </div>
                 <p class="text-xs text-slate-300 leading-relaxed">
-                    <strong>คำตอบสั้นและเด็ดขาด:</strong> "เพราะตัวเข้ารหัส <strong>VAE (Variational Autoencoder)</strong> ของ Stable Diffusion มี Downsampling Factor เท่ากับ 8 เท่า ($f=8$) เพื่อบีบอัดภาพลงสู่ Latent Space เช่น ภาพ $512\times 512$ พิกเซลจะกลายเป็น Latent Tensor ขนาด $64\times 64$ หากมิติภาพหาร 8 ไม่ลงตัว จะทำให้ Latent Tensor เกิดเศษทศนิยมและเกิด Dimension Mismatch ใน Layer ของ UNet ทันทีครับ"
+                    <strong>คำตอบสั้นและเด็ดขาด:</strong> "เพราะตัวเข้ารหัส <strong>VAE (Variational Autoencoder)</strong> ของ Stable Diffusion มีอัตราส่วนการย่อ (Downsampling Factor) เท่ากับ 8 เท่า (f = 8) เพื่อบีบอัดภาพลงสู่ Latent Space เช่น ภาพขนาด 512×512 พิกเซล จะถูกย่อลงเหลือ Latent Tensor ขนาด 64×64 หากมิติภาพหารด้วย 8 ไม่ลงตัว จะทำให้ขนาดของ Latent Tensor เกิดเศษทศนิยม และเกิดข้อผิดพลาด Dimension Mismatch ใน Layer ของ UNet ทันทีครับ"
                 </p>
             </div>
 
@@ -724,7 +724,7 @@ return {
                 time: "0.08s",
                 snippet: `# ตรวจสอบคำซ้ำก่อนเติม Trigger Words\nwords_to_add = []\nfor phrase in trigger.split(','):\n    if phrase.lower() not in user_prompt.lower():\n        words_to_add.append(phrase)\n\n# ประกอบ Prompt ขั้นสุดท้าย\nfinal_prompt = f"{injected_trigger}, {user_prompt} <lora:{lora_name}:{weight}>"`,
                 defenseQ: "LoRA ทำงานอย่างไรในโมเดล Diffusion ทางคณิตศาสตร์?",
-                defenseA: "LoRA (Low-Rank Adaptation) ทำการแทรกเมทริกซ์อันดับต่ำ $A$ และ $B$ ($W = W_0 + \\Delta W = W_0 + B \\times A$) เข้าไปที่ Cross-Attention Layers ของ UNet ทำให้โมเดลเรียนรู้สไตล์หรือตัวละครใหม่ได้โดยไม่ต้องปรับแต่ง Weights หลักทั้ง 4GB ช่วยประหยัด VRAM และสามารถสลับสไตล์ได้ทันทีครับ",
+                defenseA: "LoRA (Low-Rank Adaptation) ทำการแทรกเมทริกซ์ขนาดเล็ก 2 ตัวคือ A และ B โดยใช้สูตร W = W₀ + ΔW = W₀ + (B × A) เข้าไปที่ชั้น Cross-Attention Layers ของ UNet ทำให้โมเดลเรียนรู้สไตล์หรือตัวละครใหม่ได้โดยไม่ต้องเทรน Weights หลักทั้งก้อน 4GB ช่วยประหยัด VRAM และสลับสไตล์ได้แบบ Dynamic ในเสี้ยววินาทีครับ",
                 svg: `<svg class="w-48 h-32" viewBox="0 0 200 120">
                     <rect x="15" y="20" width="80" height="80" rx="8" fill="#1e293b" stroke="#38bdf8"/>
                     <text x="55" y="55" fill="#94a3b8" font-size="9" text-anchor="middle">Base Prompt</text>
@@ -745,7 +745,7 @@ return {
                 time: "0.65s",
                 snippet: `# ส่งคำสั่งเข้า Headless Forge REST API\nresp = requests.post(\n    "http://127.0.0.1:7861/sdapi/v1/txt2img",\n    json=payload,\n    timeout=120.0\n)\nactual_seed = _extract_seed_from_forge_resp(resp.json())`,
                 defenseQ: "กระบวนการ Denoising ใน Latent Space แตกต่างจากการวาดใน Pixel Space อย่างไร?",
-                defenseA: "ใน Pixel Space ภาพขนาด $512\\times 512\\times 3$ มีมิติข้อมูล 786,432 พิกเซล การรันโมเดลคำนวณบนมิตินี้ตรงๆ จะกินการคำนวณและ VRAM มหาศาล แต่ Latent Diffusion ใช้ VAE ย่อภาพลงมาเหลือ $64\\times 64\\times 4$ (16,384 ตัวเลข) ทำให้การคำนวณ Denoising เร็วขึ้นเกือบ 50 เท่าบนการ์ดจอ RTX 3070 ครับ",
+                defenseA: "ใน Pixel Space ภาพขนาด 512×512×3 มีมิติข้อมูลถึง 786,432 ค่า การรัน Denoising บนมิตินี้ตรงๆ จะกิน VRAM และเวลาคำนวณมหาศาล แต่โมเดลแบบ Latent Diffusion ใช้ VAE ย่อภาพลง 8 เท่า เหลือมิติ Latent เพียง 64×64×4 (16,384 ค่า) ทำให้การคำนวณ Denoising เร็วขึ้นเกือบ 50 เท่าบนการ์ดจอ RTX 3070 ครับ",
                 svg: `<svg class="w-48 h-32" viewBox="0 0 200 120">
                     <rect x="25" y="25" width="150" height="70" rx="10" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
                     <text x="100" y="50" fill="#10b981" font-size="11" font-weight="bold" font-family="monospace" text-anchor="middle">RTX 3070 Laptop (8GB)</text>
@@ -953,7 +953,7 @@ return {
                         "snippet": "class GenerateRequest(BaseModel):\n    \"\"\"\n    โครงสร้างข้อมูลสำหรับ Request การสร้างภาพแบบ Text-to-Image (txt2img):\n    มีการตรวจสอบขอบเขตข้อมูลอย่างเข้มงวด (Data Validation) ตามสเปกความปลอดภัย\n    \"\"\"\n    task_id: str = Field(..., description=\"รหัสงาน UUID ที่สร้างโดย Backend\")\n    prompt: str = Field(\n        ..., \n        min_length=AIConfig.MIN_PROMPT_LENGTH, \n        max_length=AIConfig.MAX_PROMPT_LENGTH, \n        description=\"ข้อความอธิบายภาพ (สูงสุด 2,000 ตัวอักษร)\"\n    )\n    negative_prompt: Optional[str] = Field(\n        \"blurry, low quality, distorted, bad anatomy\", \n        max_length=AIConfig.MAX_NEGATIVE_PROMPT_LENGTH,\n        description=\"ข้อความระบุสิ่งที่ไม่ต้องการให้ปรากฏในภาพ\"\n    )\n    model: Optional[str] = None\n    model_name: Optional[str] = AIConfig.DEFAULT_MODEL\n    lora: Optional[str] = None\n    lora_config: Optional[Any] = None  # รองรับได้ทั้ง String, Dict หรือ List ที่ส่งมาจาก Backend\n    sampler_name: Optional[str] = AIConfig.DEFAULT_SAMPLER\n    steps: Optional[int] = Field(\n        AIConfig.DEFAULT_STEPS, \n        ge=AIConfig.MIN_STEPS, \n        le=AIConfig.MAX_STEPS, \n        description=\"จำนวนรอบ Sampling (1-50 Steps)\"\n    )\n    cfg_scale: Optional[float] = Field(\n        AIConfig.DEFAULT_CFG, \n        ge=AIConfig.MIN_CFG, \n        le=AIConfig.MAX_CFG, \n        description=\"ความเข้มงวดตาม Prompt (1.0-20.0)\"\n    )\n    seed: Optional[int] = None\n    width: Optional[int] = Field(\n        AIConfig.DEFAULT_WIDTH, \n        ge=AIConfig.MIN_IMAGE_WIDTH, \n        le=AIConfig.MAX_IMAGE_WIDTH, \n        description=\"ความกว้างของภาพ (256-768px, หารด้วย 8 ลงตัว)\"\n    )\n    height: Optional[int] = Field(\n        AIConfig.DEFAULT_HEIGHT, \n        ge=AIConfig.MIN_IMAGE_HEIGHT, \n        le=AIConfig.MAX_IMAGE_HEIGHT, \n        description=\"ความสูงของภาพ (256-768px, หารด้วย 8 ลงตัว)\"\n    )\n    task_type: Optional[str] = \"txt2img\"\n    source_image_path: Optional[str] = None\n    image_base64: Optional[str] = None\n    mask_base64: Optional[str] = None\n    denoising_strength: Optional[float] = 0.75\n    callback_url: Optional[str] = AIConfig.BACKEND_CALLBACK_URL\n    correlation_id: Optional[str] = Field(default_factory=lambda: str(uuid.uuid4())[:8])",
                         "called_by": "Endpoint <code>generate_image()</code> ใน server.py (ใช้เป็น Type Hint ให้ FastAPI ตรวจสอบ JSON Body อัตโนมัติ)",
                         "subcalls": [],
-                        "tip": "อาจารย์ถาม: ทำไมต้องจำกัดขนาดภาพไว้ที่ 256-768px ใน Schema? ตอบ: เพื่อป้องกันปัญหา Out-of-Memory (OOM) บนการ์ดจอ RTX 3070 ที่มี VRAM 8GB ครับ เพราะการสร้างภาพขนาดเกิน 768px จะกินพื้นที่ VRAM แบบ Exponential (มิติ $W \\times H$) การสกัดกั้นตั้งแต่ชั้น Pydantic ช่วยป้องกันไม่ให้คำขอขนาดใหญ่หลุดเข้าไปทำลายความเสถียรของเซิร์ฟเวอร์ครับ"
+                        "tip": "อาจารย์ถาม: ทำไมต้องจำกัดขนาดภาพไว้ที่ 256-768px ใน Schema? ตอบ: เพื่อป้องกันปัญหา Out-of-Memory (OOM) บนการ์ดจอ RTX 3070 ที่มี VRAM 8GB ครับ เพราะการสร้างภาพขนาดเกิน 768px จะกินพื้นที่ VRAM แบบก้าวกระโดด (ตามพื้นที่กว้าง × สูง หรือ W × H) การสกัดกั้นตั้งแต่ชั้น Pydantic Schema ช่วยป้องกันไม่ให้คำขอขนาดใหญ่หลุดเข้าไปทำให้การ์ดจอหน่วยความจำเต็มครับ"
                 },
                 {
                         "line": 168,
