@@ -45,13 +45,13 @@
         </div>
         <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 text-[11px] shrink-0">
             <a href="./frontend.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-sky-500/20 text-sky-300 border-sky-500/50 font-bold shrink-0">
-                <span>🌐</span> <span>Node 1</span>
+                <span>🌐</span> <span>Node 1 (Frontend)</span>
             </a>
             <a href="./backend.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800 shrink-0">
-                <span>⚙️</span> <span>Node 2</span>
+                <span>⚙️</span> <span>Node 2 (Backend)</span>
             </a>
             <a href="./ai-server.html" class="px-2.5 py-1 rounded border transition-all flex items-center gap-1 bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800 shrink-0">
-                <span>🤖</span> <span>Node 3</span>
+                <span>🤖</span> <span>Node 3 (AI Server)</span>
             </a>
         </div>
     </div>
@@ -68,17 +68,17 @@
             <div>
                 <div class="flex flex-wrap items-center gap-2">
                     <h1 class="text-lg sm:text-xl font-bold text-white tracking-wide">LUMA Frontend (Node 1) — Defense Mastery</h1>
-                    <span class="px-2 py-0.5 text-[10px] sm:text-xs rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-mono">React 18 & Canvas</span>
+                    <span class="px-2 py-0.5 text-[10px] sm:text-xs rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-mono">Pure HTML5 & Canvas 2D</span>
                 </div>
-                <p class="text-xs text-slate-400 mt-0.5">คู่มือเตรียมสอบปากเปล่าวิชา Image Processing: ส่องโค้ดหน้าบ้านทุกบรรทัด, จำลอง Inpainting Canvas, และตะลุยโจทย์ 10 ข้อ</p>
+                <p class="text-xs text-slate-400 mt-0.5">คู่มือเตรียมสอบปากเปล่าวิชา Image Processing: ส่องสถาปัตยกรรม Zero-Build Vanilla JS, จำลอง Canvas Inpainting, และตะลุยโจทย์ 12 ข้อ</p>
             </div>
         </div>
         <div class="flex items-center gap-2 text-xs font-mono">
             <div class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 shrink-0">
-                <span class="text-slate-500">Tech:</span> React + Vite + TS + Zustand
+                <span class="text-slate-500">Tech:</span> HTML5 + CSS Tokens + Modular JS
             </div>
             <div class="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 shrink-0">
-                Port: 5173
+                Port: 5500 (Zero-Build)
             </div>
         </div>
     </div>
@@ -92,10 +92,10 @@
             <span>🖌️</span> 2. Inpaint Canvas Lab
         </button>
         <button onclick="switchTab('code')" id="tab-code" class="tab-btn pb-2.5 px-2 flex items-center gap-1.5 text-slate-400 hover:text-slate-200 whitespace-nowrap shrink-0">
-            <span>📑</span> 3. Code Inspector (ส่องโค้ด)
+            <span>📑</span> 3. Code Inspector (ส่องโค้ด 29 ฟังก์ชัน)
         </button>
         <button onclick="switchTab('exam')" id="tab-exam" class="tab-btn pb-2.5 px-2 flex items-center gap-1.5 text-slate-400 hover:text-slate-200 whitespace-nowrap shrink-0">
-            <span>🎯</span> 4. Defense Exam Simulator
+            <span>🎯</span> 4. Defense Exam Simulator (12 ข้อ)
         </button>
         <button onclick="switchTab('cheatsheet')" id="tab-cheatsheet" class="tab-btn pb-2.5 px-2 flex items-center gap-1.5 text-slate-400 hover:text-slate-200 whitespace-nowrap shrink-0">
             <span>🧠</span> 5. Frontend Cheat Sheet
@@ -108,9 +108,9 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
                 <div>
                     <h2 class="text-base font-bold text-white flex items-center gap-2">
-                        <span>⚡</span> จำลองวงจรชีวิตของงานสร้างภาพฝั่ง Client (Client-Side Pipeline)
+                        <span>⚡</span> จำลองวงจรชีวิตของงานสร้างภาพฝั่ง Client (Client-Side Vanilla Pipeline)
                     </h2>
-                    <p class="text-xs text-slate-400 mt-1">คลิกปุ่มเพื่อดูว่า State ใน Zustand, Canvas, React Query, และ DOM มีการเปลี่ยนแปลงอย่างไรในแต่ละขั้น</p>
+                    <p class="text-xs text-slate-400 mt-1">คลิกปุ่มเพื่อดูว่า Form State, Canvas 2D Mask, API Network, watchToken, และ Object URL มีการเปลี่ยนแปลงอย่างไรในแต่ละขั้น</p>
                 </div>
                 <div class="flex items-center gap-2">
                     <button onclick="stepClientPipeline(-1)" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200">◀ ย้อนกลับ</button>
@@ -124,7 +124,7 @@
                 <div class="lg:col-span-7 space-y-3">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-mono px-2 py-0.5 rounded bg-sky-500/20 text-sky-300" id="step-badge">STEP 1</span>
-                        <span class="text-[11px] font-mono text-slate-500" id="step-file">GeneratePage.tsx:35</span>
+                        <span class="text-[11px] font-mono text-slate-500" id="step-file">js/generate/draft.js:60</span>
                     </div>
                     <h3 class="text-sm font-bold text-white" id="step-title">กำลังโหลด...</h3>
                     <p class="text-xs text-slate-300 leading-relaxed" id="step-desc">...</p>
@@ -155,22 +155,23 @@
                     <h3 class="text-base font-bold text-white flex items-center gap-2">
                         <span>🖌️</span> การแปลงพิกัดหน้าจอสู่พิกเซลจริง (Coordinate Transform Simulator)
                     </h3>
-                    <p class="text-xs text-slate-400 mt-1">ทดลองลากเมาส์บนกระดานด้านล่าง เพื่อดูการคำนวณจาก Viewport Pixel สู่ Natural Resolution</p>
+                    <p class="text-xs text-slate-400 mt-1">ทดลองลากเมาส์บนกระดานด้านล่าง เพื่อดูการทำงานของ <code>MaskEditor.toCanvasPoint()</code> และ <code>realBrushSize()</code></p>
                 </div>
                 <div class="grid grid-cols-2 gap-4 text-xs font-mono bg-slate-950 p-3 rounded-xl border border-slate-800">
                     <div>
                         <label class="text-slate-400 block mb-1">ความละเอียดภาพจริง (Natural Size):</label>
                         <select id="sim-natural-size" onchange="updateCanvasSim()" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-sky-300">
-                            <option value="512x512">512 x 512 px (Square)</option>
+                            <option value="512x512">512 x 512 px (Square SD1.5)</option>
                             <option value="768x512">768 x 512 px (Landscape)</option>
                             <option value="512x768">512 x 768 px (Portrait)</option>
+                            <option value="1024x1024">1024 x 1024 px (XL Full)</option>
                         </select>
                     </div>
                     <div>
                         <label class="text-slate-400 block mb-1">ขนาด DOM บนหน้าจอ (Rendered CSS):</label>
                         <select id="sim-dom-size" onchange="updateCanvasSim()" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-emerald-300">
                             <option value="320x320">320 x 320 px (Mobile View)</option>
-                            <option value="400x400" selected>400 x 400 px (Tablet/Laptop)</option>
+                            <option value="400x400" selected>400 x 400 px (Laptop Panel)</option>
                             <option value="250x250">250 x 250 px (Small Widget)</option>
                         </select>
                     </div>
@@ -197,8 +198,8 @@
                         <span class="text-amber-300 font-bold" id="readout-natural">X: 0, Y: 0</span>
                     </div>
                     <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                        <span class="text-slate-500 block text-[10px]">Mask Color (RGB):</span>
-                        <span class="text-purple-300 font-bold">255, 255, 255</span>
+                        <span class="text-slate-500 block text-[10px]">Export Mask RGB:</span>
+                        <span class="text-purple-300 font-bold">#FFFFFF / #000000</span>
                     </div>
                 </div>
             </div>
@@ -208,19 +209,27 @@
                         <h4 class="text-base font-bold text-white flex items-center gap-2">
                             <span>📐</span> ทฤษฎี Inpaint Mask ในเชิง Image Processing
                         </h4>
-                        <p class="text-xs text-slate-400 mt-1">สิ่งที่เกิดขึ้นเมื่อส่ง Mask ไปให้โมเดล Latent Diffusion</p>
+                        <p class="text-xs text-slate-400 mt-1">สิ่งที่เกิดขึ้นเมื่อแปลงรอยวาดส่งไปให้โมเดล Latent Diffusion</p>
                     </div>
                     <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
                         <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-                            <span class="text-sky-300 font-bold block mb-1">1. สูตรการชดเชยมาตราส่วน (Scaling Math):</span>
-                            X_nat = (X_client - rect.left) * (W_nat / rect.width)<br>
-                            Y_nat = (Y_client - rect.top) * (H_nat / rect.height)<br>
-                            ช่วยให้แม้ผู้ใช้จะซูมหน้าจอ หรือเปิดบนจอมือถือ พิกัดของหัวแปรงจะถูกแมปกลับไปยังตำแหน่งพิกเซลจริงของภาพได้แม่นยำ 100%
+                            <span class="text-sky-300 font-bold block mb-1">1. สูตรการชดเชยมาตราส่วน (Affine Coordinate Transform):</span>
+                            <code>X_nat = ((X_client - rect.left) / rect.width) * W_nat</code><br>
+                            <code>Y_nat = ((Y_client - rect.top) / rect.height) * H_nat</code><br>
+                            ช่วยให้แม้ผู้ใช้จะซูมเบราว์เซอร์ ย่อหน้าต่าง หรือเปิดบนมือถือ พิกัดของหัวแปรงจะถูก Normalize กลับไปยังตำแหน่งพิกเซลจริงของภาพได้แม่นยำ 100%
                         </div>
                         <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-                            <span class="text-emerald-300 font-bold block mb-1">2. Binary Alpha Masking (ภาพขาว/ดำ):</span>
-                            Output(x,y) = 255 (สีขาว: ให้ AI วาดใหม่) หรือ 0 (สีดำ: ล็อกภาพเดิม)<br>
-                            ภาพ Mask จะถูกส่งเป็น Base64 PNG ไปยัง Backend เพื่อส่งต่อให้ AI Server นำไปคูณแบบ Hadamard Product ใน Latent Space
+                            <span class="text-emerald-300 font-bold block mb-1">2. Dynamic Brush Scaling บนหน้าจอ:</span>
+                            <code>realBrushSize = brushSize * (canvas.width / rect.width)</code><br>
+                            ชดเชยขนาดหัวพู่กันตามอัตราส่วนการย่อของ CSS เพื่อให้ความหนาของเส้นที่วาดบนภาพความละเอียดสูง มีขนาดสอดคล้องกับขนาดหัวแปรงที่ผู้ใช้มองเห็นบนหน้าจอ
+                        </div>
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                            <span class="text-purple-300 font-bold block mb-1">3. Compositing Pipeline (ขาวบนดำสนิท):</span>
+                            ใช้เทคนิค <code>destination-in</code> ร่วมกับ <code>destination-over</code> บน Offscreen Canvas เพื่อส่งออกภาพ Binary Mask ขาว-ดำ (#FFFFFF บน #000000) สำหรับส่งให้ AI นำไปคูณกับ Noise ใน Latent Space
+                        </div>
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                            <span class="text-amber-300 font-bold block mb-1">4. Downsampling 256px Speedup ใน measure():</span>
+                            แทนที่จะอ่านภาพ 4096×4096 (16 ล้านพิกเซล) ฟังก์ชัน <code>measure()</code> จะย่อลง Canvas จำลอง 256px ก่อนนับพื้นที่ระบาย ช่วยให้ประเมิน Coverage (0–1) ได้ในเสี้ยววินาที ไม่กระตุก
                         </div>
                     </div>
                 </div>
@@ -228,7 +237,7 @@
                     <span class="text-amber-400 font-bold block mb-1">💡 คำถามสอบปากเปล่าประจำหมวด Canvas:</span>
                     <p class="text-slate-300 text-[11.5px] leading-relaxed">
                         <b>ถาม:</b> ทำไมถึงไม่ส่งพิกัด Vector ของเส้นไปให้ AI Server เรนเดอร์เอง?<br>
-                        <b>ตอบ:</b> เพราะการเรนเดอร์ Stroke บน Browser ผ่าน Canvas 2D ทำได้แบบเรียลไทม์ และส่งเป็น Rasterized B/W Mask สำเร็จรูป ทำให้ AI Server ไม่ต้องเสียเวลาคำนวณ Path Rasterization ช่วยลดภาระบนการ์ดจอได้ทันที
+                        <b>ตอบ:</b> เพราะการเรนเดอร์ Stroke บน Browser ผ่าน HTML5 Canvas 2D ทำได้แบบ Hardware Accelerated ทันที และส่งออกเป็น Rasterized Binary B/W Mask สำเร็จรูป ทำให้ AI Server ไม่ต้องเสียเวลาคำนวณ Path Rasterization ช่วยลดภาระบนการ์ดจอ RTX 3070 ได้ทันทีครับ
                     </p>
                 </div>
             </div>
@@ -243,20 +252,20 @@
                     <h2 class="text-base font-bold text-white flex items-center gap-2">
                         <span>🔍</span> เครื่องมือส่องโค้ดหน้าบ้านทุกบรรทัด (Line-by-Line Code Inspector)
                     </h2>
-                    <p class="text-xs text-slate-400 mt-0.5">เลือกหมวดหมู่ที่ต้องการศึกษา และคลิกปุ่ม <span class="text-sky-300 font-mono">[ ↗ เจาะลึกโค้ด ]</span> เพื่อกระโดดข้ามฟังก์ชันตาม Call Graph ได้ทันที</p>
+                    <p class="text-xs text-slate-400 mt-0.5">คัดสรร 29 ฟังก์ชันหลักในระบบ Vanilla JS: เลือกหมวดหมู่ และคลิกปุ่ม <span class="text-sky-300 font-mono">[ ↗ เจาะลึกโค้ด ]</span> เพื่อกระโดดข้ามฟังก์ชันตาม Call Graph</p>
                 </div>
                 <div class="flex flex-wrap gap-2 text-xs">
                     <button onclick="loadFrontendModule('canvas')" id="btn-mod-canvas" class="px-3 py-1.5 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-500/30 font-semibold font-mono flex items-center gap-1.5">
-                        <span>Mask Canvas</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-sky-500/30 text-sky-200">3</span>
+                        <span>Mask Canvas</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-sky-500/30 text-sky-200">8</span>
                     </button>
-                    <button onclick="loadFrontendModule('services')" id="btn-mod-services" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
-                        <span>API Services</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">4</span>
+                    <button onclick="loadFrontendModule('families')" id="btn-mod-families" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
+                        <span>Model & LoRA</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">5</span>
                     </button>
-                    <button onclick="loadFrontendModule('hooks')" id="btn-mod-hooks" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
-                        <span>State & Hooks</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">3</span>
+                    <button onclick="loadFrontendModule('api')" id="btn-mod-api" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
+                        <span>API Client</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">8</span>
                     </button>
-                    <button onclick="loadFrontendModule('ui')" id="btn-mod-ui" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
-                        <span>Size & Controls</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">1</span>
+                    <button onclick="loadFrontendModule('state_run')" id="btn-mod-state_run" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
+                        <span>State & Run</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">8</span>
                     </button>
                 </div>
             </div>
@@ -264,8 +273,8 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
                 <div id="fe-code-list-card" class="lg:col-span-5 bg-slate-950 rounded-xl border border-slate-800 p-3 flex flex-col max-h-[380px] lg:max-h-[660px]">
                     <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800/80 text-xs">
-                        <span class="text-slate-400 font-medium" id="module-fn-count">รายการฟังก์ชันในโมดูล</span>
-                        <span class="text-[11px] text-sky-400 font-mono" id="module-file-badge">useMaskEditor.ts</span>
+                        <span class="text-slate-400 font-medium" id="module-fn-count">รายการฟังก์ชันในหมวดนี้</span>
+                        <span class="text-[11px] text-sky-400 font-mono" id="module-file-badge">js/mask.js</span>
                     </div>
                     <div id="code-lines-container" class="space-y-1.5 overflow-y-auto pr-1 flex-1 font-mono text-xs"></div>
                 </div>
@@ -289,33 +298,33 @@
                             </button>
                         </div>
                         <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2">
-                            <span class="font-bold text-sky-400 font-mono text-[13px]" id="inspect-line-number">Line 31: useMaskEditor()</span>
-                            <span class="px-2 py-0.5 rounded border font-mono text-[11px]" id="inspect-tag">Canvas Hook</span>
+                            <span class="font-bold text-sky-400 font-mono text-[13px]" id="inspect-line-number">Line 46: MaskEditor.init()</span>
+                            <span class="px-2 py-0.5 rounded border font-mono text-[11px]" id="inspect-tag">Canvas Core</span>
                         </div>
                         <div>
-                            <h4 id="inspect-title" class="text-sm font-bold text-white mb-1">Custom Hook จัดการวาด Mask สำหรับงาน Inpainting</h4>
-                            <div class="inline-block px-2 py-0.5 rounded bg-slate-800/80 text-[11px] font-mono text-slate-300 border border-slate-700/50 mb-2" id="inspect-params">naturalWidth: number, naturalHeight: number -> MaskEditor</div>
+                            <h4 id="inspect-title" class="text-sm font-bold text-white mb-1">ชื่อฟังก์ชัน</h4>
+                            <div class="inline-block px-2 py-0.5 rounded bg-slate-800/80 text-[11px] font-mono text-slate-300 border border-slate-700/50 mb-2" id="inspect-params">params -> return</div>
                             <div id="inspect-desc" class="text-xs text-slate-300 leading-relaxed">คำอธิบาย...</div>
                         </div>
                         <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/80 text-xs">
                             <div class="text-[11px] font-semibold text-slate-400 flex items-center gap-1.5 mb-1">
                                 <span>⬅️</span> <span>ต้นทางที่เรียกใช้งานฟังก์ชันนี้ (Called By):</span>
                             </div>
-                            <div id="inspect-caller-content" class="text-slate-300 text-[11.5px] leading-relaxed">GeneratePage.tsx</div>
+                            <div id="inspect-caller-content" class="text-slate-300 text-[11.5px] leading-relaxed">caller info</div>
                         </div>
                         <div class="space-y-2 pt-1 border-t border-slate-800/60">
                             <div class="flex items-center justify-between text-xs font-semibold text-sky-300">
                                 <span class="flex items-center gap-1.5">
                                     <span>🔗</span> <span>ฟังก์ชันลูกที่ถูกเรียกใช้ต่อ (Callee Execution Flow):</span>
                                 </span>
-                                <span class="text-[10px] text-slate-400 px-2 py-0.2 rounded bg-slate-800 font-mono" id="inspect-subcalls-count">1 คำสั่ง</span>
+                                <span class="text-[10px] text-slate-400 px-2 py-0.2 rounded bg-slate-800 font-mono" id="inspect-subcalls-count">0 คำสั่ง</span>
                             </div>
                             <div id="inspect-subcalls-container" class="space-y-2.5 max-h-[250px] overflow-y-auto pr-1"></div>
                         </div>
                         <div class="pt-1">
                             <div class="flex items-center justify-between text-[11px] text-slate-400 mb-1">
-                                <span class="font-semibold text-slate-300">💻 ซอร์สโค้ดจริง (TypeScript / React):</span>
-                                <span class="text-[10px] text-slate-500 font-mono">React 18</span>
+                                <span class="font-semibold text-slate-300">💻 ซอร์สโค้ดจริง (Vanilla JavaScript):</span>
+                                <span class="text-[10px] text-slate-500 font-mono">frontend-html</span>
                             </div>
                             <pre class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-[11.5px] font-mono text-sky-300 overflow-x-auto leading-relaxed"><code id="inspect-snippet"># Snippet</code></pre>
                         </div>
@@ -337,12 +346,12 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
                 <div>
                     <h2 class="text-base font-bold text-white flex items-center gap-2">
-                        <span>🎯</span> ห้องซ้อมสอบปากเปล่า: 11 คำถามวัดกึ๋นสถาปัตยกรรม Frontend
+                        <span>🎯</span> ห้องซ้อมสอบปากเปล่า: 12 คำถามวัดกึ๋นสถาปัตยกรรม Frontend
                     </h2>
-                    <p class="text-xs text-slate-400 mt-0.5">จำลองคำถามที่อาจารย์สาย Image Processing และ Web Engineering นิยมถามเพื่อตัดเกรด</p>
+                    <p class="text-xs text-slate-400 mt-0.5">จำลองคำถามสอบปากเปล่าวิชา Image Processing & Web Systems ที่อาจารย์นิยมถามเพื่อตัดเกรด</p>
                 </div>
                 <div class="flex items-center gap-4 text-xs font-mono">
-                    <span class="text-slate-400">คะแนนปัจจุบัน: <b class="text-emerald-400 text-sm" id="exam-score">0 / 11</b></span>
+                    <span class="text-slate-400">คะแนนปัจจุบัน: <b class="text-emerald-400 text-sm" id="exam-score">0 / 12</b></span>
                     <button onclick="resetExam()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold">🔄 เริ่มสอบใหม่</button>
                 </div>
             </div>
@@ -355,38 +364,38 @@
         <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-6">
             <div class="border-b border-slate-800 pb-4">
                 <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                    <span>🧠</span> คลังคำตอบสำเร็จรูป: สรุป 6 จุดตายที่อาจารย์ชอบจี้ถามฝั่ง Frontend
+                    <span>🧠</span> คลังคำตอบสำเร็จรูป: สรุป 7 จุดตายที่อาจารย์ชอบจี้ถามฝั่ง Frontend
                 </h2>
-                <p class="text-xs text-slate-400 mt-1">จำแนวทางคำตอบ 6 ข้อนี้ไว้ให้ขึ้นใจ ตอบได้อย่างมั่นใจ รับเกรด A ได้แน่นอนครับ</p>
+                <p class="text-xs text-slate-400 mt-1">จำแนวทางคำตอบ 7 ข้อนี้ไว้ให้ขึ้นใจ ตอบได้อย่างมั่นใจ รับเกรด A ได้แน่นอนครับ</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed">
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                    <span class="text-sky-400 font-bold block">1. ทำไมถึงเลือกแปลง Mask บนเบราว์เซอร์แทนที่จะส่ง Vector ไปให้ Backend ทำ?</span>
-                    <p class="text-slate-300"><b>ตอบ:</b> เพื่อลดความซับซ้อนในการคำนวณของ Backend และลดความหน่วง เบราว์เซอร์มี GPU Acceleration ผ่าน HTML5 Canvas 2D อยู่แล้ว การ Export ออกมาเป็น Binary PNG ขาว-ดำขนาดเท่ากับ Natural Resolution ตั้งแต่ต้นทาง ทำให้ Backend และ AI Server รับไปใช้งานได้ทันทีโดยไม่ต้องเสียเวลาทำ Rasterization ซ้ำ</p>
+                    <span class="text-sky-400 font-bold block">1. ทำไมถึงเลือกแปลง Mask บนเบราว์เซอร์ด้วย Canvas 2D แทนที่จะส่ง Vector ไปให้ Backend ทำ?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพื่อลดความซับซ้อนและการประมวลผลบนเซิร์ฟเวอร์ เบราว์เซอร์มี GPU Acceleration ผ่าน HTML5 Canvas 2D ที่ทำงานได้แบบเรียลไทม์ 60 FPS อยู่แล้ว การ Render และ Export ออกมาเป็น Binary PNG ขาว-ดำ (#FFFFFF บน #000000) ที่มีขนาดตรงกับ Natural Resolution ตั้งแต่ต้นทาง ทำให้ Backend และ AI Server รับไปป้อนเข้า VAE Inpaint UNet ได้ทันทีโดยไม่ต้องเสียเวลาคำนวณ Path Rasterization ซ้ำบนการ์ดจอ RTX 3070 ครับ</p>
                 </div>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                    <span class="text-emerald-400 font-bold block">2. การใช้ Adaptive Polling ดีกว่า WebSocket อย่างไรในโปรเจกต์นี้?</span>
-                    <p class="text-slate-300"><b>ตอบ:</b> เนื่องจากงานสร้างภาพด้วย Diffusion ใช้เวลาประมวลผลเป็นงานๆ ไป (Discrete Job) ไม่ใช่การแชทแบบ Real-time Streaming การเปิด Persistent WebSocket Connection ค้างไว้จะกิน Socket File Descriptors บนเซิร์ฟเวอร์โดยไม่จำเป็น ขณะที่ Adaptive Polling ทำงานแบบ Stateless หากผู้ใช้ปิดหน้าเว็บหรือเน็ตหลุดจะไม่เกิด Connection Leak และยังสามารถใช้ HTTP Caching และ CDN เข้ามาช่วยลดภาระได้ด้วย</p>
+                    <span class="text-emerald-400 font-bold block">2. การใช้ Adaptive Polling (2s -> 5s) ดีกว่า WebSocket อย่างไรในโปรเจกต์นี้?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เนื่องจากงานสร้างภาพด้วย Diffusion เป็นงานแบบ Asynchronous Batch Job ที่ใช้เวลารันเป็นช่วงๆ (10-30 วินาที) ไม่ใช่การแชท Real-time การเปิด Persistent WebSocket Connection ค้างไว้จะกิน Socket File Descriptors บนเซิร์ฟเวอร์โดยไม่จำเป็น ขณะที่ Adaptive Polling ทำงานแบบ Stateless หากผู้ใช้ปิดหน้าเว็บหรือเน็ตหลุดจะไม่เกิด Connection Leak บน Nginx Gateway และยังทำงานร่วมกับ HTTP Caching ได้อย่างสมบูรณ์ครับ</p>
                 </div>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                    <span class="text-purple-400 font-bold block">3. หน้าบ้านป้องกันปัญหา Memory Leak จากการแสดงรูปภาพขนาดใหญ่ซ้ำๆ อย่างไร?</span>
-                    <p class="text-slate-300"><b>ตอบ:</b> เมื่อมีการสร้าง Object URL จากรูปภาพ Base64 หรือ Blob (ผ่าน URL.createObjectURL()) เราจะมีการเรียก URL.revokeObjectURL() เสมอใน Cleanup Function ของ useEffect เมื่อรูปนั้นถูกปิดหรือ Unmount ออกไป เพื่อคืนหน่วยความจำ V8 Heap Memory คืนให้เบราว์เซอร์ทันที</p>
+                    <span class="text-purple-400 font-bold block">3. ทำไมทีมถึงเปลี่ยนจาก React 18/Zustand มาเป็น Zero-Build Vanilla HTML/CSS/JS?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพื่อขจัดความซับซ้อนของ Build Pipeline (ไม่มี Node.js, Vite, หรือ npm dependency ให้พัง), สามารถเปิดรันได้ทันทีผ่านคำสั่งสั้นๆ เช่น <code>python3 -m http.server 5500</code>, ลด Memory Footprint และขจัดปัญหา Re-render Overhead ของ Virtual DOM ขณะลากวาดพู่กันความถี่สูง (60-120 Hz) ทำให้ Canvas วาดเส้นได้ลื่นไหลระดับ Native และง่ายต่อการ Debug และทดสอบด้วย Unit Test แบบ pure ES modules ครับ</p>
                 </div>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                    <span class="text-amber-400 font-bold block">4. ถ้าระหว่าง Polling งานอยู่ แล้วผู้ใช้กด 'Cancel' กลไกทำงานอย่างไร?</span>
-                    <p class="text-slate-300"><b>ตอบ:</b> เราใช้เทคนิค Optimistic UI โดยสั่งปรับ State ใน React Query ให้กลายเป็น cancelled ในทันทีเพื่อให้หน้าจอแสดงผลว่ายกเลิกแล้ว พร้อมส่งคำขอ POST /api/generations/{id}/cancel ไปยัง Backend เพื่อส่งสัญญาณ Hardware Interrupt ไปตัดงานบนการ์ดจอ RTX 3070 ต่อไป</p>
+                    <span class="text-amber-400 font-bold block">4. กลไก watchToken ป้องกัน Stale Response และ Race Condition อย่างไรเมื่อผู้ใช้กด Cancel หรือสลับงาน?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เมื่อผู้ใช้สั่งหยุด สลับดูงานอื่น หรือกดสร้างใหม่ ฟังก์ชัน <code>stopWatching()</code> จะเพิ่มค่า <code>watchToken += 1</code> ทันที เมื่อการร้องขอ Polling รอบก่อนหน้าตอบกลับมา ระบบจะตรวจสอบ <code>token !== watchToken</code> หากค่าไม่ตรงกัน จะทำการทิ้ง (Discard) คำตอบนั้นทันที ทำให้ไม่มี Response จากงานเก่ามาเขียนทับหรือเปลี่ยนสถานะของ UI ปัจจุบันครับ</p>
                 </div>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                    <span class="text-rose-400 font-bold block">5. ทำไมถึงต้องบังคับขนาดภาพพรีเซ็ตให้หารด้วย 8 ลงตัว (เช่น 512x680 แทน 512x685)?</span>
-                    <p class="text-slate-300"><b>ตอบ:</b> เพราะโมเดล Stable Diffusion ทำงานบน Latent Space ผ่านโครงข่าย VAE ซึ่งมี Downsampling Factor เท่ากับ 8 เท่า (f=8) หากหน้าบ้านยอมให้ส่งเลข 685 เข้าไป มิติใน Latent Space จะกลายเป็น 85.625 ซึ่งไม่เป็นจำนวนเต็ม ทำให้เกิด Tensor Shape Mismatch ใน UNet Cross-Attention Layers ทันที การกรองตั้งแต่ Frontend จึงเป็นหัวใจของ Data Sanitization</p>
+                    <span class="text-rose-400 font-bold block">5. ทำไมถึงต้องบังคับขนาดภาพพรีเซ็ตให้หารด้วย 8 ลงตัว (เช่น 512, 680, 768) ด้วย snapSize()?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพราะโมเดล Stable Diffusion ทำงานบน Latent Space ผ่านโครงข่าย VAE ซึ่งมี Downsampling Factor เท่ากับ 8 เท่า (f=8) หากหน้าบ้านยอมให้ส่งขนาดที่ไม่หารด้วย 8 ลงตัว เช่น 685 มิติใน Latent Space จะกลายเป็น 85.625 ซึ่งเป็นทศนิยม ทำให้เกิด Tensor Shape Mismatch ใน UNet Attention Layers ทันที การกรองด้วย <code>snapSize()</code> ตั้งแต่ฝั่ง Frontend จึงเป็นหัวใจของ Pre-flight Data Sanitization ครับ</p>
                 </div>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                    <span class="text-teal-400 font-bold block">6. ทำไมถึงเก็บ Token ใน LocalStorage/Memory Store แทนที่จะใช้ Cookie ปกติ?</span>
-                    <p class="text-slate-300"><b>ตอบ:</b> เนื่องจากสถาปัตยกรรมระบบเป็นแบบ Decoupled API (Frontend อยู่พอร์ต 5173, Backend อยู่พอร์ต 8000) ซึ่งข้าม Origin กัน การใช้ Authorization Header แบบ Bearer Token ช่วยป้องกันการโจมตีประเภท CSRF (Cross-Site Request Forgery) ได้อย่างเด็ดขาดโดยไม่ต้องพึ่งพา CSRF Token เสริม</p>
+                    <span class="text-teal-400 font-bold block">6. ทำไมถึงเก็บ Token ใน LocalStorage แล้วแนบ Bearer Header แทนการใช้ Cookie ปกติ?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เนื่องจากสถาปัตยกรรมระบบเป็นแบบ Decoupled API (Frontend อยู่พอร์ต 5500, Backend อยู่พอร์ต 8000) ซึ่งรันคนละ Origin กัน การใช้ Authorization Header แบบ <code>Bearer &lt;token&gt;</code> ช่วยป้องกันการโจมตีประเภท CSRF (Cross-Site Request Forgery) และแก้ปัญหาเรื่อง Third-party Cookie Blocking บนเบราว์เซอร์สมัยใหม่ได้อย่างเด็ดขาด</p>
                 </div>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
                     <span class="text-sky-400 font-bold block">7. ทำไมฝ่าย Frontend ถึงต้องมีโมดูล families.js สำหรับตรวจจับตระกูลโมเดล และกรอง LoRA Dropdown แบบ Real-time?</span>
-                    <p class="text-slate-300"><b>ตอบ:</b> เพื่อปฏิบัติตามหลักการ User Experience (UX) และการตรวจสอบข้อมูลล่วงหน้า (Pre-flight Validation) โดยสถาปัตยกรรม SD 1.5, Illustrious XL, และ Pony XL ใช้โครงข่าย Text Encoder และมิติที่ไม่เท่ากัน หากผู้ใช้จับคู่ LoRA ผิดตระกูล ภาพที่ได้จะพังเสียหาย โมดูล families.js จะอ่านค่า family จาก GET /api/models แล้วกรอง Dropdown ให้แสดงเฉพาะ LoRA ที่เข้ากันได้กับ Base Model ทันที พร้อมติดป้ายกำกับสี ช่วยป้องกันความผิดพลาดตั้งแต่ฝั่งผู้ใช้ก่อนส่งคำขอไปยังเซิร์ฟเวอร์ครับ</p>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพื่อปฏิบัติตามหลักการ User Experience (UX) และการตรวจสอบข้อมูลล่วงหน้า (Pre-flight Validation) โดยสถาปัตยกรรม SD 1.5, Illustrious XL, และ Pony XL ใช้โครงข่าย Text Encoder และมิติ Latent ที่ไม่เท่ากัน หากผู้ใช้จับคู่ LoRA ผิดตระกูล ภาพที่ได้จะพังเสียหาย โมดูล <code>families.js</code> จะอ่านค่า family แล้วกรอง Dropdown ให้แสดงเฉพาะ LoRA ที่เข้ากันได้กับ Base Model ทันที พร้อมติดป้ายกำกับสี ช่วยป้องกันความผิดพลาดตั้งแต่ฝั่งผู้ใช้ก่อนส่งคำขอไปยังเซิร์ฟเวอร์ครับ</p>
                 </div>
             </div>
         </div>
@@ -413,58 +422,58 @@
         let currentPipelineStep = 0;
         const PIPELINE_STEPS = [
     {
-        "badge": "STEP 1: USER INPUT & DRAFT",
-        "file": "GeneratePage.tsx:32",
-        "title": "1. รับข้อมูล Prompt และบันทึก Draft ลง Zustand Store",
-        "desc": "ผู้ใช้พิมพ์คำสั่ง Prompt และเลือกโหมด (Text2Img, Img2Img, Inpaint) ข้อมูลจะถูกบันทึกแบบ Real-time ลงใน Zustand Draft Store เพื่อไม่ให้ข้อมูลหายแม้ผู้ใช้จะสลับหน้าจอไปดู History",
-        "snippet": "const draft = useDraft();\n// เมื่อพิมพ์ข้อความจะ sync ลง local state ทันที\ndraft.setPrompt(newPrompt);",
-        "defenseQ": "ทำไมถึงใช้ Zustand แทนการใช้ React useState ธรรมดาในหน้านี้?",
-        "defenseA": "เพราะฟอร์มมีขนาดใหญ่และมีหลายคอมโพเนนต์ย่อย (ControlsPanel, ModeFields, SizeControl) การใช้ Zustand ช่วยป้องกันปัญหา Prop Drilling และทำให้ข้อมูลคงอยู่แม้เปลี่ยนหน้าไปมาได้โดยไม่ต้องพึ่ง Context API ที่มักก่อให้เกิดปัญหา Unnecessary Re-renders ครับ"
+        "badge": "STEP 1: USER INPUT & FORM STATE",
+        "file": "js/generate/draft.js:60",
+        "title": "1. รับข้อมูล Prompt และบันทึก Draft ลง LocalStorage / Form State",
+        "desc": "ผู้ใช้พิมพ์คำสั่ง Prompt และเลือกโหมด (txt2img, img2img, inpaint) ข้อมูลจะถูกบันทึกแบบ Real-time ลง LocalStorage (คีย์ luma.draft) ผ่านฟังก์ชัน saveDraft() เพื่อไม่ให้ข้อความและพารามิเตอร์สูญหายแม้ผู้ใช้จะรีเฟรชหน้าเว็บ พร้อมควบคุมขนาดภาพด้วย snapSize() ให้เป็นพหุคูณของ 8 เสมอ",
+        "snippet": "// js/generate/draft.js\nfunction saveDraft() {\n  localStorage.setItem('luma.draft', JSON.stringify({\n    mode, prompt: $('prompt').value.trim(),\n    negative_prompt: $('negative-prompt').value.trim(),\n    model: $('model').value, lora: $('lora').value,\n    sampler: $('sampler').value, steps: $('steps').value\n  }));\n}",
+        "defenseQ": "ทำไมถึงเปลี่ยนจาก React 18 / Zustand มาเป็น Vanilla JS + LocalStorage ในโปรเจกต์นี้?",
+        "defenseA": "เพราะ Vanilla JS ปราศจาก Build Step (Zero-Build) ไม่ต้องติดตั้ง Node.js หรือ build tools ให้วุ่นวาย โค้ดทำงานได้ทันทีบนทุกลิมิตของเครื่องและเบราว์เซอร์ พร้อมทั้งกำจัดปัญหา Re-render Overhead ของ Virtual DOM ขณะลากวาดพู่กันความถี่สูง (60-120 Hz) ครับ"
     },
     {
         "badge": "STEP 2: CANVAS INPAINT MASK",
-        "file": "MaskCanvas.tsx:158",
-        "title": "2. วาดรอยหน้ากากและแปลงเป็น Black/White Mask Base64",
-        "desc": "หากเป็นโหมด Inpaint ระบบจะเปิดกระดาน MaskCanvas ให้ผู้ใช้วาดหัวแปรงสีส้มทึบแสง เมื่อกดส่งงาน จะนำรอยวาดไปเรนเดอร์ลง Offscreen Canvas กลายเป็นภาพขาว-ดำ (#FFFFFF บน #000000) และแปลงเป็น Base64 PNG",
-        "snippet": "const maskBase64 = editor.exportMaskBase64();\npayload.mask_base64 = maskBase64;",
-        "defenseQ": "ทำไมต้องแปลงเป็นภาพขาวดำ ไม่ส่งภาพต้นฉบับที่มีเส้นสีทึบไปตรงๆ?",
-        "defenseA": "เพราะ Inpainting VAE Model ต้องการมิติ 1 Channel Alpha Mask เพื่อใช้เป็นตัวคูณ (Mask Weight) ระบุว่าพิกเซลใดจะถูกเติม Noise ใหม่และพิกเซลใดจะคงภาพเดิม การแยก Mask เป็นไฟล์อิสระขาว-ดำเป็นมาตรฐานของ Stable Diffusion ครับ"
+        "file": "js/mask.js:196",
+        "title": "2. วาดรอยหน้ากากบน Canvas 2D และแปลงเป็น Binary Black/White Mask",
+        "desc": "ในโหมด inpaint วาง <canvas> ซ้อนทับภาพต้นฉบับ เมื่อผู้ใช้วาดพู่กัน (สีส้ม #e0a458) ระบบจะแปลงพิกัด Pointer สู่ Natural Resolution และส่งออกด้วย MaskEditor.exportMask() โดยใช้เทคนิค destination-in ผสม destination-over สร้างเป็นภาพขาวดำบริสุทธิ์ (#FFFFFF บน #000000) ส่งออกเป็นไบนารี PNG Blob",
+        "snippet": "// js/mask.js:196\nctx.fillStyle = '#ffffff';\nctx.fillRect(0, 0, out.width, out.height);\nctx.globalCompositeOperation = 'destination-in';\nctx.drawImage(this.canvas, 0, 0);\nctx.globalCompositeOperation = 'destination-over';\nctx.fillStyle = '#000000';\nctx.fillRect(0, 0, out.width, out.height);\nreturn new Promise((resolve) => out.toBlob(resolve, 'image/png'));",
+        "defenseQ": "ทำไมถึงส่งออกเป็นภาพขาวดำ (White on Black) แทนที่จะส่งสีโปร่งใส (Alpha Transparent)?",
+        "defenseA": "เพราะ Inpainting Diffusion Model (VAE Inpaint UNet) กำหนดให้พิกเซลสีขาว (255) คือบริเวณที่จะเติม Noise เพื่อสร้างภาพใหม่ และสีดำ (0) คือบริเวณที่ต้องคง Latent เดิมไว้ การสร้างภาพขาวดำสำเร็จรูปจากเบราว์เซอร์ช่วยลดภาระ GPU ในการทำ Rasterization ได้ทันทีครับ"
     },
     {
-        "badge": "STEP 3: API DISPATCH",
-        "file": "generationService.ts:12",
-        "title": "3. ส่งคำขอสร้างภาพพร้อมแนบ JWT Token (POST /api/generations)",
-        "desc": "เรียกใช้ apiClient ส่ง JSON Payload ไปยัง Backend Node 2 โดยจะดึง Access Token จาก TokenStore มาแนบใน Header 'Authorization: Bearer <token>' อัตโนมัติ",
-        "snippet": "const job = await generationService.create(payload);\n// ได้รับ job.id และ status='queued' กลับมาทันที",
-        "defenseQ": "ทำไมคำขอนี้ถึงตอบกลับอย่างรวดเร็ว (HTTP 201/202) โดยที่ยังไม่ได้รูปภาพ?",
-        "defenseA": "เพราะการสร้างภาพใช้เวลาคำนวณนาน การบล็อก HTTP Connection จะทำให้เกิด Gateway Timeout การตอบรับ Task ID แล้วส่งต่องานเข้าคิว FIFO จึงเป็นรูปแบบ Asynchronous Job Processing ที่ถูกต้องครับ"
+        "badge": "STEP 3: API DISPATCH & UPLOAD",
+        "file": "js/generate/run.js:55",
+        "title": "3. อัปโหลด Mask (POST /uploads) และส่งคำขอสร้างภาพ (POST /generations)",
+        "desc": "ฟังก์ชัน submit() ตรวจสอบโหมด หากเป็น inpaint จะส่ง mask Blob ผ่าน apiUpload('/uploads', maskBlob, 'mask.png') ด้วย XMLHttpRequest เพื่อแทร็กความคืบหน้า จากนั้นสร้าง buildRequest(maskUrl) แนบ Authorization: Bearer <token> ผ่าน apiRequest('/generations', { method: 'POST', json: ... }) เพื่อรับ Task ID",
+        "snippet": "// js/generate/run.js:63\nif (mode === 'inpaint') {\n  const maskBlob = await MaskEditor.exportMask();\n  maskUrl = (await apiUpload('/uploads', maskBlob, 'mask.png')).url;\n}\nconst created = await apiRequest('/generations', {\n  method: 'POST', json: buildRequest(maskUrl)\n});\nwatchRun(created);",
+        "defenseQ": "ทำไมถึงแยกอัปโหลด Mask ผ่าน multipart/form-data ก่อน แล้วค่อยส่ง JSON Generation Request?",
+        "defenseA": "เพราะการแยกอัปโหลดไฟล์ขนาดใหญ่แบบไบนารีทำให้สามารถตรวจสอบ mime-type, ขนาดไฟล์ และแทร็ก upload progress ได้ชัดเจน อีกทั้งทำให้ JSON Payload ของงานสร้างภาพมีขนาดกะทัดรัด (ส่งเฉพาะ URL Path) ป้องกันปัญหา JSON Stringify Memory Overhead ครับ"
     },
     {
-        "badge": "STEP 4: OPTIMISTIC RUN STRIP",
-        "file": "ResultStage.tsx:45",
-        "title": "4. แสดงผล Optimistic Card และแถบสถานะการทำงานทันที",
-        "desc": "หน้าจอจะเปลี่ยนสถานะเป็น 'Generating...' ทันที พร้อมแสดงแถบ RunStrip มี Progress Spinner และเวลาที่กำลังนับเดินหน้า (useElapsed Hook) เพื่อให้ผู้ใช้รับรู้ว่าระบบกำลังทำงาน",
-        "snippet": "setRunningTaskId(job.id);\n// แสดง UI กำลังโหลดทันทีโดยไม่ต้องรอ Polling รอบแรก",
-        "defenseQ": "Optimistic UI มีประโยชน์อย่างไรในแง่ของ User Experience?",
-        "defenseA": "ช่วยขจัดความหน่วงของการรับรู้ (Zero Perceived Latency) ผู้ใช้จะเห็นว่าระบบตอบสนองต่อการคลิกทันที ไม่เกิดอาการค้างหรือสงสัยว่าคลิกติดหรือไม่ครับ"
+        "badge": "STEP 4: RUN STAGE & WATCHDOG",
+        "file": "js/generate/run.js:95",
+        "title": "4. ปรับเปลี่ยน Stage ตรงกลาง และเริ่มตัวจับเวลาด้วย watchToken",
+        "desc": "watchRun(newRun) จะล้างภาพในหน่วยความจำเดิม (releaseImages()), เริ่มต้นนาฬิกานับเวลา (startClock()), และใช้ตัวแปร watchToken ป้องกันปัญหา Race Condition กรณีที่ผู้ใช้กดยกเลิกหรือเปลี่ยนงานกะทันหัน",
+        "snippet": "// js/generate/run.js:95\nfunction watchRun(newRun) {\n  stopWatching(); // watchToken += 1\n  releaseImages(); // URL.revokeObjectURL\n  run = newRun; progress = null;\n  startClock(); updateView();\n  if (isFinished(run)) onFinished();\n  else poll();\n}",
+        "defenseQ": "watchToken มีบทบาทอย่างไรในการป้องกัน Race Condition?",
+        "defenseA": "เมื่อผู้ใช้สั่งหยุดหรือสลับดูงานอื่น stopWatching() จะบวกค่า watchToken += 1 ทันที เมื่อการร้องขอ Polling จากรอบก่อนหน้าตอบกลับมา ระบบจะเทียบ token !== watchToken หากไม่ตรงกันจะทิ้งคำตอบนั้นทันที ทำให้ไม่มีผลลัพธ์เก่ามาเขียนทับ State ปัจจุบันครับ"
     },
     {
-        "badge": "STEP 5: ADAPTIVE POLLING",
-        "file": "useGenerationJob.ts:38",
-        "title": "5. เริ่มต้นลูป Polling ถามสถานะงานด้วยความถี่แบบ Adaptive Backoff",
-        "desc": "Hook useGenerationJob จะทำการสอบถาม GET /api/generations/{id} ทุกๆ 1s ในช่วงแรก แล้วค่อยๆ ขยายความถี่เป็น 2s และ 5s เพื่อลดโหลดของเซิร์ฟเวอร์ พร้อมดึงเปอร์เซ็นต์ Denoising Progress มาแสดง",
-        "snippet": "refetchInterval: (query) => computeAdaptiveInterval(query.state.data),\n// 1s -> 2s -> 5s จนกว่า status จะเป็น completed",
-        "defenseQ": "ถ้างานค้างหรือเซิร์ฟเวอร์ตาย หน้าบ้านจะรู้ได้อย่างไร?",
-        "defenseA": "เรามี Stalled Watchdog ใน useGenerationJob หากเวลาที่ผ่านไปเกิน 120 วินาที ระบบจะแจ้งเตือนว่างานค้าง และเปิดปุ่มให้ผู้ใช้กดยกเลิกหรือส่งใหม่ได้ทันทีครับ"
+        "badge": "STEP 5: ADAPTIVE POLLING LOOP",
+        "file": "js/generate/run.js:126",
+        "title": "5. ถามสถานะซ้ำๆ แบบ Adaptive Interval (2s ➔ 5s ➔ เลิกหลัง 5 นาที)",
+        "desc": "ฟังก์ชัน poll() จะสอบถาม GET /generations/{id} และ GET /generations/{id}/progress โดยในนาทีแรกจะถามทุก 2 วินาที หลังจากนั้นจะขยายความถี่เป็นทุก 5 วินาที หากเกิน 5 นาที (POLL_GIVE_UP_MS = 300,000) จะตัดเข้าสู่สถานะ stalled = true เพื่อแจ้งเตือนผู้ใช้",
+        "snippet": "// js/generate/run.js:148\nconst watched = Date.now() - watchStartedAt;\nif (watched > POLL_GIVE_UP_MS) {\n  stalled = true; clearInterval(clockTimer);\n  renderStage(); return;\n}\nrenderStage();\npollTimer = setTimeout(poll, watched > 60 * 1000 ? 5000 : 2000);",
+        "defenseQ": "ทำไมการตั้งเวลา 2s -> 5s ดีกว่าการใช้ WebSocket ตลอดเวลาในโปรเจกต์นี้?",
+        "defenseA": "งาน Diffusion เป็นงานแบบ Batch Job ที่ใช้เวลารันเป็นช่วงๆ (10-30 วินาที) ไม่ใช่การแชท Real-time การใช้ Adaptive Polling ทำงานแบบ Stateless หากเน็ตหลุดจะไม่เกิด Connection Leak และช่วยลดภาระ Socket File Descriptors ของ Nginx Gateway และ FastAPI Backend ได้อย่างมากครับ"
     },
     {
-        "badge": "STEP 6: RESULT RENDERING",
-        "file": "ResultStage.tsx:112",
-        "title": "6. แสดงผลลัพธ์ภาพที่สำเร็จ และจัดเก็บลงแคช React Query",
-        "desc": "เมื่อได้รับ status='completed' ระบบจะดึง URL ภาพมาแสดงผลผ่านคอมโพเนนต์ ImageViewer พร้อมปุ่มดาวน์โหลด, สลับดู Seed ที่ใช้, และปุ่มส่งภาพนี้ต่อไปยังแท็บ Image Tools ได้ทันที",
-        "snippet": "<ImageViewer src={imageUrl} alt=\"Generated Result\" />\nqueryClient.invalidateQueries(['generations']);",
-        "defenseQ": "ภาพที่ได้จากเซิร์ฟเวอร์เป็นฟอร์แมตอะไร และเบราว์เซอร์แสดงผลได้ดีแค่ไหน?",
-        "defenseA": "เป็นภาพฟอร์แมต WebP ที่บีบอัดมาจาก AI Server ซึ่งเบราว์เซอร์สมัยใหม่รองรับแบบ Native 100% มีขนาดไฟล์เบากว่า PNG ถึง 80% ทำให้โหลดขึ้นจอได้เร็วกว่ามากครับ"
+        "badge": "STEP 6: RESULT & RAM CLEANUP",
+        "file": "js/generate/run.js:160",
+        "title": "6. ดึงภาพผลลัพธ์ด้วย Token และคืนหน่วยความจำ Blob ด้วย revokeObjectURL",
+        "desc": "เมื่อได้รับสถานะ completed ฟังก์ชัน onFinished() จะเรียก apiBlob('/generations/' + runId + '/image') เพื่อดึงภาพผ่าน Authorization Bearer แล้วแปลงเป็น Object URL และเมื่อมีการปิดงานหรือเปลี่ยนภาพ ฟังก์ชัน releaseImages() จะสั่ง URL.revokeObjectURL() คืน RAM ให้เบราว์เซอร์ทันที",
+        "snippet": "// js/generate/run.js:85, 170\nconst blob = await apiBlob('/generations/' + runId + '/image');\nrunImageBlob = blob;\nrunImageUrl = URL.createObjectURL(blob);\n// เมื่อปิดหรือสลับงาน:\nfunction releaseImages() {\n  if (runImageUrl) URL.revokeObjectURL(runImageUrl);\n  runImageUrl = null;\n}",
+        "defenseQ": "ทำไมถึงไม่ใช้แท็ก <img src='/generations/{id}/image'> ตรงๆ ใน HTML?",
+        "defenseA": "เพราะรูปภาพผลลัพธ์อยู่ภายใต้ระบบรักษาความปลอดภัย ต้องผ่านการยืนยันสิทธิ์ แต่แท็ก <img> ธรรมดาของ HTML ไม่สามารถแนบ Custom HTTP Header (Authorization: Bearer <token>) ได้ จึงต้องดึงไฟล์ผ่าน fetch() เป็น Blob ก่อนแล้วแปลงเป็น Object URL มาใส่ใน src ครับ"
     }
 ];
 
@@ -514,7 +523,7 @@
                 const rect = canvas.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                ctx.fillStyle = '#f97316';
+                ctx.fillStyle = '#e0a458'; // Theme accent brush color
                 ctx.beginPath();
                 ctx.arc(x, y, 16, 0, Math.PI * 2);
                 ctx.fill();
@@ -554,216 +563,474 @@
         const FRONTEND_MODULES_DATA = {
     "canvas": [
         {
-            "line": 31,
-            "name": "useMaskEditor(naturalWidth, naturalHeight)",
-            "tag": "Canvas Hook",
+            "line": 46,
+            "name": "MaskEditor.init(canvas, onChange)",
+            "tag": "Canvas Core",
             "tag_color": "bg-amber-950/60 text-amber-300 border-amber-500/30",
-            "title": "Custom Hook จัดการวาด Mask สำหรับงาน Inpainting",
-            "params": "naturalWidth: number, naturalHeight: number -> MaskEditor",
-            "desc": "หัวใจหลักของเครื่องมือ Inpaint ในฝั่งหน้าบ้าน: ควบคุม Canvas 2D Context, เก็บลำดับประวัติเส้นวาด (Stroke History Stack) สำหรับ Undo/Redo, ควบคุมขนาดหัวแปรงและโหมด Brush/Eraser, และมีฟังก์ชันส่งออก Mask เป็น Base64 ภาพขาว/ดำเพื่อส่งให้ AI Node",
-            "snippet": "export function useMaskEditor(naturalWidth: number, naturalHeight: number) {\n  const canvasRef = useRef<HTMLCanvasElement | null>(null);\n  const strokes = useRef<Stroke[]>([]);\n  const redoStack = useRef<Stroke[]>([]);\n  const active = useRef<Stroke | null>(null);\n  // จัดการวาดเส้น Brush / Eraser ลงบน Canvas Context\n  return { canvasRef, startStroke, addPoint, endStroke, undo, redo, exportMaskBase64 };\n}",
-            "called_by": "คอมโพเนนต์ <code>GeneratePage.tsx</code> (บรรทัด 58) และส่งต่อให้ <code>MaskCanvas.tsx</code>",
+            "title": "เริ่มต้นกระดานวาด Mask และผูก Pointer Event Listeners",
+            "params": "canvas: HTMLCanvasElement, onChange: Function -> void",
+            "desc": "รับ element canvas โปร่งใสที่วางซ้อนทับภาพต้นฉบับ ดึง context 2D ด้วย willReadFrequently: true ผูก pointerdown, pointermove, pointerup, pointercancel รองรับทั้งเมาส์ นิ้วสัมผัส และปากกาสไตลัส พร้อม setPointerCapture เพื่อไม่ให้รอยวาดหลุดแม้ลากเมาส์เลยขอบจอ",
+            "snippet": "init(canvas, onChange) {\n  this.canvas = canvas;\n  this.ctx = canvas.getContext('2d', { willReadFrequently: true });\n  this.onChange = onChange;\n  canvas.addEventListener('pointerdown', (event) => {\n    if (event.button !== 0) return;\n    canvas.setPointerCapture(event.pointerId);\n    this.saveUndo();\n    this.drawing = true;\n    this.lastPoint = this.toCanvasPoint(event);\n    this.paintLine(this.lastPoint, this.lastPoint);\n  });\n  // pointermove, pointerup, pointercancel...\n}",
+            "called_by": "js/generate/source.js (ตอนโหลดภาพ) และ js/generate/mask-tools.js",
             "subcalls": [
                 {
                     "targetMod": "canvas",
-                    "targetFn": "exportMaskBase64",
-                    "label": "editor.exportMaskBase64()",
-                    "why": "เพื่อสกัดภาพ Mask ที่ผู้ใช้วาดออกมาเป็น Base64 Data URL ก่อนแนบไปกับคำขอสร้างภาพ",
-                    "what": "สร้าง Offscreen Canvas ➔ เทสีพื้นหลังเป็นสีดำสนิท (#000000) ➔ เรนเดอร์รอยแปรงทับด้วยสีขาวบริสุทธิ์ (#FFFFFF) ➔ ส่งออกเป็น image/png Base64",
-                    "callsNext": "ส่ง Base64 สตริงต่อไปให้ generationService.create()"
+                    "targetFn": "toCanvasPoint",
+                    "label": "this.toCanvasPoint(event)",
+                    "why": "แปลงพิกัดเมาส์ใน DOM ให้กลายเป็นพิกัดภาพจริง",
+                    "what": "คำนวณสัดส่วนตาม bounding box เทียบกับ canvas.width",
+                    "callsNext": "ส่งพิกัด X, Y ให้ paintLine"
+                },
+                {
+                    "targetMod": "canvas",
+                    "targetFn": "paintLine",
+                    "label": "this.paintLine(from, to)",
+                    "why": "วาดเส้นพู่กันลงบน 2D context",
+                    "what": "สร้าง Path ด้วย lineCap = 'round' และ stroke()",
+                    "callsNext": "อัปเดตพิกัดลงแคนวาส"
                 }
             ],
-            "tip": "อาจารย์ถาม: ทำไม Mask ต้องส่งออกเป็นสีขาว-ดำ (White on Black) แทนที่จะเป็นสีโปร่งใส (Alpha)? ตอบว่า: เพราะมาตรฐาน Inpainting ของโมเดล Diffusion (VAE Inpaint Layer) กำหนดให้พิกเซลสีขาว (ค่าความสว่าง 255) คือบริเวณที่ต้องการให้ AI วาดใหม่ ส่วนสีดำ (ค่า 0) คือบริเวณที่ต้องคงสภาพเดิมไว้ครับ"
+            "tip": "อาจารย์ถาม: ทำไมถึงใช้ Pointer Events แทน Mouse Events? ตอบ: เพราะ Pointer Events เป็น W3C Unified Standard ที่รองรับทั้งเมาส์, ทัชสกรีนบนมือถือ/แท็บเล็ต และปากกาสไตลัสใน API เดียว โดย setPointerCapture ช่วยให้จับการลากเส้นได้ต่อเนื่องแม้ผู้ใช้จะลากพู่กันหลุดออกนอกขอบ Canvas ชั่วคราวครับ"
         },
         {
-            "line": 158,
-            "name": "exportMaskBase64(format = 'image/png')",
-            "tag": "Mask Export",
+            "line": 91,
+            "name": "MaskEditor.toCanvasPoint(event)",
+            "tag": "Coord Transform",
             "tag_color": "bg-amber-950/60 text-amber-300 border-amber-500/30",
-            "title": "แปลงรอยวาดบน Canvas เป็น Black/White Mask Base64",
-            "params": "format: string -> string (Data URL Base64)",
-            "desc": "สร้าง Offscreen Canvas ขนาดเท่ากับ Natural Resolution ของภาพต้นฉบับ วาดพื้นหลังสีดำสนิท และวาดเฉพาะ Stroke ที่เป็นสีขาวทับลงไป จากนั้นเรียก toDataURL('image/png') เพื่อให้ได้ไบนารี Mask ที่แม่นยำระดับพิกเซล",
-            "snippet": "const exportMaskBase64 = useCallback(() => {\n  const canvas = document.createElement('canvas');\n  canvas.width = naturalWidth;\n  canvas.height = naturalHeight;\n  const ctx = canvas.getContext('2d');\n  // พ่นสีดำเป็นพื้นหลัง (ส่วนคงเดิม)\n  ctx.fillStyle = '#000000';\n  ctx.fillRect(0, 0, naturalWidth, naturalHeight);\n  // พ่นสีขาวเฉพาะบริเวณ Stroke (ส่วนที่ต้องการแต่งใหม่)\n  renderStrokesToContext(ctx, strokes.current, '#ffffff');\n  return canvas.toDataURL('image/png');\n}, [naturalWidth, naturalHeight]);",
-            "called_by": "ฟังก์ชัน handleSubmit() ใน GeneratePage.tsx ตอนกดยืนยันสร้างภาพโหมด Inpaint",
+            "title": "แปลงพิกัดเคอร์เซอร์บนหน้าจอ สู่พิกัดพิกเซลจริงบนภาพ",
+            "params": "event: PointerEvent -> { x: number, y: number }",
+            "desc": "คำนวณสัดส่วนตำแหน่งเมาส์ใน DOM Bounding Client Rect เทียบกับมิติความละเอียดจริง (canvas.width, canvas.height) ชดเชยการย่อ-ขยายด้วย CSS ทำให้วาดได้ตรงพิกเซลเสมอไม่ว่าหน้าจอจะขนาดเท่าใด",
+            "snippet": "toCanvasPoint(event) {\n  const box = this.canvas.getBoundingClientRect();\n  return {\n    x: ((event.clientX - box.left) / box.width) * this.canvas.width,\n    y: ((event.clientY - box.top) / box.height) * this.canvas.height,\n  };\n}",
+            "called_by": "Event handler ใน MaskEditor.init() ตอน pointerdown และ pointermove",
             "subcalls": [],
-            "tip": "อาจารย์ถาม: ทำไมต้องวาดลงบน Offscreen Canvas อีกตัวที่มีขนาด naturalWidth แทนที่จะดึงจาก Canvas ที่แสดงอยู่บนหน้าจอตรงๆ? ตอบ: เพราะ Canvas บนหน้าจอถูกย่อ-ขยายด้วย CSS (Responsive Scaling) ทำให้ขนาด DOM ไม่ตรงกับภาพจริง การวาดซ้ำลง Offscreen Canvas ขนาด Natural Size ช่วยรักษา Resolution ดั้งเดิมของภาพ ไม่ทำให้ Mask คลาดเคลื่อนตำแหน่งครับ"
+            "tip": "สูตรหลักของวิชา Image Processing: ((clientX - box.left) / box.width) * canvas.width คือการทำ 2D Affine Transformation (Translation + Scaling) เพื่อ Normalize พิกัดสัมพัทธ์ในจอภาพ (0..1) เข้าสู่มิติดั้งเดิมของภาพถ่ายครับ"
         },
+        {
+            "line": 100,
+            "name": "MaskEditor.realBrushSize()",
+            "tag": "Brush Math",
+            "tag_color": "bg-yellow-950/60 text-yellow-300 border-yellow-500/30",
+            "title": "คำนวณขนาดเส้นพู่กันจริงบนภาพ ชดเชยอัตราส่วน CSS Scale",
+            "params": "() -> number",
+            "desc": "คำนวณอัตราส่วน Scale Factor ระหว่างความกว้างจริงของ Canvas กับความกว้างบนหน้าจอ (box.width) เพื่อให้ขนาดเส้นที่ปรากฏแก่สายตาผู้ใช้มีความหนาคงที่ตรงกับค่า Slider ไม่ว่าภาพจะถูกย่อลงมาเท่าใด",
+            "snippet": "realBrushSize() {\n  const box = this.canvas.getBoundingClientRect();\n  return this.brushSize * (this.canvas.width / (box.width || this.canvas.width));\n}",
+            "called_by": "MaskEditor.paintLine(from, to)",
+            "subcalls": [],
+            "tip": "หากไม่คำนวณ realBrushSize() เมื่อนำภาพความละเอียดสูง 2048x2048 มาแสดงในกล่องขนาด 400px บนจอ เส้นพู่กัน 40px บนจอจะกลายเป็นเส้นบางเฉียบแค่ 8px บนภาพจริง ทำให้ Mask ที่ได้ขาดความแม่นยำอย่างมากครับ"
+        },
+        {
+            "line": 105,
+            "name": "MaskEditor.paintLine(from, to)",
+            "tag": "Canvas Render",
+            "tag_color": "bg-amber-950/60 text-amber-300 border-amber-500/30",
+            "title": "วาดหรือลบรอยแปรงระหว่างจุดสองจุด ด้วย Canvas 2D Path",
+            "params": "from: Point, to: Point -> void",
+            "desc": "ใช้ globalCompositeOperation = 'source-over' สำหรับพู่กัน (สีส้มธีม) และ 'destination-out' สำหรับยางลบ (ลบพิกเซลให้โปร่งใสกลับคืน) เชื่อมต่อจุดด้วย lineCap = 'round' และ lineJoin = 'round' พร้อมดักจับกรณีคลิกจุดเดียวด้วย arc()",
+            "snippet": "paintLine(from, to) {\n  const ctx = this.ctx;\n  const color = brushColor();\n  ctx.globalCompositeOperation = this.mode === 'eraser' ? 'destination-out' : 'source-over';\n  ctx.strokeStyle = color;\n  ctx.fillStyle = color;\n  ctx.lineWidth = this.realBrushSize();\n  ctx.lineCap = 'round';\n  ctx.lineJoin = 'round';\n  ctx.beginPath();\n  if (from.x === to.x && from.y === to.y) {\n    ctx.arc(from.x, from.y, ctx.lineWidth / 2, 0, Math.PI * 2);\n    ctx.fill();\n  } else {\n    ctx.moveTo(from.x, from.y);\n    ctx.lineTo(to.x, to.y);\n    ctx.stroke();\n  }\n}",
+            "called_by": "MaskEditor.init() ตอน pointerdown และ pointermove",
+            "subcalls": [
+                {
+                    "targetMod": "canvas",
+                    "targetFn": "realBrushSize",
+                    "label": "this.realBrushSize()",
+                    "why": "คำนวณความหนาของเส้นที่แท้จริงบนภาพ",
+                    "what": "คูณขนาดหัวแปรงด้วย canvas.width / box.width",
+                    "callsNext": "กำหนดค่าลง ctx.lineWidth"
+                }
+            ],
+            "tip": "อาจารย์ถาม: ยางลบทำงานอย่างไรใน Canvas 2D? ตอบ: ใช้โหมดการผสานพิกเซล destination-out ซึ่งเป็นการลบ Alpha Channel ของพิกเซลเดิมที่เคยวาดออกไป กลายเป็นพื้นผิวโปร่งใสเดิม โดยไม่ต้องสั่งเคลียร์แคนวาสแล้ววาดใหม่ทั้งหมดครับ"
+        },
+        {
+            "line": 136,
+            "name": "MaskEditor.saveUndo() & undo()",
+            "tag": "RAM Budget",
+            "tag_color": "bg-red-950/60 text-red-300 border-red-500/30",
+            "title": "ระบบย้อนกลับประวัติรอยวาด พร้อมงบประมาณหน่วยความจำ 200MB",
+            "params": "() -> void",
+            "desc": "บันทึกภาพก่อนหน้าด้วย getImageData ลงใน undoStack โดยมีการจำกัดงบ RAM รวมไม่เกิน 200 MB (UNDO_BUDGET_BYTES = 200 * 1024 * 1024) คำนวณ maxSteps ตามขนาดภาพ เช่น ภาพ 768x768 ย้อนได้ 30 ขั้น แต่ภาพ 4096x4096 ย้อนได้ 3 ขั้น ป้องกันเบราว์เซอร์เกิด Out-of-Memory (OOM)",
+            "snippet": "saveUndo() {\n  this.undoStack.push(this.snapshot());\n  const bytesPerStep = this.canvas.width * this.canvas.height * 4;\n  const maxSteps = Math.max(3, Math.min(30, Math.floor(UNDO_BUDGET_BYTES / bytesPerStep)));\n  while (this.undoStack.length > maxSteps) this.undoStack.shift();\n  this.redoStack = [];\n}\nundo() {\n  const previous = this.undoStack.pop();\n  if (!previous) return;\n  this.redoStack.push(this.snapshot());\n  this.ctx.putImageData(previous, 0, 0);\n  this.changed();\n}",
+            "called_by": "MaskEditor.init(), clear(), และปุ่ม Undo ใน mask-tools.js",
+            "subcalls": [],
+            "tip": "การออกแบบระดับโปรดักชัน: การเก็บภาพ 4K แบบดิบ (RGBA 4 bytes) กินแรม 67 MB ต่อขั้น หากไม่มี Memory Budget Guard ผู้ใช้กด Undo ไปเรื่อยๆ แท็บเบราว์เซอร์จะแครชทันทีครับ"
+        },
+        {
+            "line": 170,
+            "name": "MaskEditor.measure()",
+            "tag": "Downsampling",
+            "tag_color": "bg-teal-950/60 text-teal-300 border-teal-500/30",
+            "title": "คำนวณสัดส่วนพื้นที่ระบาย (Coverage 0-1) ด้วยการย่อขนาด 256px",
+            "params": "() -> number (0.0 ถึง 1.0)",
+            "desc": "เพื่อตรวจสอบว่าผู้ใช้ระบาย Mask แล้วหรือยังอย่างรวดเร็ว โดยแทนที่จะอ่านพิกเซลทั้งภาพ 4096x4096 (16 ล้านพิกเซล) ซึ่งทำให้หน้าเว็บกระตุก ฟังก์ชันจะวาดภาพย่อลง Canvas จำลองขนาด 256px แล้วนับพิกเซลที่มีค่า Alpha > 0 ได้ผลลัพธ์ในเวลาไม่ถึง 1 มิลลิวินาที",
+            "snippet": "measure() {\n  if (!this.canvas.width) return 0;\n  const scale = Math.min(1, 256 / Math.max(this.canvas.width, this.canvas.height));\n  const small = document.createElement('canvas');\n  small.width = Math.max(1, Math.round(this.canvas.width * scale));\n  small.height = Math.max(1, Math.round(this.canvas.height * scale));\n  const ctx = small.getContext('2d');\n  ctx.drawImage(this.canvas, 0, 0, small.width, small.height);\n  const pixels = ctx.getImageData(0, 0, small.width, small.height).data;\n  let painted = 0;\n  for (let i = 3; i < pixels.length; i += 4) {\n    if (pixels[i] > 0) painted += 1;\n  }\n  return painted / (pixels.length / 4);\n}",
+            "called_by": "MaskEditor.changed() ทุกครั้งหลังจบ Stroke",
+            "subcalls": [],
+            "tip": "อาจารย์ถาม: ทำไมไม่นับพิกเซลจาก canvas จริงตรงๆ? ตอบ: เพราะ getImageData() บน Canvas ความละเอียดสูงสร้างภาระบัสข้อมูล CPU-GPU อย่างรุนแรง (Readback latency) การย่อเหลือ 256px ก่อนนับคือเทคนิค Downsampling Spatial Sampling เพื่อประเมินสัดส่วนได้ทันทีโดยไม่เสียเวลาครับ"
+        },
+        {
+            "line": 196,
+            "name": "MaskEditor.exportMask()",
+            "tag": "Binary Export",
+            "tag_color": "bg-purple-950/60 text-purple-300 border-purple-500/30",
+            "title": "สร้างภาพ Binary PNG ขาว-ดำ (White on Black) ส่งต่อให้ AI Node",
+            "params": "() -> Promise<Blob>",
+            "desc": "สร้าง Offscreen Canvas ชั่วคราวขนาดเท่าภาพจริง เทสีขาว #ffffff ทั้งแผ่น แล้วใช้ destination-in สกัดเอาเฉพาะบริเวณที่เคยวาด จากนั้นใช้ destination-over เทสีดำ #000000 อุดพื้นที่ที่เหลือทั้งหมด แล้วแปลงเป็นไบนารี PNG Blob เพื่อเตรียมอัปโหลด",
+            "snippet": "exportMask() {\n  const out = document.createElement('canvas');\n  out.width = this.canvas.width;\n  out.height = this.canvas.height;\n  const ctx = out.getContext('2d');\n\n  ctx.fillStyle = '#ffffff';\n  ctx.fillRect(0, 0, out.width, out.height);\n  ctx.globalCompositeOperation = 'destination-in';\n  ctx.drawImage(this.canvas, 0, 0);\n  ctx.globalCompositeOperation = 'destination-over';\n  ctx.fillStyle = '#000000';\n  ctx.fillRect(0, 0, out.width, out.height);\n\n  return new Promise((resolve) => out.toBlob(resolve, 'image/png'));\n}",
+            "called_by": "submit() ใน js/generate/run.js (โหมด inpaint)",
+            "subcalls": [],
+            "tip": "จุดเชื่อมโยง Image Processing: สองขั้นตอนด้วย Canvas Compositing: 1) destination-in ตัดสีขาวให้เหลือเฉพาะบริเวณ Stroke, 2) destination-over เทสีดำฉากหลัง ทำให้ได้ Alpha Mask ขาว-ดำสมบูรณ์แบบโดยไม่ต้องวนลูปทีละพิกเซลด้วย JavaScript ให้ช้าครับ"
+        },
+        {
+            "line": 217,
+            "name": "MaskEditor.loadMask(image, invert)",
+            "tag": "Studio Import",
+            "tag_color": "bg-indigo-950/60 text-indigo-300 border-indigo-500/30",
+            "title": "โหลด Mask ขาวดำจากสตูดิโอ พร้อมรองรับการกลับสี (Invert Mask)",
+            "params": "image: HTMLImageElement, invert: boolean -> void",
+            "desc": "รองรับการนำภาพ Mask จากเครื่องมือตัดฉากหลัง (Remove BG) ใน Studio มาใช้ต่อ โดยอ่านค่าความสว่างของพิกเซล หากเป็นสีขาวจะแปลงเป็นสีพู่กันของธีม และหาก invert = true จะสลับไบนารี เพื่อให้ผู้ใช้เลือกว่าจะวาดแก้เฉพาะตัวแบบ หรือวาดแก้เฉพาะฉากหลัง",
+            "snippet": "loadMask(image, invert) {\n  const temp = document.createElement('canvas');\n  temp.width = this.canvas.width; temp.height = this.canvas.height;\n  const tempCtx = temp.getContext('2d');\n  tempCtx.drawImage(image, 0, 0, temp.width, temp.height);\n  const color = brushColor();\n  const [r, g, b] = [1, 3, 5].map((i) => parseInt(color.slice(i, i + 2), 16));\n  const data = tempCtx.getImageData(0, 0, temp.width, temp.height);\n  const px = data.data;\n  for (let i = 0; i < px.length; i += 4) {\n    const isWhite = ((px[i] + px[i + 1] + px[i + 2]) / 3) * (px[i + 3] / 255) >= 128;\n    px[i] = r; px[i + 1] = g; px[i + 2] = b;\n    px[i + 3] = isWhite !== invert ? 255 : 0;\n  }\n  this.saveUndo();\n  this.ctx.putImageData(data, 0, 0);\n  this.changed();\n}",
+            "called_by": "js/generate/source.js ตอนรับภาพส่งต่อจาก Studio",
+            "subcalls": [],
+            "tip": "แสดงความสามารถในการประสานงานระหว่างหน้าเว็บ (Studio -> Inpaint): หน้าบ้านรองรับการ Thresholding แบบ Binarization (R+G+B)/3 >= 128 เพื่อเปลี่ยนภาพสเกลเทาเป็นมาสก์สองระดับสีขาว/ดำแบบเรียลไทม์ครับ"
+        }
+    ],
+    "families": [
         {
             "line": 26,
-            "name": "MaskCanvas({ editor, sourceUrl, onNaturalSize })",
-            "tag": "Canvas UI",
-            "tag_color": "bg-yellow-950/60 text-yellow-300 border-yellow-500/30",
-            "title": "คอมโพเนนต์กระดานวาด Mask พร้อมระบบแปลงพิกัด Pointer",
-            "params": "Props: { editor, sourceUrl, onNaturalSize } -> JSX.Element",
-            "desc": "แสดงผลภาพต้นฉบับเป็น Background และซ้อน Canvas สำหรับวาด Mask ไว้ด้านบน ดักจับ Pointer Events (pointerdown, pointermove, pointerup) และทำการแปลงพิกัด (Coordinate Normalization) จากขนาดจอแสดงผลกลับไปเป็นขนาดพิกเซลจริงของภาพ",
-            "snippet": "export function MaskCanvas({ editor, sourceUrl, onNaturalSize }: Props) {\n  const handlePointerMove = (e: ReactPointerEvent<HTMLCanvasElement>) => {\n    const rect = e.currentTarget.getBoundingClientRect();\n    const scaleX = editor.naturalWidth / rect.width;\n    const scaleY = editor.naturalHeight / rect.height;\n    const x = (e.clientX - rect.left) * scaleX;\n    const y = (e.clientY - rect.top) * scaleY;\n    editor.addPoint({ x, y });\n  };\n  return <div className=\"mask-canvas-wrapper\">...</div>;\n}",
-            "called_by": "GeneratePage.tsx ในส่วนแสดงผลหน้าจอฝั่ง Canvas Editor",
+            "name": "FAMILY_TEXT",
+            "tag": "Data Dictionary",
+            "tag_color": "bg-slate-800 text-sky-300 border-slate-700",
+            "title": "ตารางแมปชื่อตระกูลโมเดลสำหรับแสดงผลบนหน้าจอ UI",
+            "params": "Const Dictionary",
+            "desc": "จับคู่รหัสตระกูลโมเดลมาตรฐาน { sd15: 'SD 1.5', illustrious_xl: 'Illustrious XL', pony_xl: 'Pony XL' } เพื่อนำไปแสดงใน Dropdown และป้ายกำกับสี Badge",
+            "snippet": "const FAMILY_TEXT = {\n  sd15: 'SD 1.5',\n  illustrious_xl: 'Illustrious XL',\n  pony_xl: 'Pony XL'\n};",
+            "called_by": "js/generate/settings.js",
+            "subcalls": [],
+            "tip": "โครงสร้างข้อมูลระดับระบบ: ใช้รหัสตระกูลเดียวกันกับฝั่ง AI Server เพื่อให้เกิดความสอดคล้องทั้งระบบ"
+        },
+        {
+            "line": 29,
+            "name": "detectModelFamily(modelId)",
+            "tag": "Heuristic Rule",
+            "tag_color": "bg-sky-950/60 text-sky-300 border-sky-500/30",
+            "title": "เดาตระกูลของโมเดลจากชื่อไฟล์ตามลำดับความสำคัญ",
+            "params": "modelId: string -> 'sd15' | 'illustrious_xl' | 'pony_xl'",
+            "desc": "ตรวจสอบ Substring ของชื่อโมเดลตามลำดับเดียวกับ AI Server เป๊ะๆ: ถ้ามี 'pdxl' หรือ 'pony' จะจัดเป็น pony_xl, ถ้ามี 'illu', 'nova', 'xl' จะจัดเป็น illustrious_xl, นอกเหนือจากนั้นจะจัดเป็น sd15",
+            "snippet": "function detectModelFamily(modelId) {\n  const name = String(modelId || '').toLowerCase();\n  if (['pdxl', 'pony'].some((key) => name.includes(key))) return 'pony_xl';\n  if (['illu', 'nova', 'xl'].some((key) => name.includes(key))) return 'illustrious_xl';\n  return 'sd15';\n}",
+            "called_by": "modelFamily(model)",
+            "subcalls": [],
+            "tip": "อาจารย์ถาม: ทำไมลำดับ if ถึงสำคัญมาก? ตอบ: เพราะโมเดลตระกูล Pony บางตัวมีคำว่า 'xl' ปนอยู่ในชื่อด้วย เช่น 'pony-v6-xl' หากตรวจคำว่า 'xl' ก่อน จะทำให้หลุดไปเป็น illustrious_xl ทันที จึงต้องตรวจ 'pony'/'pdxl' เป็นลำดับแรกสุดครับ"
+        },
+        {
+            "line": 37,
+            "name": "modelFamily(model)",
+            "tag": "Cascade Resolver",
+            "tag_color": "bg-sky-950/60 text-sky-300 border-sky-500/30",
+            "title": "ค้นหาตระกูลของโมเดล (Metadata ➔ Config Fallback ➔ Heuristic)",
+            "params": "model: { id, family? } -> string",
+            "desc": "ดึงค่าตามลำดับ 3 ระดับ: 1) อ่านจาก property model.family ที่ส่งมาจาก Backend, 2) ถ้าไม่มี ให้ค้นหาจากรายชื่อสำรอง FALLBACK_CHECKPOINTS ใน config.js, 3) ถ้าไม่พบจริงๆ ให้เรียก detectModelFamily(model.id)",
+            "snippet": "function modelFamily(model) {\n  if (model.family) return model.family;\n  const known = FALLBACK_CHECKPOINTS.find((item) => item.id === model.id);\n  return known ? known.family : detectModelFamily(model.id);\n}",
+            "called_by": "settings.js ตอนเปลี่ยน Checkpoint Model",
+            "subcalls": [
+                {
+                    "targetMod": "families",
+                    "targetFn": "detectModelFamily",
+                    "label": "detectModelFamily(model.id)",
+                    "why": "เดาตระกูลเมื่อเซิร์ฟเวอร์ไม่ได้ส่งฟิลด์ family มา",
+                    "what": "ตรวจสอบ Substring pdxl/pony/illu/xl",
+                    "callsNext": "คืนค่าตระกูล 'pony_xl', 'illustrious_xl' หรือ 'sd15'"
+                }
+            ],
+            "tip": "กลยุทธ์ Graceful Degradation: แม้ Backend จะยังไม่ได้อัปเดต Metadata ฟิลด์ family หน้าบ้านก็ยังทำงานต่อได้อย่างถูกต้อง 100% โดยอาศัยกฎการเดาชื่อไฟล์"
+        },
+        {
+            "line": 44,
+            "name": "loraFamily(lora)",
+            "tag": "LoRA Resolver",
+            "tag_color": "bg-emerald-950/60 text-emerald-300 border-emerald-500/30",
+            "title": "ระบุตระกูลของ LoRA ตัวที่ต้องการ ('unknown' หากไม่แน่ใจ)",
+            "params": "lora: { id, family? } -> string",
+            "desc": "ตรวจสอบว่า LoRA มีการระบุ family มาหรือไม่ หากไม่มีจะค้นหาจาก FALLBACK_LORAS ถ้ายังไม่พบจะคืนค่า 'unknown' ซึ่ง LoRA ที่ไม่รู้ตระกูลจะถูกอนุญาตให้แสดงคู่กับทุกโมเดล (ตรงกับพฤติกรรมของ AI Server)",
+            "snippet": "function loraFamily(lora) {\n  if (lora.family) return lora.family;\n  const known = FALLBACK_LORAS.find((item) => item.id === lora.id);\n  return known ? known.family : 'unknown';\n}",
+            "called_by": "compatibleLoras()",
+            "subcalls": [],
+            "tip": "ออกแบบมาเพื่อความยืดหยุ่น: หากผู้ใช้เพิ่ม LoRA แปลกใหม่เข้ามาและระบบยังไม่รู้จัก ระบบจะไม่บล็อก แต่จะปล่อยผ่านให้ทดลองได้ พร้อมให้ AI Server เป็นตัวคัดกรองด่านสอง"
+        },
+        {
+            "line": 51,
+            "name": "compatibleLoras(loras, family)",
+            "tag": "Filter Engine",
+            "tag_color": "bg-emerald-950/60 text-emerald-300 border-emerald-500/30",
+            "title": "กรองรายชื่อ LoRA ให้เหลือเฉพาะตัวที่เข้ากันได้กับโมเดลที่เลือก",
+            "params": "loras: Array, family: string -> Array",
+            "desc": "วนลูปกรอง LoRA Dropdown: เก็บเฉพาะ LoRA ที่ตระกูลตรงกับโมเดลปัจจุบัน หรือ LoRA ที่มีตระกูลเป็น 'unknown' ป้องกันไม่ให้ผู้ใช้เลือกคู่สถาปัตยกรรมผิด เช่น นำ LoRA ของ SD 1.5 ไปใส่ใน Illustrious XL",
+            "snippet": "function compatibleLoras(loras, family) {\n  return loras.filter((lora) => {\n    const own = loraFamily(lora);\n    return own === 'unknown' || own === family;\n  });\n}",
+            "called_by": "updateLoraOptions() ใน js/generate/settings.js",
+            "subcalls": [
+                {
+                    "targetMod": "families",
+                    "targetFn": "loraFamily",
+                    "label": "loraFamily(lora)",
+                    "why": "ค้นหาตระกูลของ LoRA แต่ละตัว",
+                    "what": "อ่าน family หรือเทียบ FALLBACK_LORAS",
+                    "callsNext": "คืนค่าตระกูลมาตรวจสอบเงื่อนไข filter"
+                }
+            ],
+            "tip": "หลักการ Pre-flight Validation: ป้องกันขยะและข้อผิดพลาดตั้งแต่ฝั่งไคลเอนต์ ช่วยลดจำนวนงานที่ต้อง Fail บนการ์ดจอ RTX 3070 ได้อย่างมีนัยสำคัญ"
+        }
+    ],
+    "api": [
+        {
+            "line": 31,
+            "name": "getToken() & setToken(token)",
+            "tag": "Session Store",
+            "tag_color": "bg-indigo-950/60 text-indigo-300 border-indigo-500/30",
+            "title": "จัดการจัดเก็บและลบ JWT Access Token ใน LocalStorage",
+            "params": "token: string | null -> string | void",
+            "desc": "บันทึก Token ภายใต้คีย์ 'luma.token' ใน localStorage เพื่อให้ Session ยังคงอยู่แม้เปิดแท็บใหม่ หรือส่งค่า null เพื่อลบ Token ทิ้งเมื่อกดออกจากระบบ",
+            "snippet": "function getToken() {\n  return localStorage.getItem(TOKEN_KEY);\n}\nfunction setToken(token) {\n  if (token) localStorage.setItem(TOKEN_KEY, token);\n  else localStorage.removeItem(TOKEN_KEY);\n}",
+            "called_by": "authHeaders(), handleUnauthorized(), login.js, account.js",
+            "subcalls": [],
+            "tip": "Frontend ไม่เก็บรหัสผ่านจริงของผู้ใช้ เก็บเฉพาะ Bearer Token ที่ได้รับอนุมัติจาก FastAPI เพื่อความปลอดภัยสูงสุด"
+        },
+        {
+            "line": 42,
+            "name": "authHeaders()",
+            "tag": "HTTP Header",
+            "tag_color": "bg-indigo-950/60 text-indigo-300 border-indigo-500/30",
+            "title": "สร้าง HTTP Authorization Header สำหรับแนบ Token ไปกับคำขอ",
+            "params": "() -> Object",
+            "desc": "อ่าน Token จาก getToken() หากมีจะคืนค่า { Authorization: 'Bearer ' + token } แต่ถ้ายังไม่ได้ล็อกอินจะคืนค่า {} ว่างเปล่า ป้องกันข้อผิดพลาดการส่ง Header ผิดรูป เช่น 'Bearer null'",
+            "snippet": "function authHeaders() {\n  const token = getToken();\n  return token ? { Authorization: 'Bearer ' + token } : {};\n}",
+            "called_by": "apiRequest(), apiUpload(), apiBlob()",
+            "subcalls": [],
+            "tip": "การป้องกันบั๊ก Header: ถ้าส่ง Bearer null เซิร์ฟเวอร์ FastAPI OAuth2 จะโยน 401 ทันที การคืน Object ว่างเปล่าทำให้สามารถยิง Public Endpoint ได้ตามปกติ"
+        },
+        {
+            "line": 56,
+            "name": "errorMessage(status, detail)",
+            "tag": "i18n Translation",
+            "tag_color": "bg-rose-950/60 text-rose-300 border-rose-500/30",
+            "title": "แปลงรหัสสถานะ HTTP (Status Code) เป็นข้อความภาษาไทยที่เข้าใจง่าย",
+            "params": "status: number, detail?: string -> string",
+            "desc": "แมปข้อผิดพลาดทางเทคนิค เช่น 0 (ต่อ backend ไม่ได้), 401 (เซสชันหมดอายุ), 403 (ไม่มีสิทธิ์), 413 (ไฟล์ใหญ่เกิน 10MB), 415 (ไฟล์ไม่ใช่ PNG/JPEG/WEBP), 500 (เซิร์ฟเวอร์ขัดข้อง) ให้เป็นข้อความภาษาไทยที่สุภาพ",
+            "snippet": "function errorMessage(status, detail) {\n  if (status === 0) return 'ติดต่อ backend ไม่ได้ — ตรวจ IP ใน js/config.js และการเชื่อมต่อเครือข่าย';\n  if (status === 401) return 'เซสชันหมดอายุ หรือชื่อผู้ใช้/รหัสผ่านไม่ถูกต้อง';\n  if (status === 403) return 'บัญชีนี้ไม่มีสิทธิ์ทำรายการนี้';\n  if (status === 413) return 'ไฟล์ใหญ่เกินไป (สูงสุด 10 MB และไม่เกิน 4096 พิกเซล)';\n  if (status === 415) return 'รองรับเฉพาะไฟล์ PNG, JPEG และ WEBP';\n  if (status >= 500) return detail || 'เซิร์ฟเวอร์ขัดข้อง ลองใหม่อีกครั้ง';\n  return detail || 'เกิดข้อผิดพลาด (รหัส ' + status + ')';\n}",
+            "called_by": "apiRequest(), apiUpload(), apiBlob()",
+            "subcalls": [],
+            "tip": "UX Localization & Debugging: Status 0 ชี้เป้าตรงจุดเรื่องการตั้งค่า IP ใน config.js ช่วยให้เพื่อนร่วมทีมแก้ปัญหาเน็ตเวิร์กตอนเดโมงานได้อย่างรวดเร็ว"
+        },
+        {
+            "line": 72,
+            "name": "readDetail(body)",
+            "tag": "Validation Parser",
+            "tag_color": "bg-rose-950/60 text-rose-300 border-rose-500/30",
+            "title": "แกะข้อความ Error Detail จาก FastAPI ทั้งแบบ String และ Array",
+            "params": "body: Object -> string | null",
+            "desc": "FastAPI Pydantic Validation Error จะส่ง detail กลับมาเป็น Array เช่น [{ loc: ['body', 'steps'], msg: 'ensure this value is greater than 0' }] ฟังก์ชันนี้จะแปลงฟิลด์ให้เป็นสตริงอ่านง่าย 'steps: ensure this value...'",
+            "snippet": "function readDetail(body) {\n  if (!body || !body.detail) return null;\n  if (typeof body.detail === 'string') return body.detail;\n  if (Array.isArray(body.detail) && body.detail.length > 0) {\n    const first = body.detail[0];\n    const field = (first.loc || []).filter((p) => p !== 'body' && p !== 'query').join('.');\n    return field ? field + ': ' + first.msg : first.msg;\n  }\n  return null;\n}",
+            "called_by": "apiRequest(), apiUpload()",
+            "subcalls": [],
+            "tip": "แก้ปัญหาหน้าจอแสดงผล [object Object] เวลา FastAPI ส่ง Validation Error กลับมา ทำให้เห็นว่ากรอกฟิลด์ไหนผิดพลาดทันที"
+        },
+        {
+            "line": 84,
+            "name": "handleUnauthorized()",
+            "tag": "Auth Guard",
+            "tag_color": "bg-red-950/60 text-red-300 border-red-500/30",
+            "title": "จัดการเมื่อเซสชันหมดอายุ (HTTP 401) ลบ Token และพากลับหน้าล็อกอิน",
+            "params": "() -> void",
+            "desc": "เมื่อ API ตอบกลับด้วยรหัส 401 ฟังก์ชันจะสั่ง setToken(null) เพื่อล้าง Token ที่หมดอายุ และเปลี่ยนเส้นทางหน้าเว็บไปที่ login.html?expired=1 พร้อมแสดงข้อความเตือนให้ผู้ใช้ล็อกอินใหม่",
+            "snippet": "function handleUnauthorized() {\n  setToken(null);\n  const here = location.pathname.split('/').pop();\n  if (here !== 'login.html' && here !== 'register.html') {\n    location.href = 'login.html?expired=1';\n  }\n}",
+            "called_by": "apiRequest(), apiUpload(), apiBlob()",
+            "subcalls": [],
+            "tip": "ความปลอดภัยของระบบ: ป้องกันไม่ให้แอปพลิเคชันค้างอยู่ในสถานะผี (Ghost State) เมื่อ JWT Expire ตามกำหนดเวลา"
+        },
+        {
+            "line": 98,
+            "name": "apiRequest(path, options)",
+            "tag": "Fetch Wrapper",
+            "tag_color": "bg-blue-950/60 text-blue-300 border-blue-500/30",
+            "title": "Fetch Wrapper ศูนย์กลางสำหรับส่งคำขอ JSON และอ่านผลลัพธ์",
+            "params": "path: string, options: Object -> Promise<Object>",
+            "desc": "รวม Base URL, แนบ Authorization Header, ตรวจสอบประเภทข้อมูล (json หรือ form), ยิง fetch(), ดักจับเน็ตเวิร์กเออร์เรอร์ และแปลงผลลัพธ์เป็น JSON พร้อมโยน ApiError เมื่อพบข้อผิดพลาด",
+            "snippet": "async function apiRequest(path, options = {}) {\n  const headers = options.auth === false ? {} : authHeaders();\n  let body;\n  if (options.json !== undefined) {\n    headers['Content-Type'] = 'application/json';\n    body = JSON.stringify(options.json);\n  }\n  let response;\n  try {\n    response = await fetch(API_BASE_URL + path, { method: options.method || 'GET', headers, body });\n  } catch (networkError) {\n    throw new ApiError(0, errorMessage(0));\n  }\n  if (!response.ok) {\n    let data = null;\n    try { data = await response.json(); } catch (ignored) {}\n    if (response.status === 401 && !options.quiet401) handleUnauthorized();\n    throw new ApiError(response.status, errorMessage(response.status, readDetail(data)));\n  }\n  if (response.status === 204) return null;\n  const text = await response.text();\n  return text ? JSON.parse(text) : null;\n}",
+            "called_by": "ทุกโมดูลในระบบ (run.js, settings.js, history, admin)",
+            "subcalls": [
+                {
+                    "targetMod": "api",
+                    "targetFn": "authHeaders",
+                    "label": "authHeaders()",
+                    "why": "สร้าง Header แนบ Bearer Token",
+                    "what": "อ่าน Token จาก localStorage",
+                    "callsNext": "ใส่ใน headers ของ fetch"
+                },
+                {
+                    "targetMod": "api",
+                    "targetFn": "handleUnauthorized",
+                    "label": "handleUnauthorized()",
+                    "why": "เคลียร์ Session เมื่อเจอ HTTP 401",
+                    "what": "ลบ token แล้ว redirect ไป login.html",
+                    "callsNext": "พาไปหน้าล็อกอิน"
+                }
+            ],
+            "tip": "สถาปัตยกรรม Single Responsibility: จัดการข้อผิดพลาดและ Token กลางจุดเดียว ไม่ต้องเขียน try-catch และแนบ Header ซ้ำซ้อนในทุกหน้า"
+        },
+        {
+            "line": 140,
+            "name": "apiUpload(path, fileBlob, fileName, fields, onProgress)",
+            "tag": "Multipart Upload",
+            "tag_color": "bg-cyan-950/60 text-cyan-300 border-cyan-500/30",
+            "title": "อัปโหลดไฟล์มัลติมีเดียแบบ multipart/form-data พร้อมแทร็กเปอร์เซ็นต์",
+            "params": "path, fileBlob, fileName, fields, onProgress -> Promise<Object>",
+            "desc": "สร้าง FormData บรรจุไฟล์ไบนารีและฟิลด์เพิ่มเติม ใช้ XMLHttpRequest แทน fetch เพราะ XMLHttpRequest.upload.onprogress สามารถคำนวณและรายงานความคืบหน้าการส่งข้อมูลได้แม่นยำ",
+            "snippet": "function apiUpload(path, fileBlob, fileName, fields = {}, onProgress) {\n  return new Promise((resolve, reject) => {\n    const form = new FormData();\n    form.append('file', fileBlob, fileName);\n    for (const key in fields) form.append(key, fields[key]);\n    const xhr = new XMLHttpRequest();\n    xhr.open('POST', API_BASE_URL + path);\n    for (const [name, value] of Object.entries(authHeaders())) xhr.setRequestHeader(name, value);\n    if (onProgress) {\n      xhr.upload.onprogress = (event) => {\n        if (event.lengthComputable) onProgress(event.loaded / event.total);\n      };\n    }\n    xhr.onload = () => { /* resolve / reject */ };\n    xhr.onerror = () => reject(new ApiError(0, errorMessage(0)));\n    xhr.send(form);\n  });\n}",
+            "called_by": "submit() ใน run.js (อัปโหลด mask), source.js, studio/tools.js",
+            "subcalls": [],
+            "tip": "อาจารย์ถาม: ทำไมไม่อัปโหลดด้วย fetch() ธรรมดา? ตอบ: เพราะ Fetch API บนเบราว์เซอร์ยังไม่รองรับ Upload Progress Event มาตรฐาน การใช้ XMLHttpRequest สำหรับไฟล์รูปภาพขนาดใหญ่ทำให้หน้าเว็บสามารถแสดง Progress Bar ให้ผู้ใช้เห็นความคืบหน้าได้ครับ"
+        },
+        {
+            "line": 179,
+            "name": "apiBlob(path) & apiImageUrl(path)",
+            "tag": "Protected Asset",
+            "tag_color": "bg-purple-950/60 text-purple-300 border-purple-500/30",
+            "title": "ดาวน์โหลดรูปภาพที่มีสิทธิ์ป้องกัน และสร้าง Object URL ในเบราว์เซอร์",
+            "params": "path: string -> Promise<Blob> / Promise<string>",
+            "desc": "ดึงข้อมูลภาพจาก Endpoint ที่ต้องยืนยันตัวตน เช่น /generations/{id}/image โดยแนบ Header Authorization: Bearer <token> แล้วแปลง Response เป็น Binary Blob หรือใช้ URL.createObjectURL(blob) เพื่อนำไปแสดงในแท็ก <img>",
+            "snippet": "async function apiBlob(path) {\n  let response;\n  try {\n    response = await fetch(API_BASE_URL + path, { headers: authHeaders() });\n  } catch (networkError) {\n    throw new ApiError(0, errorMessage(0));\n  }\n  if (!response.ok) {\n    if (response.status === 401) handleUnauthorized();\n    throw new ApiError(response.status, errorMessage(response.status));\n  }\n  return response.blob();\n}\nasync function apiImageUrl(path) {\n  const blob = await apiBlob(path);\n  return URL.createObjectURL(blob);\n}",
+            "called_by": "onFinished() ใน run.js, studio/tools.js, history/detail.js",
+            "subcalls": [],
+            "tip": "หัวใจด้านความมั่นคงปลอดภัย: รูปภาพผลลัพธ์ของระบบไม่อนุญาตให้บุคคลภายนอกเปิดดูได้โดยตรง จึงต้องใช้ apiBlob แนบ Token ไปดึงไบนารีมาแสดงผลบน Memory ของเบราว์เซอร์เท่านั้นครับ"
+        }
+    ],
+    "state_run": [
+        {
+            "line": 65,
+            "name": "snapSize(value) & fitToEngine(width, height)",
+            "tag": "VAE f=8 Rule",
+            "tag_color": "bg-teal-950/60 text-teal-300 border-teal-500/30",
+            "title": "จัดระเบียบมิติของภาพให้หารด้วย 8 ลงตัว และบีบไม่เกินขีดจำกัด AI",
+            "params": "value: number, width: number, height: number -> number / { width, height }",
+            "desc": "ฟังก์ชัน snapSize() บังคับปัดมิติภาพให้อยู่ในช่วง 256–768 พิกเซล และเป็นพหุคูณของ 8 เสมอ (multipleOf: 8) ตามข้อกำหนดของ VAE Downsampling Factor (f=8) ส่วน fitToEngine() จะย่อภาพต้นฉบับที่ด้านยาวเกิน 768 พิกเซลลงมาโดยคงสัดส่วนเดิมไว้",
+            "snippet": "function snapSize(value) {\n  const { min, max, multipleOf } = LIMITS.size;\n  if (!Number.isFinite(value)) return min;\n  const snapped = Math.round(value / multipleOf) * multipleOf;\n  return Math.min(max, Math.max(min, snapped));\n}\nfunction fitToEngine(width, height) {\n  const longest = Math.max(width, height);\n  const scale = longest > LIMITS.size.max ? LIMITS.size.max / longest : 1;\n  return { width: snapSize(width * scale), height: snapSize(height * scale) };\n}",
+            "called_by": "outputSize() ใน js/generate/state.js และ settings.js",
+            "subcalls": [],
+            "tip": "Image Processing Requirement: หากภาพไม่หารด้วย 8 ลงตัว เมื่อถูกส่งเข้า VAE Latent Space (ขนาดลดลง 8 เท่า) จะเกิดเศษทศนิยม ทำให้มิติ Matrix Tensor ใน UNet Cross-Attention ไม่ตรงกันและโปรแกรมจะแครช การคัดกรองตั้งแต่หน้าบ้านจึงป้องกันปัญหานี้ได้อย่างสมบูรณ์"
+        },
+        {
+            "line": 29,
+            "name": "buildRequest(maskUrl)",
+            "tag": "Payload Builder",
+            "tag_color": "bg-blue-950/60 text-blue-300 border-blue-500/30",
+            "title": "รวบรวมค่าจากฟอร์มสร้างภาพ แปลงเป็น JSON Payload ตามที่ Backend ต้องการ",
+            "params": "maskUrl: string | null -> Object",
+            "desc": "อ่านค่า prompt, negative_prompt, model, sampler, steps, cfg, seed, width, height และในโหมด img2img/inpaint จะแนบ source_image_path, denoising_strength และ mask_image_path เพิ่มเติมอย่างถูกต้อง",
+            "snippet": "function buildRequest(maskUrl) {\n  const seedText = $('seed').value.trim();\n  const out = outputSize();\n  const request = {\n    task_type: mode,\n    prompt: $('prompt').value.trim(),\n    negative_prompt: $('negative-prompt').value.trim() || null,\n    model_name: $('model').value,\n    lora_config: $('lora').value ? { id: $('lora').value } : null,\n    sampler_name: $('sampler').value,\n    steps: Number($('steps').value),\n    cfg_scale: Number($('cfg').value),\n    seed: seedText === '' || !Number.isFinite(Number(seedText)) ? null : Number(seedText),\n    width: out.width,\n    height: out.height,\n  };\n  if (mode !== 'txt2img') {\n    request.source_image_path = source.url;\n    request.denoising_strength = Number($('denoise').value);\n    request.mask_image_path = mode === 'inpaint' ? maskUrl : null;\n  }\n  return request;\n}",
+            "called_by": "submit() ใน js/generate/run.js",
+            "subcalls": [],
+            "tip": "จัดการ Seed สะอาดตา: หากผู้ใช้เว้นว่างช่อง Seed ระบบจะส่ง null ไปยัง Backend เพื่อให้ AI Server ทำการสุ่มเลข torch.randint ใหม่ในทุกรอบ"
+        },
+        {
+            "line": 55,
+            "name": "submit()",
+            "tag": "Run Core",
+            "tag_color": "bg-emerald-950/60 text-emerald-300 border-emerald-500/30",
+            "title": "ส่งคำขอสร้างภาพ: อัปโหลด Mask หากเป็นโหมด Inpaint แล้ว POST /generations",
+            "params": "() -> Promise<void>",
+            "desc": "ป้องกันการกดปุ่มซ้ำด้วย submitting = true, บันทึก Draft ล่าสุด, หากเป็น inpaint จะสกัดและอัปโหลด mask ผ่าน MaskEditor.exportMask() แล้วส่งคำขอ JSON ไปยัง Backend ก่อนส่ง Object งานเข้าสู่ลูป watchRun()",
+            "snippet": "async function submit() {\n  if ($('generate-button').disabled) return;\n  submitting = true; updateFooter(); saveDraft();\n  try {\n    let maskUrl = null;\n    if (mode === 'inpaint') {\n      const maskBlob = await MaskEditor.exportMask();\n      maskUrl = (await apiUpload('/uploads', maskBlob, 'mask.png')).url;\n    }\n    const created = await apiRequest('/generations', { method: 'POST', json: buildRequest(maskUrl) });\n    watchRun(created);\n    loadRecent();\n  } catch (error) {\n    showAlert($('form-alert'), error.message);\n  } finally {\n    submitting = false; updateFooter();\n  }\n}",
+            "called_by": "ปุ่มสร้างภาพใน main.js, คีย์ลัด Ctrl+Enter (Cmd+Enter)",
             "subcalls": [
                 {
                     "targetMod": "canvas",
-                    "targetFn": "useMaskEditor",
-                    "label": "editor.addPoint({ x, y })",
-                    "why": "เพื่อบันทึกพิกัดจุดลากเส้นลงใน Stroke ปัจจุบัน",
-                    "what": "รับพิกัดจุด Natural (X, Y) เข้าไปในอาร์เรย์ points ของเส้นวาด",
-                    "callsNext": "สั่งวาดเส้นเชื่อมโยงด้วย ctx.lineTo(x, y)"
+                    "targetFn": "exportMask",
+                    "label": "MaskEditor.exportMask()",
+                    "why": "แปลงรอยวาดเป็นไบนารี PNG ขาวดำ",
+                    "what": "สร้าง Offscreen Canvas Compositing",
+                    "callsNext": "ส่ง Blob ให้ apiUpload('/uploads')"
+                },
+                {
+                    "targetMod": "api",
+                    "targetFn": "apiRequest",
+                    "label": "apiRequest('/generations', ...)",
+                    "why": "ส่ง JSON Payload ไปยัง Backend",
+                    "what": "แนบ JWT และสั่งรัน Asynchronous Job",
+                    "callsNext": "ส่งต่องานให้ watchRun()"
                 }
             ],
-            "tip": "หัวใจคณิตศาสตร์ Image Processing บนเว็บ: สูตรคำนวณ X_nat = (X_client - rect.left) * (W_nat / rect.width) สำคัญอย่างไร? ตอบว่าเป็นการชดเชยอัตราส่วนการย่อ-ขยาย (Aspect-ratio scale transformation) ระหว่าง Viewport พิกเซลบนเบราว์เซอร์กับพิกเซลจริงของภาพ เพื่อให้ตำแหน่งหัวแปรงตรงกับพิกเซลในรูปภาพเสมอ ไม่ว่าผู้ใช้จะเปิดจอมือถือหรือจอ 4K"
-        }
-    ],
-    "services": [
+            "tip": "กระบวนการ 2-Phase Submission: แยกอัปโหลด Mask แบบ Binary Data ก่อนเพื่อความเสถียร จากนั้นส่ง JSON Payload งานสร้างภาพที่มี URL อ้างอิงเท่านั้น"
+        },
         {
-            "line": 35,
-            "name": "apiUrl(path, query)",
-            "tag": "URL Builder",
-            "tag_color": "bg-blue-950/60 text-blue-300 border-blue-500/30",
-            "title": "สร้าง URL ปลายทางเชื่อมต่อกับ Backend Node 2",
-            "params": "path: string, query?: Record<string, any> -> string",
-            "desc": "รวม Base URL (จาก VITE_API_BASE_URL) เข้ากับ Endpoint Path และต่อเติม Query Parameters อย่างถูกต้องตามมาตรฐาน RFC 3986 ป้องกันข้อผิดพลาดเรื่อง Trailing Slashes หรือ Double Slashes",
-            "snippet": "export function apiUrl(path: string, query?: RequestOptions['query']): string {\n  const base = env.apiBaseUrl.replace(/\\/+$/, '');\n  const normalizedPath = path.replace(/^\\/+/, '');\n  const url = new URL(`${base}/${normalizedPath}`);\n  if (query) {\n    Object.entries(query).forEach(([k, v]) => {\n      if (v !== undefined && v !== null) url.searchParams.set(k, String(v));\n    });\n  }\n  return url.toString();\n}",
-            "called_by": "ฟังก์ชัน apiClient() ใน apiClient.ts",
+            "line": 95,
+            "name": "watchRun(newRun) & stopWatching()",
+            "tag": "Race Guard",
+            "tag_color": "bg-amber-950/60 text-amber-300 border-amber-500/30",
+            "title": "เริ่มต้นกระบวนการติดตามงาน พร้อมกลไก watchToken ป้องกัน Stale Response",
+            "params": "newRun: Object -> void",
+            "desc": "สั่ง stopWatching() เพื่อเพิ่มค่า watchToken += 1, สั่ง releaseImages() คืน RAM เดิม, รีเซ็ตนาฬิกานับเวลา (startClock()), และเริ่มลูปถามสถานะ poll() หากงานยังไม่เสร็จ",
+            "snippet": "function stopWatching() {\n  watchToken += 1;\n  clearTimeout(pollTimer);\n  clearInterval(clockTimer);\n}\nfunction watchRun(newRun) {\n  stopWatching();\n  releaseImages();\n  run = newRun;\n  progress = null;\n  stalled = false;\n  startClock();\n  updateView();\n  markActiveThumb();\n  if (isFinished(run)) onFinished();\n  else poll();\n}",
+            "called_by": "submit(), คลิกเลือกภาพในแถบประวัติงานล่าสุด recent.js",
             "subcalls": [],
-            "tip": "ช่วยให้ Frontend สามารถสลับ Environment ระหว่าง Local Development (http://localhost:8000) กับ Production Server ได้อย่างไร้รอยต่อผ่านตัวแปร Environment Variable เพียงตัวเดียว"
+            "tip": "กลไก watchToken: การเพิ่มค่า token ทุกครั้งที่สลับงานช่วยแก้ปัญหา Race Condition เมื่อ Response ของงานเก่าที่ช้าตอบกลับมา จะถูกตัดทิ้งทันทีเพราะ token !== watchToken"
         },
         {
-            "line": 78,
-            "name": "apiClient(path, options)",
-            "tag": "HTTP Core",
-            "tag_color": "bg-blue-950/60 text-blue-300 border-blue-500/30",
-            "title": "ตัวกลางยิง HTTP Requests พร้อมระบบดักจับ Token & Errors",
-            "params": "path: string, options: RequestOptions -> Promise<T>",
-            "desc": "Fetch Wrapper ประจำระบบ: แนบ Authorization: Bearer <token> อัตโนมัติจาก LocalStorage/TokenStore, แปลง JSON Payload, รองรับ AbortSignal สำหรับยกเลิก Request, และแปลง HTTP Status Code Error ออกมาเป็นโครงสร้าง ApiError ที่มีข้อความสองภาษา (TH/EN)",
-            "snippet": "export async function apiClient<T>(path: string, options: RequestOptions = {}): Promise<T> {\n  const token = tokenStore.getAccessToken();\n  const headers = new Headers(options.headers);\n  if (token && !headers.has('Authorization')) {\n    headers.set('Authorization', `Bearer ${token}`);\n  }\n  const response = await fetch(apiUrl(path, options.query), { ...options, headers });\n  if (!response.ok) throw await normalizeError(response);\n  return response.json();\n}",
-            "called_by": "ถูกเรียกใช้โดยทุก Service ในระบบ: generationService, authService, uploadService",
-            "subcalls": [
-                {
-                    "targetMod": "services",
-                    "targetFn": "apiUrl",
-                    "label": "apiUrl(path, options.query)",
-                    "why": "เพื่อสร้าง URL ปลายทางที่สมบูรณ์",
-                    "what": "ผูก Base URL เข้ากับ Path และพารามิเตอร์",
-                    "callsNext": "ส่ง URL ให้ฟังก์ชันมาตรฐาน fetch()"
-                }
-            ],
-            "tip": "อาจารย์ถาม: ทำไมถึงเขียน Fetch Wrapper เองแทนที่จะใช้ Axios สำเร็จรูป? ตอบ: เพื่อลด Bundle Size ของโปรเจกต์ลงกว่า 40KB และทำให้เราสามารถควบคุม Custom Interceptor เช่น การดักจับ HTTP 401 เพื่อสั่งล้าง Session หรือการแปลงข้อความ Error ให้รองรับสองภาษา (i18n) ได้อย่างกระชับตรงจุดตามสถาปัตยกรรม Micro-frontend ครับ"
-        },
-        {
-            "line": 11,
-            "name": "generationService.create(payload)",
-            "tag": "API Client",
-            "tag_color": "bg-emerald-950/60 text-emerald-300 border-emerald-500/30",
-            "title": "ยิงคำขอสร้างภาพใหม่ไปยัง Backend (POST /api/generations)",
-            "params": "payload: CreateGenerationRequest -> Promise<Generation>",
-            "desc": "ส่งคำขอสร้างภาพ (รองรับ Text2Img, Img2Img, Inpaint) ไปยัง Backend Node 2 โดยจะได้รับ Object ข้อมูล Task กลับมาพร้อมสถานะเริ่มต้นเป็น queued",
-            "snippet": "export const generationService = {\n  create(payload: CreateGenerationRequest, signal?: AbortSignal): Promise<Generation> {\n    return apiClient<Generation>('/api/generations', {\n      method: 'POST',\n      body: payload,\n      signal,\n    });\n  },\n  // get, list, cancel, getProgress ...\n};",
-            "called_by": "ฟังก์ชัน useGenerationJob.ts และ GeneratePage.tsx",
-            "subcalls": [
-                {
-                    "targetMod": "services",
-                    "targetFn": "apiClient",
-                    "label": "apiClient('/api/generations', { method: 'POST', ... })",
-                    "why": "ส่งข้อมูล Payload ไปบันทึกและจัดคิวบน Backend",
-                    "what": "แนบ JWT Token และยิง HTTP POST ไปที่พอร์ต 8000",
-                    "callsNext": "Backend จะตอบกลับ JSON งานที่มี status='queued'"
-                }
-            ],
-            "tip": "เน้นย้ำเรื่อง Asynchronous Decoupling: หน้าบ้านไม่ได้รอรับรูปภาพกลับมาในคำขอนี้ทันที แต่รับ Generation ID กลับมา เพื่อนำไปใช้เริ่มกระบวนการ Polling หรือรอฟัง Webhook ต่อไป"
-        },
-        {
-            "line": 38,
-            "name": "generationService.cancel(id)",
-            "tag": "API Client",
-            "tag_color": "bg-rose-950/60 text-rose-300 border-rose-500/30",
-            "title": "ส่งคำขอยกเลิกงานสร้างภาพ (POST /api/generations/{id}/cancel)",
-            "params": "id: string -> Promise<CancelResponse>",
-            "desc": "ส่งคำขอสั่งยกเลิกงานที่กำลังประมวลผลอยู่ โดย Backend จะส่งต่อไปสั่ง Hardware Interrupt บน GPU ของ AI Node 3 ให้หยุดทันที",
-            "snippet": "cancel(id: string): Promise<CancelResponse> {\n  return apiClient<CancelResponse>(`/api/generations/${id}/cancel`, {\n    method: 'POST',\n  });\n}",
-            "called_by": "Hook useCancelRun.ts เมื่อผู้ใช้กดปุ่ม 'Cancel Generation'",
-            "subcalls": [
-                {
-                    "targetMod": "services",
-                    "targetFn": "apiClient",
-                    "label": "apiClient(`/api/generations/${id}/cancel`, { method: 'POST' })",
-                    "why": "ส่งสัญญาณยกเลิกงานไปยังเซิร์ฟเวอร์",
-                    "what": "ยิง POST ตัดงานในระบบ",
-                    "callsNext": "Backend จะอัปเดต DB และสั่งตัด GPU"
-                }
-            ],
-            "tip": "แสดงถึงการออกแบบ UX ที่ใส่ใจผู้ใช้ เมื่อผู้ใช้รู้ว่าพิมพ์ Prompt ผิดหรือเปลี่ยนใจ สามารถกดยกเลิกเพื่อไม่ให้ค้างรอและประหยัดการ์ดจอได้ทันที"
-        }
-    ],
-    "hooks": [
-        {
-            "line": 30,
-            "name": "useGenerationJob(id, startedAt)",
-            "tag": "State Machine",
+            "line": 130,
+            "name": "poll()",
+            "tag": "Adaptive Poller",
             "tag_color": "bg-purple-950/60 text-purple-300 border-purple-500/30",
-            "title": "State Machine ควบคุมวงจรชีวิตของงานสร้างภาพแบบ Real-time",
-            "params": "id: string | null, startedAt: number | null -> JobView",
-            "desc": "จัดการสถานะงาน: สั่ง Polling ข้อมูลสถานะจาก Backend แบบ Adaptive Interval (เริ่มจาก 1s ➔ 2s ➔ 5s), จัดการ Optimistic UI, ตรวจจับงานค้าง (Stalled Task Watchdog), และเรียกใช้ Invalidate Queries ของ React Query เมื่อสถานะเปลี่ยนเป็น Terminal State (completed หรือ failed)",
-            "snippet": "export function useGenerationJob(id: string | null, startedAt: number | null): JobView {\n  const queryClient = useQueryClient();\n  const [stalled, setStalled] = useState(false);\n  const { data: job, error } = useQuery({\n    queryKey: ['generation', id],\n    queryFn: () => generationService.get(id!),\n    enabled: Boolean(id),\n    refetchInterval: (query) => computeAdaptiveInterval(query.state.data),\n  });\n  // ตรวจสอบ Terminal State\n  return { job, status: job?.status, stalled, isTerminal: isTerminal(job?.status) };\n}",
-            "called_by": "คอมโพเนนต์ ResultStage.tsx และ RunStrip.tsx ในหน้าสร้างภาพ",
+            "title": "ลูปสอบถามสถานะงานแบบ Adaptive Polling พร้อม Watchdog ตัดงานค้าง 5 นาที",
+            "params": "() -> Promise<void>",
+            "desc": "ยิง GET /generations/{id} และ /progress เพื่อนำความคืบหน้า Denoising มาแสดงผล ปรับความถี่จากทุก 2 วินาที (ใน 1 นาทีแรก) เป็นทุก 5 วินาที และหากเกิน 5 นาที (POLL_GIVE_UP_MS) จะหยุดถามและปรับสถานะเป็น stalled = true",
+            "snippet": "async function poll() {\n  const token = watchToken;\n  const runId = run.id;\n  try {\n    const latest = await apiRequest('/generations/' + runId);\n    if (token !== watchToken) return;\n    run = latest;\n    if (!isFinished(run)) {\n      progress = await apiRequest('/generations/' + runId + '/progress').catch(() => null);\n      if (token !== watchToken) return;\n    }\n  } catch (error) {\n    if (token !== watchToken) return;\n  }\n  if (isFinished(run)) return onFinished();\n  const watched = Date.now() - watchStartedAt;\n  if (watched > POLL_GIVE_UP_MS) {\n    stalled = true; clearInterval(clockTimer); renderStage(); return;\n  }\n  renderStage();\n  pollTimer = setTimeout(poll, watched > 60 * 1000 ? 5000 : 2000);\n}",
+            "called_by": "watchRun() และทำงานต่อเนื่องผ่าน setTimeout",
             "subcalls": [
                 {
-                    "targetMod": "services",
-                    "targetFn": "generationService.create",
-                    "label": "generationService.get(id)",
-                    "why": "ดึงข้อมูลสถานะงานล่าสุดจาก Backend",
-                    "what": "ส่งคำขอ GET /api/generations/{id}",
-                    "callsNext": "ส่งข้อมูลเข้า React Query Cache"
+                    "targetMod": "state_run",
+                    "targetFn": "onFinished",
+                    "label": "onFinished()",
+                    "why": "เมื่อสถานะงานเสร็จสิ้น (completed / failed)",
+                    "what": "หยุดนาฬิกา และดาวน์โหลดรูปภาพผลลัพธ์",
+                    "callsNext": "แสดงภาพผลลัพธ์ใน stage.js"
                 }
             ],
-            "tip": "อาจารย์ถาม: ทำไมถึงใช้ Adaptive Polling แทนที่จะตั้ง setInterval คงที่ทุก 1 วินาที? ตอบ: เพราะงาน Diffusion ใช้เวลารัน 5-15 วินาที การ Polling ถี่ๆ ทุก 1 วิ ตลอดเวลาจะสร้างภาระ Network Overhead ให้กับเซิร์ฟเวอร์มหาศาล การใช้ Adaptive Polling (เริ่มเร็ว 1s แล้วค่อยๆ ขยายเป็น 2s-3s) ช่วยประหยัด Request ได้กว่า 60% โดยที่ผู้ใช้แทบไม่รู้สึกถึงความล่าช้าครับ"
+            "tip": "การตั้งเวลาแบบ Adaptive Interval ช่วยประหยัดแบนด์วิดท์เครือข่ายและ CPU บน Backend ได้มากกว่า 60% เมื่อเทียบกับการ Polling ถี่ๆ ทุก 1 วินาทีตลอดเวลา"
         },
         {
-            "line": 17,
-            "name": "useCancelRun(onCancelled)",
-            "tag": "Action Hook",
+            "line": 85,
+            "name": "onFinished() & releaseImages()",
+            "tag": "Asset Lifecyle",
+            "tag_color": "bg-emerald-950/60 text-emerald-300 border-emerald-500/30",
+            "title": "โหลดภาพผลลัพธ์ผ่าน Token และคืนหน่วยความจำ Object URL ทันทีที่เลิกแสดง",
+            "params": "() -> Promise<void> / void",
+            "desc": "เมื่อสถานะงานเป็น completed จะดึงไบนารีภาพผ่าน apiBlob('/generations/' + runId + '/image') แล้วสร้าง Object URL ส่วน releaseImages() จะสั่ง URL.revokeObjectURL() คืน RAM ให้เบราว์เซอร์ทุกครั้งที่มีการเปลี่ยนงานหรือปิดรูป",
+            "snippet": "function releaseImages() {\n  if (runImageUrl) URL.revokeObjectURL(runImageUrl);\n  if (quick) URL.revokeObjectURL(quick.url);\n  runImageUrl = null; runImageBlob = null; quick = null;\n}\nasync function onFinished() {\n  clearInterval(clockTimer); renderStage(); loadRecent(); refreshUser();\n  if (run.status !== 'completed') return;\n  const runId = run.id;\n  try {\n    const blob = await apiBlob('/generations/' + runId + '/image');\n    if (!run || run.id !== runId) return;\n    runImageBlob = blob;\n    runImageUrl = URL.createObjectURL(blob);\n  } catch (error) { toast('โหลดภาพที่สร้างเสร็จไม่ได้'); }\n  if (run && run.id === runId) renderStage();\n}",
+            "called_by": "poll(), watchRun(), closeRun()",
+            "subcalls": [],
+            "tip": "การป้องกัน Web Browser Memory Leak: ภาพผลลัพธ์ความละเอียดสูงที่ถูกสร้างเป็น Object URL จะไม่ถูก Garbage Collector ลบอัตโนมัติตราบใดที่ยังไม่ปิดแท็บ การเรียก revokeObjectURL() อย่างเคร่งครัดจึงช่วยรักษาประสิทธิภาพของเบราว์เซอร์ได้ทั้งวัน"
+        },
+        {
+            "line": 190,
+            "name": "cancelRun(button) & deleteRun()",
+            "tag": "Task Lifecycle",
             "tag_color": "bg-rose-950/60 text-rose-300 border-rose-500/30",
-            "title": "จัดการยกเลิกงานพร้อม Optimistic Update และ Toast Alert",
-            "params": "onCancelled?: () => void -> { cancelRun, isCancelling }",
-            "desc": "ควบคุมกระบวนการกดยกเลิกงาน: ส่ง Mutation ไปที่ generationService.cancel(id), ทำการอัปเดตแคชใน React Query เป็นสถานะ cancelled ล่วงหน้าทันที (Optimistic Update) เพื่อให้ UI ตอบสนองในเสี้ยววินาที, และแสดง Toast แจ้งเตือน",
-            "snippet": "export function useCancelRun(onCancelled?: () => void) {\n  const queryClient = useQueryClient();\n  const showToast = useToasts((state) => state.show);\n  const mutation = useMutation({\n    mutationFn: (id: string) => generationService.cancel(id),\n    onMutate: async (id) => {\n      // Optimistic Update ปรับสถานะหน้าจอทันที\n      queryClient.setQueryData(['generation', id], (old: any) => ({ ...old, status: 'cancelled' }));\n    },\n    onSuccess: () => showToast({ type: 'info', message: 'Task cancelled' })\n  });\n  return { cancelRun: mutation.mutate, isCancelling: mutation.isPending };\n}",
-            "called_by": "ปุ่มยกเลิกใน ResultStage.tsx และ RunStrip.tsx",
-            "subcalls": [
-                {
-                    "targetMod": "services",
-                    "targetFn": "generationService.cancel",
-                    "label": "generationService.cancel(id)",
-                    "why": "ส่งคำขอยกเลิกไปยัง Backend",
-                    "what": "เรียก POST /api/generations/{id}/cancel",
-                    "callsNext": "Backend ส่งต่อคำสั่ง Hardware Interrupt ไปที่ AI Server"
-                }
-            ],
-            "tip": "อธิบายเรื่อง Optimistic UI: ผู้ใช้ไม่ต้องรอให้สัญญาณเดินทางไปถึงการ์ดจอแล้วส่งกลับมา หน้าเว็บจะเปลี่ยนสถานะเป็น 'Cancelled' ทันที ทำให้รู้สึกลื่นไหล ไม่ค้างหน่วง (Zero perceived latency)"
+            "title": "ยกเลิกงานที่กำลังรัน หรือลบภาพพร้อมประวัติออกจากฐานข้อมูลถาวร",
+            "params": "button: HTMLButtonElement -> Promise<void>",
+            "desc": "กดยกเลิกจะส่ง POST /generations/{id}/cancel เพื่อส่งสัญญาณไปยัง Backend และ AI Server ให้ตัดงานบน GPU ทันที ส่วนการลบจะเปิดกล่องยืนยัน confirmDialog ก่อนส่ง DELETE /generations/{id} ลบทั้ง Record และไฟล์ภาพ",
+            "snippet": "async function cancelRun(button) {\n  button.disabled = true;\n  try {\n    run = await apiRequest('/generations/' + run.id + '/cancel', { method: 'POST' });\n    stopWatching(); toast('หยุดงานแล้ว'); onFinished();\n  } catch (error) {\n    toast(error.status === 409 ? 'งานเสร็จก่อนที่จะหยุดทัน' : 'หยุดงานนี้ไม่สำเร็จ');\n    button.disabled = false;\n  }\n}",
+            "called_by": "onStageClick() ใน run.js",
+            "subcalls": [],
+            "tip": "การจัดการ HTTP 409 Conflict: หากผู้ใช้กดยกเลิกจังหวะเดียวกับที่ AI สร้างภาพเสร็จพอดี ระบบจะแจ้งอย่างสุภาพว่า 'งานเสร็จก่อนที่จะหยุดทัน' โดยไม่ทำให้แอปพลิเคชันพัง"
         },
         {
-            "line": 14,
-            "name": "decodeJwt(token)",
-            "tag": "Auth Security",
+            "line": 75,
+            "name": "sendToGenerate(blob, extra, button)",
+            "tag": "Studio Handoff",
             "tag_color": "bg-indigo-950/60 text-indigo-300 border-indigo-500/30",
-            "title": "ถอดรหัส Payload ของ JWT Access Token ฝั่ง Client",
-            "params": "token: string -> JwtPayload | null",
-            "desc": "ทำการแยก Base64Url ส่วนที่ 2 (Payload) ของ JSON Web Token ออกมา แล้วทำการ Decode เป็น JSON Object เพื่ออ่านค่า exp (Expiration Timestamp) และ sub (User ID / Role) ใช้สำหรับตรวจสอบว่า Session หมดอายุหรือยังก่อนส่งคำขอ",
-            "snippet": "export function decodeJwt(token: string): JwtPayload | null {\n  try {\n    const parts = token.split('.');\n    if (parts.length !== 3) return null;\n    const payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');\n    const json = decodeURIComponent(\n      atob(payload).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')\n    );\n    return JSON.parse(json);\n  } catch {\n    return null;\n  }\n}",
-            "called_by": "ระบบ Route Guard guards.tsx และ sessionStore.ts",
+            "title": "ส่งภาพผลลัพธ์จาก Studio ข้ามไปยังหน้าสร้างภาพผ่าน SessionStorage Handoff",
+            "params": "blob: Blob, extra: Object, button: HTMLButtonElement -> Promise<void>",
+            "desc": "อัปโหลดภาพ Blob ที่แต่งจาก Studio ไปยัง /uploads แล้วบันทึก Metadata (URL, width, height) ลงใน sessionStorage ภายใต้คีย์ 'luma.handoff' ก่อน Redirect ไปยัง generate.html ซึ่งหน้าสร้างภาพจะอ่านไปตั้งเป็นภาพต้นฉบับในโหมด img2img อัตโนมัติ",
+            "snippet": "async function sendToGenerate(blob, extra, button) {\n  button.disabled = true;\n  try {\n    const uploaded = await apiUpload('/uploads', blob, 'studio.png');\n    sessionStorage.setItem('luma.handoff', JSON.stringify({\n      mode: 'img2img',\n      source: { url: uploaded.url, width: uploaded.width, height: uploaded.height, name: 'ภาพจากสตูดิโอ.png', sizeBytes: uploaded.size_bytes },\n      ...extra,\n    }));\n    location.href = 'generate.html';\n  } catch (error) {\n    toast('ส่งภาพไปหน้าสร้างภาพไม่ได้');\n    button.disabled = false;\n  }\n}",
+            "called_by": "ปุ่ม 'ส่งไปสร้างภาพต่อ' ใน Studio (js/studio/tools.js)",
             "subcalls": [],
-            "tip": "อาจารย์ถาม: การ Decode JWT ฝั่ง Frontend มีความเสี่ยงด้านความปลอดภัยหรือไม่? ตอบ: ไม่มีครับ เพราะ Frontend ทำหน้าที่แค่อ่านค่า exp เพื่อเตือนผู้ใช้หรือ Redirect ไปหน้า Login เท่านั้น แต่ไม่ได้ใช้ Signature Verification เพื่ออนุมัติสิทธิ์ การตรวจสอบสิทธิ์ที่แท้จริงจะเกิดขึ้นบน Backend ด้วย Secret Key เสมอตามหลัก Client-Server Separation ครับ"
-        }
-    ],
-    "ui": [
-        {
-            "line": 45,
-            "name": "SizeControl({ width, height, onChange })",
-            "tag": "IP Control",
-            "tag_color": "bg-teal-950/60 text-teal-300 border-teal-500/30",
-            "title": "ตัวควบคุมอัตราส่วนและมิติภาพตามกฎ VAE f=8",
-            "params": "Props: { width, height, onChange } -> JSX.Element",
-            "desc": "เรนเดอร์ปุ่ม Preset อัตราส่วนภาพยอดนิยม: Square (1:1 - 512x512), Portrait (3:4 - 512x680), Landscape (4:3 - 680x512) โดยมีกลไกตรวจสอบให้มิติกว้างและยาวเป็นจำนวนเต็มที่หารด้วย 8 ลงตัวเสมอ",
-            "snippet": "export function SizeControl({ width, height, onChange }: Props) {\n  const presets = [\n    { label: 'Square', ratio: '1:1', w: 512, h: 512 },\n    { label: 'Portrait', ratio: '3:4', w: 512, h: 680 }, // (680 % 8 === 0)\n    { label: 'Landscape', ratio: '4:3', w: 680, h: 512 },\n  ];\n  return <div className=\"size-presets-grid\">...</div>;\n}",
-            "called_by": "คอมโพเนนต์ ControlsPanel.tsx ในหน้าสร้างภาพ",
-            "subcalls": [],
-            "tip": "ชี้แจงให้อาจารย์เห็นว่า Frontend มีการทำ Client-side Validation ร่วมกับทฤษฎี Image Processing โดยไม่ยอมให้ผู้ใช้พิมพ์ตัวเลขแปลกๆ ที่หาร 8 ไม่ลงตัวเข้ามาตั้งแต่ต้นทาง ช่วยป้องกัน 422 Error และ Tensor Mismatch ได้ 100%"
+            "tip": "สถาปัตยกรรมไร้เฟรมเวิร์ก (Multi-Page Architecture): ส่งข้อมูลข้ามระหว่างหน้าเว็บต่างๆ อย่างราบรื่นด้วย sessionStorage ช่วยให้หน้าเว็บแต่ละหน้าแยกขาดจากกัน (Decoupled Pages) โหลดเร็วและดูแลรักษาง่าย"
         }
     ]
 };
@@ -778,7 +1045,7 @@
                 updateFrontendNavUI();
             }
 
-            ['canvas', 'services', 'hooks', 'ui'].forEach(m => {
+            ['canvas', 'families', 'api', 'state_run'].forEach(m => {
                 const b = document.getElementById('btn-mod-' + m);
                 if (!b) return;
                 if (m === mod) {
@@ -789,15 +1056,15 @@
             });
 
             const fileNames = {
-                canvas: 'useMaskEditor.ts / MaskCanvas.tsx',
-                services: 'apiClient.ts / generationService.ts',
-                hooks: 'useGenerationJob.ts / useCancelRun.ts',
-                ui: 'SizeControl.tsx'
+                canvas: 'js/mask.js',
+                families: 'js/generate/families.js',
+                api: 'js/api.js',
+                state_run: 'js/generate/state.js & run.js'
             };
             document.getElementById('module-file-badge').innerText = fileNames[mod] || mod;
 
             const lines = FRONTEND_MODULES_DATA[mod] || [];
-            document.getElementById('module-fn-count').innerText = `พบ ${lines.length} ฟังก์ชัน/คอมโพเนนต์ในหมวดนี้`;
+            document.getElementById('module-fn-count').innerText = `พบ ${lines.length} ฟังก์ชันหลักในหมวดนี้`;
 
             const container = document.getElementById('code-lines-container');
             container.innerHTML = '';
@@ -867,7 +1134,7 @@
                 subContainer.innerHTML = `
                     <div class="bg-slate-950/40 p-3 rounded-lg border border-slate-800/60 text-slate-400 text-xs flex items-center gap-2">
                         <span>🍃</span>
-                        <span><b>ฟังก์ชันปลายทาง (Leaf Action):</b> ทำงานเสร็จสิ้นภายในฟังก์ชัน ไม่มีการเรียกต่อยอดไปยัง Service อื่น</span>
+                        <span><b>ฟังก์ชันปลายทาง (Leaf Action):</b> ทำงานเสร็จสิ้นภายในตัว ไม่มีการเรียกข้ามไปยังฟังก์ชันอื่น</span>
                     </div>
                 `;
             } else {
@@ -960,135 +1227,147 @@
         const FRONTEND_EXAM = [
     {
         "id": 1,
-        "q": "ทำไมการแปลงพิกัด Pointer จากหน้าจอไปสู่ Canvas ต้องนำค่า (e.clientX - rect.left) ไปคูณกับ (naturalWidth / rect.width)?",
+        "q": "ทำไมการแปลงพิกัด Pointer จากหน้าจอไปสู่ Canvas ใน MaskEditor.toCanvasPoint() ต้องนำค่า (clientX - rect.left) ไปคูณกับ (canvas.width / rect.width)?",
         "options": [
             "เพื่อให้การ์ดจอสามารถเรนเดอร์สีแบบ 32-bit float ได้",
-            "เพื่อชดเชยการย่อ-ขยายด้วย CSS ทำให้ตำแหน่งเมาส์ตรงกับพิกเซลจริงของภาพต้นฉบับ",
-            "เพื่อป้องกันการเกิด Memory Leak บน React Virtual DOM",
-            "เป็นข้อกำหนดของฟอร์แมตไฟล์ WebP บนเบราว์เซอร์"
+            "เพื่อชดเชยการย่อ-ขยายด้วย CSS ทำให้ตำแหน่งเมาส์ตรงกับพิกเซลจริงของภาพต้นฉบับ (Coordinate Normalization)",
+            "เพื่อป้องกันการเกิด Memory Leak บนเบราว์เซอร์",
+            "เป็นข้อกำหนดของฟอร์แมตไฟล์ WebP บน HTML5"
         ],
         "correct": 1,
-        "rationale": "ถูกต้อง! เมื่อภาพถูกแสดงผลบนหน้าจอ ขนาดของ HTML Element (DOM Rect) จะเปลี่ยนไปตามขนาดหน้าจอและ CSS แต่ภาพจริงมีขนาดคงที่ (Natural Size) จึงต้องคูณด้วยอัตราส่วน Scale Factor เพื่อให้พิกัดรอยวาดตรงกับพิกเซลจริงของรูปภาพ"
+        "rationale": "ถูกต้อง! เมื่อภาพถูกแสดงผลบนหน้าจอ ขนาดของ HTML Canvas Element (DOM Rect) จะถูกย่อหรือขยายตาม CSS และขนาดจอ แต่ภาพจริงมีขนาดพิกเซลคงที่ (Natural Resolution) จึงต้องคูณด้วยอัตราส่วน Scale Factor เพื่อให้พิกัดรอยวาดตรงกับพิกเซลจริงของรูปภาพเสมอ"
     },
     {
         "id": 2,
-        "q": "ในโหมด Inpainting ทำไมหน้าบ้านต้องส่งออก Mask เป็นภาพขาว-ดำ (#FFFFFF บน #000000) แทนที่จะส่งเป็นภาพโปร่งใส?",
+        "q": "ในโหมด Inpainting ทำไม MaskEditor.exportMask() ต้องส่งออก Mask เป็นภาพขาว-ดำ (#FFFFFF บน #000000) แทนที่จะส่งเป็นภาพโปร่งใส?",
         "options": [
             "เพราะโปรแกรม Node.js ไม่รองรับ Alpha Channel",
-            "เพราะตัวเข้ารหัส VAE ของโมเดล Diffusion ใช้ค่าความสว่าง 255 (สีขาว) เป็นตัวแทนบริเวณที่ต้องสร้างใหม่ และ 0 (สีดำ) สำหรับส่วนเดิม",
+            "เพราะตัวเข้ารหัส VAE ของโมเดล Latent Diffusion ใช้ค่าความสว่าง 255 (สีขาว) เป็นตัวแทนบริเวณที่ต้องสร้างใหม่ และ 0 (สีดำ) สำหรับส่วนเดิม",
             "เพื่อลดขนาดไฟล์ Base64 ให้ไม่เกิน 1 KB",
-            "เพื่อให้เบราว์เซอร์สามารถทำ Hardware Acceleration ได้"
+            "เพื่อให้เบราว์เซอร์สามารถทำ CSS Blend Mode ได้"
         ],
         "correct": 1,
-        "rationale": "ถูกต้อง! ในทฤษฎี Image Processing ของ Latent Inpainting โมเดลต้องการ Binary Weight Mask ในการผสม Noise หากเป็นสีขาว (255) โมเดลจะ Denoise สร้างภาพใหม่ทับลงไป หากเป็นสีดำ (0) โมเดลจะล็อก Latent เดิมไว้คงเดิม"
+        "rationale": "ถูกต้อง! ในทฤษฎี Image Processing ของ Latent Inpainting โมเดลต้องการ Binary Weight Mask ในการผสม Noise หากเป็นสีขาว (255) โมเดลจะ Denoise สร้างภาพใหม่ทับลงไป หากเป็นสีดำ (0) โมเดลจะล็อก Latent เดิมไว้คงสภาพเดิม"
     },
     {
         "id": 3,
-        "q": "เหตุใดระบบจึงเลือกใช้ Adaptive Polling (ความถี่แบบ 1s ➔ 2s ➔ 5s) แทนการใช้ setInterval คงที่ทุก 1 วินาที?",
+        "q": "เหตุใดระบบจึงเลือกใช้ Adaptive Polling (ความถี่แบบ 2s ➔ 5s ➔ เลิกหลัง 5 นาที) แทนการใช้ WebSocket หรือ setInterval คงที่ทุก 1 วินาที?",
         "options": [
-            "เพราะ setInterval ถูกห้ามใช้ใน React 18 Strict Mode",
-            "เพื่อลด Network Overhead และภาระของเซิร์ฟเวอร์ โดยไม่กระทบต่อประสบการณ์ของผู้ใช้ที่รอรับผล",
+            "เพราะเบราว์เซอร์ไม่อนุญาตให้เปิด WebSocket ในเครื่อง Localhost",
+            "เพื่อลด Network Overhead และภาระของเซิร์ฟเวอร์ โดยเป็น Stateless Job ที่ทำงานร่วมกับ Nginx Reverse Proxy ได้ดีเยี่ยม ไม่เกิด Connection Leak",
             "เพื่อให้เบราว์เซอร์มีเวลาล้าง Garbage Collection ใน RAM",
             "เพื่อป้องกันไม่ให้ฐานข้อมูล SQLite เกิด Table Lock"
         ],
         "correct": 1,
-        "rationale": "ถูกต้อง! งานสร้างภาพใช้เวลาหลายวินาที การ Polling ถี่ๆ ทุก 1 วินาทีตลอดเวลาจะทำให้เซิร์ฟเวอร์รับคำขอซ้ำซ้อนมหาศาล การใช้ Exponential/Adaptive Backoff ช่วยลด Request ลงกว่า 60% โดยที่ผู้ใช้แทบไม่รู้สึกถึงความแตกต่าง"
+        "rationale": "ถูกต้อง! งานสร้างภาพด้วย Diffusion ใช้เวลาประมวลผลเป็นงานๆ ไป (Discrete Batch Job) การเปิด Persistent WebSocket Connection ค้างไว้จะกิน Socket File Descriptors บนเซิร์ฟเวอร์โดยไม่จำเป็น ขณะที่ Adaptive Polling ทำงานแบบ Stateless หากผู้ใช้ปิดหน้าเว็บหรือเน็ตหลุดจะไม่เกิด Connection Leak"
     },
     {
         "id": 4,
-        "q": "เมื่อผู้ใช้กด 'Cancel' งานสร้างภาพ หน้าบ้านทำไมถึงปรับสถานะเป็น 'cancelled' บนหน้าจอทันทีก่อนที่ API จะตอบกลับ (Optimistic UI)?",
+        "q": "ทำไมทีมงานจึงตัดสินใจยกเลิก React 18/Vite/TS/Zustand ในโปรเจกต์นี้ แล้วเปลี่ยนมาใช้ Vanilla HTML5 + Modular JS (frontend-html/) แบบ Zero-Build แทน?",
         "options": [
-            "เพื่อหลอกเบราว์เซอร์ไม่ให้ปิดแท็บ",
-            "เพื่อขจัดความหน่วงของการรับรู้ (Zero Perceived Latency) ให้ผู้ใช้รู้สึกว่าระบบตอบสนองทันที",
-            "เพื่อให้ React Query สามารถบันทึกแคชลง LocalStorage ได้",
-            "เพื่อป้องกันไม่ให้เกิด CORS Error"
+            "เพราะอาจารย์ห้ามใช้เฟรมเวิร์กทุกชนิดในมหาวิทยาลัย",
+            "เพื่อขจัดความซับซ้อนของ Build Pipeline (ไม่ต้องพึ่งพา Node.js/npm), เปิดรันได้ทันที, ขจัดปัญหา Re-render Overhead ระหว่างลากวาดพู่กันความถี่สูงบน Canvas และรัน Unit Tests ด้วย pure ES modules ได้ง่าย",
+            "เพื่อให้แอปพลิเคชันรองรับเฉพาะ Internet Explorer 6",
+            "เพราะ React ไม่รองรับฟังก์ชัน fetch() ของเบราว์เซอร์"
         ],
         "correct": 1,
-        "rationale": "ถูกต้อง! Optimistic UI เป็นรูปแบบการออกแบบที่อัปเดตสถานะล่วงหน้าทันที เพื่อให้ประสบการณ์ใช้งานลื่นไหลและทันใจที่สุด"
+        "rationale": "ถูกต้อง! สถาปัตยกรรม Zero-Build Vanilla HTML/CSS/JS ช่วยให้ระบบสามารถเปิดใช้งานได้ทันทีด้วย python -m http.server 5500 โดยไม่ต้องกังวลเรื่อง dependency เสียหาย และขจัด overhead ของ Virtual DOM ทำให้การลากเส้นวาดบน Canvas 2D ทำงานได้ลื่นไหลระดับ Native 60-120 FPS"
     },
     {
         "id": 5,
-        "q": "ฟังก์ชัน decodeJwt() ในหน้าบ้าน มีจุดประสงค์หลักเพื่ออะไร?",
-        "options": [
-            "ตรวจสอบความถูกต้องของลายเซ็น HMAC-SHA256 ด้วย Secret Key",
-            "อ่านค่า Timestamp หมดอายุ (exp) เพื่อแจ้งเตือนหรือ Redirect ไปหน้า Login เมื่อ Session หมดอายุ",
-            "เข้ารหัสรหัสผ่านของผู้ใช้ก่อนส่งข้ามเครือข่าย",
-            "ดึงภาพโปรไฟล์ของผู้ใช้จากฐานข้อมูล"
-        ],
-        "correct": 1,
-        "rationale": "ถูกต้อง! Frontend ทำการ Decode Base64 Payload เพื่ออ่านวันหมดอายุ (exp) ในการบริหารจัดการหน้าจอเท่านั้น แต่การยืนยันความถูกต้องของ Signature เพื่อความปลอดภัยจะเกิดขึ้นที่ Backend เสมอ"
-    },
-    {
-        "id": 6,
-        "q": "ทำไมคอมโพเนนต์ SizeControl จึงบังคับให้ขนาดพิกเซลของภาพหารด้วย 8 ลงตัวเสมอ (เช่น 512x680 แทน 512x682)?",
-        "options": [
-            "เพื่อไม่ให้ขนาดภาพเกินกว่าความจุของ RAM เบราว์เซอร์",
-            "เพราะโครงข่าย VAE ใน Stable Diffusion ย่อภาพลง 8 เท่า (f=8) หากไม่หาร 8 ลงตัว มิติเทนเซอร์ใน Latent Space จะเกิดทศนิยมและเกิดข้อผิดพลาด",
-            "เป็นข้อบังคับของ CSS Grid System",
-            "เพื่อให้การแสดงผลบนจอ Retina Display คมชัดขึ้น"
-        ],
-        "correct": 1,
-        "rationale": "ถูกต้อง! VAE Downsampling Factor f=8 ทำให้ขนาดภาพในพิกเซลต้องสอดคล้องกับขนาดเทนเซอร์ใน Latent Space เสมอ การคัดกรองตั้งแต่หน้าบ้านจึงเป็นหัวใจของการป้องกันบั๊ก"
-    },
-    {
-        "id": 7,
-        "q": "ใน useMaskEditor ทำไมถึงใช้ useRef ในการเก็บ Stroke History แทนการใช้ useState?",
-        "options": [
-            "เพราะ useRef เร็วกว่าและไม่ทำให้เกิด Re-render ทุกครั้งที่มีการลากเมาส์เพิ่มพิกัดจุด (High-frequency pointer events)",
-            "เพราะ useState ไม่สามารถเก็บข้อมูลประเภท Object ได้",
-            "เพื่อป้องกันไม่ให้ข้อมูลใน Canvas หายไปเมื่อรีเฟรชหน้าเว็บ",
-            "เป็นข้อกำหนดของ TypeScript"
-        ],
-        "correct": 0,
-        "rationale": "ถูกต้อง! การลากเมาส์วาดภาพจะปล่อย Event ถี่มาก (60-120 ครั้งต่อวินาที) หากใช้ useState คอมโพเนนต์จะเกิด Re-render ถี่ยิบจนกระตุก การใช้ useRef และสั่งวาดตรงลง Context จึงให้ประสิทธิภาพสูงสุดระดับ 60 FPS"
-    },
-    {
-        "id": 8,
-        "q": "เมื่อมีการสร้าง Object URL ผ่าน URL.createObjectURL() ในหน้าบ้าน ต้องระวังเรื่องใดมากที่สุด?",
-        "options": [
-            "การเกิด XSS Attack",
-            "การเกิด Memory Leak หากไม่สั่ง revokeObjectURL() เมื่อรูปถูกปิดหรือเลิกใช้งาน",
-            "การถูกบล็อกโดย AdBlocker",
-            "ขนาดไฟล์จะขยายใหญ่ขึ้น 33%"
-        ],
-        "correct": 1,
-        "rationale": "ถูกต้อง! Object URL จะตรึง Blob ไบนารีไว้ในหน่วยความจำ RAM ของเบราว์เซอร์จนกว่าจะปิดหน้าต่าง การสั่ง URL.revokeObjectURL() จึงจำเป็นเพื่อปลดปล่อย RAM ทันที"
-    },
-    {
-        "id": 9,
-        "q": "หากผู้ใช้ปิดแท็บเบราว์เซอร์ขณะที่ AI กำลังประมวลผล จะเกิดอะไรขึ้นในสถาปัตยกรรมนี้?",
-        "options": [
-            "เซิร์ฟเวอร์จะล่มทันที",
-            "งานบน Backend และ AI Server จะยังคงรันต่อไปจนเสร็จและบันทึกลง Database เมื่อผู้ใช้เปิดหน้า History ในภายหลังก็จะเห็นรูปภาพตามปกติ",
-            "ภาพจะสูญหายถาวร",
-            "ฐานข้อมูลจะ Rollback ข้อมูลทั้งหมดทิ้ง"
-        ],
-        "correct": 1,
-        "rationale": "ถูกต้อง! เพราะระบบถูกออกแบบด้วยสถาปัตยกรรม Decoupled Asynchronous Processing งานรันอยู่บนโหนดเซิร์ฟเวอร์และบันทึกผลลง Database อย่างอิสระจาก Client Session"
-    },
-    {
-        "id": 10,
-        "q": "ทำไม apiClient จึงแนบ Token ผ่าน Header 'Authorization: Bearer' แทนการพึ่งพา Cookie ในโปรเจกต์นี้?",
+        "q": "ฟังก์ชัน authHeaders() ใน js/api.js แนบ Token ผ่าน Header 'Authorization: Bearer' แทนการพึ่งพา Cookie ปกติ เพราะเหตุผลใด?",
         "options": [
             "เพราะ Cookie ถูกยกเลิกใช้งานแล้วในเว็บสมัยใหม่",
-            "เพราะ Frontend (พอร์ต 5173) และ Backend (พอร์ต 8000) รันคนละ Origin การใช้ Bearer Token ป้องกันปัญหา CSRF และ Third-party Cookie Blocking ได้อย่างเด็ดขาด",
+            "เพราะ Frontend (พอร์ต 5500) และ Backend (พอร์ต 8000) รันคนละ Origin กัน การใช้ Bearer Token ป้องกันปัญหา CSRF และ Third-party Cookie Blocking ได้อย่างเด็ดขาด",
             "เพื่อให้ส่งข้อมูลข้ามเครือข่ายได้เร็วกว่า",
             "เพื่อไม่ให้เบราว์เซอร์ต้องใช้ HTTPS"
         ],
         "correct": 1,
-        "rationale": "ถูกต้อง! การใช้ Bearer Token เหมาะกับ Cross-origin Microservices Architecture อย่างยิ่ง ป้องกันปัญหาเรื่อง Third-party Cookie และการโจมตี CSRF"
+        "rationale": "ถูกต้อง! การใช้ Bearer Token เหมาะกับ Cross-origin Decoupled Architecture อย่างยิ่ง ป้องกันปัญหาเรื่อง Third-party Cookie Blocking บนเบราว์เซอร์สมัยใหม่ และป้องกันการโจมตี CSRF ได้อย่างสมบูรณ์"
+    },
+    {
+        "id": 6,
+        "q": "ทำไมฟังก์ชัน snapSize() ใน js/generate/state.js จึงบังคับให้ขนาดพิกเซลของภาพเป็นพหุคูณของ 8 เสมอ (เช่น 512, 680, 768)?",
+        "options": [
+            "เพื่อไม่ให้ขนาดภาพเกินกว่าความจุของ RAM เบราว์เซอร์",
+            "เพราะโครงข่าย VAE ใน Stable Diffusion ย่อภาพลง 8 เท่า (f=8) หากไม่หาร 8 ลงตัว มิติเทนเซอร์ใน Latent Space จะเกิดทศนิยมและเกิดข้อผิดพลาด Shape Mismatch",
+            "เป็นข้อบังคับของ CSS Grid System",
+            "เพื่อให้การแสดงผลบนจอ Retina Display คมชัดขึ้น"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! VAE Downsampling Factor f=8 ทำให้ขนาดภาพในพิกเซลต้องสอดคล้องกับขนาดเทนเซอร์ใน Latent Space เสมอ การคัดกรองตั้งแต่หน้าบ้านด้วย snapSize() จึงเป็นหัวใจของ Pre-flight Data Sanitization"
+    },
+    {
+        "id": 7,
+        "q": "ใน MaskEditor (js/mask.js) ทำไมถึงวาดลง Canvas 2D Context โดยตรงแทนที่จะใช้ State Framework Re-render ทุกครั้งที่มีการลากเมาส์?",
+        "options": [
+            "เพราะการลากเมาส์วาดภาพปล่อย Event ถี่มาก (60-120 Hz) หากใช้ Re-render ผ่าน State Framework จะเกิดอาการกระตุกรุนแรง การสั่งวาดตรงลง Canvas 2D จึงให้ประสิทธิภาพสูงสุดระดับ Native",
+            "เพราะ Canvas 2D ไม่รองรับตัวแปรแบบ State",
+            "เพื่อป้องกันไม่ให้ข้อมูลใน Canvas หายไปเมื่อรีเฟรชหน้าเว็บ",
+            "เป็นข้อกำหนดของภาษา JavaScript แบบโบราณ"
+        ],
+        "correct": 0,
+        "rationale": "ถูกต้อง! High-frequency pointer events (60-120 ครั้งต่อวินาที) ต้องอาศัยการเข้าถึง GPU Acceleration ของ Canvas 2D Context โดยตรง การตัดรอบ Virtual DOM Diffing ออกไปทำให้การวาดลื่นไหล ไร้ความหน่วง"
+    },
+    {
+        "id": 8,
+        "q": "ในฟังก์ชัน releaseImages() ทำไมจึงต้องเรียกคำสั่ง URL.revokeObjectURL() ทุกครั้งที่มีการเปลี่ยนหรือปิดภาพผลลัพธ์?",
+        "options": [
+            "เพื่อป้องกันการเกิด XSS Attack",
+            "เพื่อป้องกัน Memory Leak ในหน่วยความจำของเบราว์เซอร์ เนื่องจาก Object URL จะตรึง Blob ไบนารีไว้ใน RAM จนกว่าจะมีการ Revoke หรือปิดแท็บ",
+            "เพื่อลบภาพออกจากฐานข้อมูลเซิร์ฟเวอร์",
+            "เพื่อให้เบราว์เซอร์สามารถดาวน์โหลดภาพใหม่ได้"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! Object URL ที่สร้างจาก Blob ไบนารีขนาดใหญ่จะถูกตรึงไว้ใน Heap Memory ของเบราว์เซอร์ การสั่ง URL.revokeObjectURL() ช่วยคืน RAM ทันที ป้องกันปัญหาเปิดเว็บใช้งานไปนานๆ แล้วหน่วยความจำบวมขึ้นเรื่อยๆ"
+    },
+    {
+        "id": 9,
+        "q": "ตัวแปร watchToken ใน js/generate/run.js มีบทบาททางวิศวกรรมซอฟต์แวร์อย่างไรในการป้องกันปัญหา Race Condition?",
+        "options": [
+            "เป็น Token สำหรับเข้ารหัสรหัสผ่านของผู้ใช้",
+            "ใช้ตรวจสอบเมื่อมีคำตอบ Polling จากงานเก่าตอบกลับมาช้า หาก token !== watchToken จะตัดคำตอบทิ้งทันที เพื่อไม่ให้ Response เก่ามาเขียนทับสถานะ UI ของงานปัจจุบัน",
+            "ใช้เป็น Session ID สำหรับเชื่อมต่อไปยัง WebSocket",
+            "ใช้ป้องกัน SQL Injection บนฝั่งเบราว์เซอร์"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! เมื่อผู้ใช้กดหยุด สลับงาน หรือกดสร้างใหม่ stopWatching() จะบวกค่า watchToken += 1 ทันที เมื่อ Response ของงานเก่าที่ค้างอยู่ตอบกลับมา จะถูกปฏิเสธทันทีเพราะ token ไม่ตรงกัน จึงป้องกัน Stale State Overwrite ได้อย่างสมบูรณ์"
+    },
+    {
+        "id": 10,
+        "q": "ทำไมฟังก์ชัน MaskEditor.measure() จึงต้องย่อขนาด Canvas ให้ด้านยาวเหลือไม่เกิน 256 พิกเซลก่อนคำนวณสัดส่วนพื้นที่ระบาย (0–1)?",
+        "options": [
+            "เพราะภาพขนาดเกิน 256 พิกเซลจะไม่รองรับสีขาวดำ",
+            "เพื่อหลีกเลี่ยง Readback Latency ของ getImageData() บนภาพขนาดเต็ม 4096x4096 (16 ล้านพิกเซล) การย่อเหลือ 256 พิกเซลช่วยให้อ่านข้อมูลพิกเซลได้ในเสี้ยววินาทีโดยหน้าเว็บไม่ค้าง",
+            "เป็นข้อบังคับของเอนจิน V8 ใน Google Chrome",
+            "เพื่อให้ได้ขนาดไฟล์ที่เหมาะกับ SQLite"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! การเรียก getImageData() บน Canvas ความละเอียดสูงจะทำให้เกิด Bus Transfer Bottleneck ระหว่าง GPU กับ CPU การ Downsampling ให้เหลือไม่เกิน 256px ก่อนนับพื้นที่ระบายจึงเป็นเทคนิค Spatial Optimization ชั้นยอด"
     },
     {
         "id": 11,
-        "q": "ทำไมฝ่าย Frontend จึงต้องกรอง LoRA ตามตระกูลโมเดลผ่าน families.js ทั้งที่ AI Server มี Auto-skip Guard อยู่แล้ว?",
+        "q": "เหตุใดหน้าบ้านจึงต้องมีโมดูล families.js เพื่อตรวจสอบและกรอง LoRA Dropdown ตามตระกูลโมเดล ทั้งที่ฝั่ง AI Server มี Auto-skip Guard อยู่แล้ว?",
         "options": [
-            "เพราะเบราว์เซอร์จะแคชไฟล์ถ้าไม่กรอง",
+            "เพราะเบราว์เซอร์จะล่มหากส่ง LoRA ข้ามตระกูล",
             "เพื่อให้สอดคล้องกับหลักการ 'Defense in Depth' และยกระดับ UX โดยป้องกันไม่ให้ผู้ใช้เลือกตัวเลือกที่ผิดตั้งแต่ต้นทาง พร้อมทั้งให้ Feedback ทางสายตาทันที",
             "เพื่อไม่ให้ Backend ต้องบันทึกชื่อ LoRA ลงฐานข้อมูล",
             "เพราะมาตรฐาน W3C บังคับให้ Dropdown มีไม่เกิน 5 ตัวเลือก"
         ],
         "correct": 1,
-        "rationale": "ถูกต้อง! การตรวจสอบทั้งสองฝั่งคือหลักการ Defense in Depth: ฝั่งหน้าบ้านช่วยยกระดับประสบการณ์ผู้ใช้งาน (UX) โดยแสดงเฉพาะสิ่งที่ใช้งานได้จริง ส่วนฝั่ง AI Server ทำหน้าที่เป็นกำแพงด่านสุดท้าย (Fail-safe Guard) ป้องกันกรณีที่มีการเรียกยิง API จากภายนอกโดยตรง"
+        "rationale": "ถูกต้อง! นี่คือหลักการ Defense in Depth: หน้าบ้านทำ Pre-flight Validation เพื่อให้ผู้ใช้ได้รับประสบการณ์ที่ราบรื่น (UX) และลดจำนวนคำขอที่ส่งผิดพลาด ส่วน AI Server ทำหน้าที่เป็น Fail-safe Guard ด่านสุดท้าย"
+    },
+    {
+        "id": 12,
+        "q": "ทำไมการแสดงภาพผลลัพธ์ที่สร้างเสร็จแล้ว จึงไม่สามารถใส่พาธ URL ลงในแท็ก <img src='...'> ตรงๆ ได้ แต่ต้องใช้ apiBlob() ดึงผ่าน JavaScript ก่อน?",
+        "options": [
+            "เพราะแท็ก <img> บนเบราว์เซอร์ไม่รองรับรูปภาพ WebP",
+            "เพราะ Endpoint รูปภาพอยู่ภายใต้ระบบความปลอดภัยที่ต้องแนบ Header 'Authorization: Bearer <token>' ซึ่งแท็ก <img> ดั้งเดิมของ HTML ไม่สามารถแนบ Custom Header ได้",
+            "เพราะขนาดไฟล์รูปภาพใหญ่เกินกว่าที่แท็ก <img> จะรับได้",
+            "เพราะ Nginx บล็อกการโหลดรูปภาพจากแท็ก <img> ทั้งหมด"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! แท็ก <img> ดั้งเดิมของ HTML จะส่งคำขอแบบธรรมดาโดยไม่สามารถแนบ Authorization Header ได้ จึงต้องใช้ fetch() ใน apiBlob() แนบ Token ไปดึงไบนารี Blob แล้วแปลงเป็น Object URL ให้เบราว์เซอร์แสดงผล"
     }
 ];
 
@@ -1134,7 +1413,7 @@
                 card.innerHTML = `
                     <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
                         <span class="text-xs font-mono font-bold text-sky-400">คำถามข้อที่ ${qIdx + 1} / ${FRONTEND_EXAM.length}</span>
-                        <span class="text-[11px] font-mono text-slate-500">Image Processing & Web UI</span>
+                        <span class="text-[11px] font-mono text-slate-500">Image Processing & Web Architecture</span>
                     </div>
                     <h4 class="text-sm font-bold text-white leading-relaxed">${item.q}</h4>
                     <div class="space-y-2 pt-1">
