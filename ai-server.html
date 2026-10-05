@@ -453,6 +453,9 @@ return {
                     <button onclick="loadCodeModule('gpu')" id="btn-mod-gpu" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
                         <span>gpu_monitor.py</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">2</span>
                     </button>
+                    <button onclick="loadCodeModule('prompt')" id="btn-mod-prompt" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold font-mono flex items-center gap-1.5">
+                        <span>prompt_builder.py</span> <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">4</span>
+                    </button>
                 </div>
             </div>
 
@@ -571,13 +574,13 @@ return {
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
                 <div>
                     <h2 class="text-base font-bold text-white flex items-center gap-2">
-                        <span>🎯</span> ห้องซ้อมสอบปากเปล่า: 10 คำถามวัดกึ๋นจากอาจารย์ (Exam Simulator)
+                        <span>🎯</span> ห้องซ้อมสอบปากเปล่า: 12 คำถามวัดกึ๋นจากอาจารย์ (Exam Simulator)
                     </h2>
                     <p class="text-xs text-slate-400 mt-0.5">เลือกคำตอบที่ถูกต้องที่สุดเพื่อทดสอบความแม่นยำ พร้อมอ่านเฉลยเชิงลึกระดับวิศวกรรมทันที</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="text-xs font-mono text-slate-300">
-                        คะแนนของคุณ: <span id="exam-score" class="text-sky-400 font-bold text-base">0</span> / 10
+                        คะแนนของคุณ: <span id="exam-score" class="text-sky-400 font-bold text-base">0</span> / 12
                     </div>
                     <button onclick="resetExam()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-semibold">
                         ทำใหม่ทั้งหมด
@@ -656,6 +659,26 @@ return {
                     <strong>คำตอบสั้นและเด็ดขาด:</strong> "เราใช้ <strong>Dual-Mode Cancellation</strong> ครับ ถ้างายังรอในคิว จะทำ <em>Soft Cancel</em> (ปรับ Flag เป็น cancelled แล้วข้าม) แต่ถ้างายกำลังรันบน GPU อยู่จริง จะทำ <em>Hard Cancel</em> โดยส่งสัญญาณ HTTP POST ไปที่ <code class="text-sky-300">/sdapi/v1/interrupt</code> ของ Forge Engine เพื่อสั่งให้ GPU หยุดรอบการ Denoising ทันที พร้อมกับยกเลิก asyncio Future บน Python Worker ทำให้ GPU คืนรอบการทำงานได้อย่างสมบูรณ์ครับ"
                 </p>
             </div>
+
+            <!-- Card 7: Model Architecture Family Compatibility -->
+            <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-2">
+                <div class="flex items-center gap-2 text-purple-400 text-sm font-bold">
+                    <span>⚠️</span> Q7: "ทำไมถึงไม่สามารถนำ LoRA ข้ามตระกูล (เช่น Pony XL / Illustrious ไปรันบน SD 1.5) ได้ และระบบป้องกันอย่างไร?"
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    <strong>คำตอบสั้นและเด็ดขาด:</strong> "เพราะมิติทางสถาปัตยกรรมของ <strong>Text Encoder และ Latent Space แตกต่างกันสิ้นเชิง</strong> ครับ โดย SD 1.5 ใช้ตัวเข้ารหัส CLIP ViT-L ตัวเดียว (768 มิติ) ขณะที่ SDXL / Illustrious / Pony ใช้ Dual Text Encoders (CLIP ViT-L + OpenCLIP ViT-bigG รวม 2048 มิติ) และมีมิติของ Cross-Attention Layer ใน UNet ที่ไม่เท่ากัน หากฝืนโหลดข้ามตระกูลจะเกิด Tensor Shape Mismatch หรือภาพที่ได้จะกลายเป็นสัญญาณรบกวนสีดำ (Black Noise Artifacts) ทางระบบจึงออกแบบ <code class="text-sky-300">prompt_builder.py</code> ให้มี <strong>Auto-skip Compatibility Guard</strong> ตรวจจับตระกูลและข้ามการแทรก LoRA พร้อมแจ้งเตือน <code class="text-amber-300">[WARN]</code> ใน Log เพื่อให้งานหลักยังคงสำเร็จได้อย่างปลอดภัยครับ"
+                </p>
+            </div>
+
+            <!-- Card 8: DevOps Nginx Reverse Proxy -->
+            <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-2">
+                <div class="flex items-center gap-2 text-cyan-400 text-sm font-bold">
+                    <span>⚠️</span> Q8: "ทำไม Nginx Reverse Proxy ฝั่ง DevOps ต้องเปิด underscores_in_headers on; และตั้ง client_max_body_size 50M;?"
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    <strong>คำตอบสั้นและเด็ดขาด:</strong> "เป็นหัวใจของความปลอดภัยและการรองรับข้อมูลมัลติมีเดียครับ: 1) โดยค่าเริ่มต้น Nginx จะดร็อป Header ที่มีเครื่องหมายขีดล่าง (_) ทิ้ง คำสั่ง <code class="text-sky-300">underscores_in_headers on;</code> และ <code class="text-sky-300">proxy_set_header X-LUMA-INTERNAL-SECRET $http_x_luma_internal_secret;</code> จึงจำเป็นอย่างยิ่งเพื่อให้ Node 2 สามารถส่งกุญแจลับความปลอดภัยมายัง AI Node ได้โดยไม่ถูกตัดทิ้ง และ 2) ในโหมด Inpainting และ Image-to-Image มีการส่ง Base64 รูปภาพขนาดใหญ่ การตั้ง <code class="text-emerald-300">client_max_body_size 50M;</code> ร่วมกับ Timeout 300s ช่วยป้องกันปัญหา HTTP 413 (Payload Too Large) และ 504 Gateway Timeout ระหว่าง GPU กำลังประมวลผลครับ"
+                </p>
+            </div>
         </div>
     </section>
 </main>
@@ -724,16 +747,16 @@ return {
                 </svg>`
             },
             3: {
-                title: "Step 3: Prompt Enrichment & LoRA Deduplication",
-                file: "prompt_builder.py:40",
-                badge: "LORA INJECTED",
-                desc: "โมดูล Prompt Builder โหลดคอนฟิกจาก lora_registry.json ทำการแทรก Trigger Words (เช่น white hair, green eyes) และไวยากรณ์ <lora:filename:0.85> โดยมีระบบ Deduplication ตรวจจับไม่ให้ใส่คำซ้ำซ้อนหากผู้ใช้พิมพ์มาเองแล้ว",
+                title: "Step 3: Prompt Enrichment, LoRA Family Guard & Deduplication",
+                file: "prompt_builder.py:75",
+                badge: "LORA & FAMILY GUARD",
+                desc: "โมดูล Prompt Builder (<code>prompt_builder.py</code>) ตรวจสอบความเข้ากันได้ของสถาปัตยกรรม (Architecture Families: SD 1.5, Illustrious XL, Pony XL) หาก LoRA ข้ามตระกูลจะทำ Auto-skip ทันทีพร้อมแจ้งเตือน [WARN] ป้องกันภาพเละ/จอดำ จากนั้นแทรก Trigger Words และขจัดคำซ้ำซ้อน (Deduplication) ก่อนส่งให้ Forge",
                 queue: "1 Active",
                 vram: "4.85 GB / 8 GB",
                 time: "0.08s",
-                snippet: `# ตรวจสอบคำซ้ำก่อนเติม Trigger Words\nwords_to_add = []\nfor phrase in trigger.split(','):\n    if phrase.lower() not in user_prompt.lower():\n        words_to_add.append(phrase)\n\n# ประกอบ Prompt ขั้นสุดท้าย\nfinal_prompt = f"{injected_trigger}, {user_prompt} <lora:{lora_name}:{weight}>"`,
-                defenseQ: "LoRA ทำงานอย่างไรในโมเดล Diffusion ทางคณิตศาสตร์?",
-                defenseA: "LoRA (Low-Rank Adaptation) ทำการแทรกเมทริกซ์ขนาดเล็ก 2 ตัวคือ A และ B โดยใช้สูตร W = W₀ + ΔW = W₀ + (B × A) เข้าไปที่ชั้น Cross-Attention Layers ของ UNet ทำให้โมเดลเรียนรู้สไตล์หรือตัวละครใหม่ได้โดยไม่ต้องเทรน Weights หลักทั้งก้อน 4GB ช่วยประหยัด VRAM และสลับสไตล์ได้แบบ Dynamic ในเสี้ยววินาทีครับ",
+                snippet: `# ตรวจสอบ Architecture Compatibility Guard\nif model_name and not is_lora_compatible(lora_id, model_name):\n    print(f"[WARN] Compatibility Guard: LoRA '{lora_id}' incompatible with '{model_name}'. Auto-skipping...")\n    return user_prompt.strip(), ""\n\n# Deduplication และแทรก Trigger Words\nwords = [p.strip() for p in trigger.split(',') if p.strip().lower() not in user_prompt.lower()]\nfinal_prompt = f"{', '.join(words)}, {user_prompt} <lora:{lora_name}:{weight}>"`,
+                defenseQ: "ทำไมต้องมี Model Architecture Family Guard และ LoRA ข้ามตระกูลส่งผลเสียอย่างไร?",
+                defenseA: "เพราะโมเดลแต่ละตระกูลมีโครงสร้าง Text Encoder และ Latent Space ต่างกันอย่างสิ้นเชิงครับ: SD 1.5 ใช้ CLIP ViT-L 768 มิติ ขณะที่ SDXL / Illustrious / Pony ใช้ Dual Encoders 2048 มิติ หากนำ LoRA ข้ามตระกูลไปผสม Cross-Attention Layers จะเกิด Dimension Mismatch หรือภาพที่ได้จะกลายเป็นสัญญาณรบกวนสีดำ (Black Artifacts) ระบบจึงสร้าง Auto-skip Guard คอยดักจับเพื่อความเสถียร 100% ครับ",
                 svg: `<svg class="w-48 h-32" viewBox="0 0 200 120">
                     <rect x="15" y="20" width="80" height="80" rx="8" fill="#1e293b" stroke="#38bdf8"/>
                     <text x="55" y="55" fill="#94a3b8" font-size="9" text-anchor="middle">Base Prompt</text>
@@ -1127,14 +1150,14 @@ return {
                         "name": "list_available_models()",
                         "tag": "Model Discovery",
                         "tag_color": "bg-cyan-950/60 text-cyan-300 border-cyan-500/30",
-                        "title": "สแกนค้นหาโมเดล Checkpoints และ LoRAs อัตโนมัติ (GET /ai/models)",
+                        "title": "สแกนค้นหาโมเดล Checkpoints และ LoRAs พร้อมตรวจจับ Family (GET /ai/models)",
                         "params": "None -> dict",
-                        "desc": "เปรียบเหมือน <b>'สมุดบัญชีรายชื่อวัตถุดิบในคลัง'</b>: เข้าไปสแกนโฟลเดอร์ของ Stability Matrix บนเครื่องอัตโนมัติ เพื่อหารายชื่อโมเดล Checkpoint (ไฟล์ <code>.safetensors</code>, <code>.ckpt</code>) และ LoRA ทั้งหมด ส่งกลับไปให้หน้าบ้านแสดงในช่อง Dropdown ให้ผู้ใช้เลือกได้โดยไม่ต้องพิมพ์ชื่อเอง",
-                        "visual": "สแกนไดเรกทอรี Stability Matrix:\n├── models/Stable-diffusion/*.safetensors ──> [ Checkpoints List ]\n└── models/Lora/*.safetensors            ──> [ LoRA Styles List ]\n               │\n               ▼\nส่งคืนรายการโมเดลทั้งหมดไปแสดงผลใน Dropdown ของหน้าเว็บ",
-                        "snippet": "@app.get(\"/ai/models\")\nasync def list_available_models():\n    \"\"\"\n    สแกนไดเรกทอรีของ Stability Matrix และส่งคืนรายการโมเดล Checkpoints และ LoRAs ทั้งหมด\n    ช่วยให้ Frontend ดึงรายชื่อโมเดลไปแสดงใน Dropdown ได้โดยตรง\n    \"\"\"\n    checkpoints = []\n    loras = []\n\n    # สแกน Checkpoint Models (.safetensors, .ckpt)\n    if os.path.exists(AIConfig.CHECKPOINTS_DIR):\n        for f in os.listdir(AIConfig.CHECKPOINTS_DIR):\n            if f.endswith((\".safetensors\", \".ckpt\")):\n                checkpoints.append({\n                    \"id\": f,\n                    \"name\": f.replace(\".safetensors\", \"\").replace(\".ckpt\", \"\"),\n                    \"path\": os.path.join(AIConfig.CHECKPOINTS_DIR, f)\n                })\n\n    # สแกน LoRA Adapters (.safetensors)\n    if os.path.exists(AIConfig.LORA_DIR):\n        for f in os.listdir(AIConfig.LORA_DIR):\n            if f.endswith(\".safetensors\"):\n                loras.append({\n                    \"id\": f,\n                    \"name\": f.replace(\".safetensors\", \"\"),\n                    \"path\": os.path.join(AIConfig.LORA_DIR, f)\n                })\n\n    return {\n        \"checkpoints\": checkpoints,\n        \"loras\": loras,\n        \"total_checkpoints\": len(checkpoints),\n        \"total_loras\": len(loras)\n    }",
-                        "called_by": "Frontend Client (Node 1) เรียกตอนโหลดหน้าจอ Create Page เพื่อดึงรายชื่อโมเดลมาใส่ Dropdown",
+                        "desc": "เปรียบเหมือน <b>'สมุดบัญชีรายชื่อวัตถุดิบในคลังพร้อมระบุตระกูล'</b>: เข้าไปสแกนโฟลเดอร์ของ Stability Matrix บนเครื่องอัตโนมัติ เพื่อหารายชื่อโมเดล Checkpoint (ไฟล์ <code>.safetensors</code>, <code>.ckpt</code>) และ LoRA ทั้งหมด พร้อมวิเคราะห์ระบุตระกูลสถาปัตยกรรม (<code>family</code>: sd15, illustrious_xl, pony_xl) ส่งกลับไปให้หน้าบ้านแสดงในช่อง Dropdown ให้ผู้ใช้เลือกได้โดยกรองเฉพาะ LoRA ที่เข้ากันได้",
+                        "visual": "สแกนไดเรกทอรี Stability Matrix + แยกตระกูล:\n├── Checkpoints/*.safetensors ──> detect_model_family() ──> [ Checkpoints + family ]\n└── Lora/*.safetensors        ──> LORA_REGISTRY match   ──> [ LoRAs + family ]\n               │\n               ▼\nส่งคืนรายการโมเดลทั้งหมดพร้อม Family Tag ให้ Frontend กรอง UI แบบ Real-time",
+                        "snippet": "@app.get(\"/ai/models\")\nasync def list_available_models():\n    \"\"\"\n    สแกนไดเรกทอรีของ Stability Matrix และส่งคืนรายการโมเดล Checkpoints และ LoRAs พร้อม Family\n    ช่วยให้ Frontend ดึงรายชื่อโมเดลไปแสดงใน Dropdown และกรอง LoRA ที่ตรงตระกูลได้โดยตรง\n    \"\"\"\n    checkpoints = []\n    loras = []\n\n    # สแกน Checkpoint Models พร้อมตรวจจับตระกูลสถาปัตยกรรม (sd15, illustrious_xl, pony_xl)\n    if os.path.exists(AIConfig.CHECKPOINTS_DIR):\n        for f in os.listdir(AIConfig.CHECKPOINTS_DIR):\n            if f.endswith((\".safetensors\", \".ckpt\")):\n                checkpoints.append({\n                    \"id\": f,\n                    \"name\": f.replace(\".safetensors\", \"\").replace(\".ckpt\", \"\"),\n                    \"path\": os.path.join(AIConfig.CHECKPOINTS_DIR, f),\n                    \"family\": detect_model_family(f)\n                })\n\n    # สแกน LoRA Adapters พร้อมจับคู่ family จาก LORA_REGISTRY หรือ Heuristics\n    if os.path.exists(AIConfig.LORA_DIR):\n        for f in os.listdir(AIConfig.LORA_DIR):\n            if f.endswith(\".safetensors\"):\n                lora_cfg = LORA_REGISTRY.get(f, {})\n                lora_family = lora_cfg.get(\"family\") or detect_model_family(f)\n                loras.append({\n                    \"id\": f,\n                    \"name\": f.replace(\".safetensors\", \"\"),\n                    \"path\": os.path.join(AIConfig.LORA_DIR, f),\n                    \"family\": lora_family\n                })\n\n    return {\n        \"checkpoints\": checkpoints,\n        \"loras\": loras,\n        \"total_checkpoints\": len(checkpoints),\n        \"total_loras\": len(loras)\n    }",
+                        "called_by": "Frontend Client (Node 1) เรียกตอนโหลดหน้าจอ Create Page เพื่อดึงรายชื่อโมเดลและกรอง Dropdown ตาม Family",
                         "subcalls": [],
-                        "tip": "นี่คือระบบ Dynamic Model Discovery: หากทีมงานดาวน์โหลดโมเดลหรือ LoRA ใหม่เข้ามาใส่ในโฟลเดอร์ ระบบจะตรวจพบทันทีโดยไม่ต้องแก้โค้ดหรือรีสตาร์ตเซิร์ฟเวอร์ครับ"
+                        "tip": "นี่คือระบบ Architecture-Aware Discovery: ไม่เพียงแค่ส่งชื่อไฟล์กลับไป แต่ส่งแท็ก Family กำกับไปด้วย ทำให้ Frontend สามารถซ่อนหรือเตือน LoRA ข้ามตระกูลได้ตั้งแต่ระดับ UI ครับ"
                 },
                 {
                         "line": 584,
@@ -1590,6 +1613,82 @@ return {
                         "subcalls": [],
                         "tip": "อาจารย์ถาม: ทำไมต้องมีคำสั่งนี้ในบล็อก finally เสมอ? ตอบ: เพื่อรับประกันว่าไม่ว่างานสร้างภาพจะสำเร็จหรือล้มเหลว เมมโมรีแคชของการ์ดจอจะถูกกวาดคืนระบบ 100% เสมอ ป้องกันการเกิด VRAM Leak สะสมจนการ์ดจอ OOM แฮงก์ในระยะยาวครับ"
                 }
+        ],
+        "prompt": [
+                {
+                        "line": 23,
+                        "name": "load_lora_registry()",
+                        "tag": "Registry Loader",
+                        "tag_color": "bg-blue-950/60 text-blue-300 border-blue-500/30",
+                        "title": "โหลดคอนฟิกคลัง LoRA และคำค้นกระตุ้น (LoRA Registry Loader)",
+                        "params": "None -> dict",
+                        "desc": "โหลดฐานข้อมูล <code>lora_registry.json</code> ที่ระบุตระกูลสถาปัตยกรรม (<code>family</code>: sd15, illustrious_xl, pony_xl), คีย์เวิร์ดกระตุ้น (<code>trigger_words</code>), ค่าน้ำหนักเริ่มต้น (<code>weight</code>), และตำแหน่งการแทรก (<code>position</code>) เข้าสู่ In-Memory Cache เพื่อความรวดเร็วในการประมวลผล",
+                        "visual": "lora_registry.json ──> load_lora_registry() ──> LORA_REGISTRY (In-Memory Cache)\n├── SousouNoFrieren: { family: 'illustrious_xl', trigger: 'frieren, elf', weight: 0.85 }\n├── detail_tweaker:   { family: 'sd15',           trigger: 'highly detailed', weight: 0.8 }\n└── anime_lineart:    { family: 'sd15',           trigger: 'monochrome lineart', weight: 0.7 }",
+                        "snippet": "def load_lora_registry() -> dict:\n    \"\"\"\n    โหลดข้อมูล LoRA Registry จากไฟล์ JSON\n    โครงสร้างข้อมูลประกอบด้วย: trigger_words, weight เริ่มต้น, ตำแหน่งที่ควรแทรก (prefix/suffix), และ family\n    หากไม่พบไฟล์หรือไฟล์เสียหาย จะ Fallback เป็น Dictionary ว่าง เพื่อไม่ให้ระบบหยุดทำงาน\n    \"\"\"\n    if os.path.exists(REGISTRY_PATH):\n        try:\n            with open(REGISTRY_PATH, \"r\", encoding=\"utf-8\") as f:\n                return json.load(f)\n        except Exception as e:\n            print(f\"[WARN] Failed to load lora_registry.json: {e}\")\n    return {}",
+                        "called_by": "โมดูล <code>prompt_builder.py</code> ตอนเริ่มต้น Import โมดูล (In-Memory Singleton Cache)",
+                        "subcalls": [],
+                        "tip": "การแคช Registry ไว้ใน In-Memory Cache ช่วยขจัด Disk I/O Overhead ในทุกๆ Request ทำให้การเตรียม Prompt ใช้เวลาน้อยกว่า 1 มิลลิวินาที"
+                },
+                {
+                        "line": 42,
+                        "name": "detect_model_family(model_name)",
+                        "tag": "Family Detection",
+                        "tag_color": "bg-purple-950/60 text-purple-300 border-purple-500/30",
+                        "title": "ตรวจจับและแยกแยะตระกูลสถาปัตยกรรมของโมเดล (Model Architecture Family Heuristics)",
+                        "params": "model_name: Optional[str] = None -> str ('sd15' | 'illustrious_xl' | 'pony_xl')",
+                        "desc": "วิเคราะห์ชื่อ Checkpoint Model หรือ LoRA ผ่าน Heuristic Matching เพื่อจัดกลุ่มตระกูลสถาปัตยกรรม (Architecture Family) ป้องกันการนำ LoRA ที่เทรนบน Text Encoder และมิติ Latent Space คนละแบบมาผสมกันจนภาพพังเละ",
+                        "visual": "ชื่อโมเดล Checkpoint / LoRA\n├── มีคำว่า 'pdxl', 'pony'                ──> ตระกูล pony_xl (SDXL Pony V6)\n├── มีคำว่า 'illu', 'nova', 'xl'         ──> ตระกูล illustrious_xl (SDXL Illustrious)\n└── มีคำว่า 'counterfeit', 'sd15', '1.5'  ──> ตระกูล sd15 (Stable Diffusion 1.5)",
+                        "snippet": "def detect_model_family(model_name: Optional[str] = None) -> str:\n    \"\"\"\n    วิเคราะห์และระบุตระกูลสถาปัตยกรรมของโมเดล (Model Architecture Family):\n    - sd15: Stable Diffusion 1.5 (เช่น counterfeitV30)\n    - illustrious_xl: SDXL / Illustrious XL (เช่น novaAnimeXL, illustrious)\n    - pony_xl: SDXL / Pony XL (เช่น prefectPonyXL, pdxl)\n    - default fallback: sd15\n    \"\"\"\n    if not model_name:\n        return \"sd15\"\n    m_lower = model_name.lower()\n    if any(k in m_lower for k in [\"pdxl\", \"pony\"]):\n        return \"pony_xl\"\n    if any(k in m_lower for k in [\"illu\", \"nova\", \"xl\"]):\n        return \"illustrious_xl\"\n    if any(k in m_lower for k in [\"counterfeit\", \"sd15\", \"v1-5\", \"1.5\"]):\n        return \"sd15\"\n    return \"sd15\"",
+                        "called_by": "เรียกใน <code>is_lora_compatible()</code>, <code>build_prompt_with_lora()</code>, และ <code>list_available_models()</code> ใน <code>server.py</code>",
+                        "subcalls": [],
+                        "tip": "Heuristic Matching ช่วยให้ระบบฉลาดพอที่จะตรวจจับตระกูลโมเดลใหม่ๆ ได้ทันทีโดยไม่ต้องแก้ Configuration File ทุกครั้งที่ทีมงานโหลด Checkpoint มาเพิ่ม"
+                },
+                {
+                        "line": 62,
+                        "name": "is_lora_compatible(lora_id, model_name)",
+                        "tag": "Compatibility Guard",
+                        "tag_color": "bg-emerald-950/60 text-emerald-300 border-emerald-500/30",
+                        "title": "ตรวจสอบความเข้ากันได้ระหว่าง LoRA และ Base Model (Cross-Architecture Validator)",
+                        "params": "lora_id: str, model_name: Optional[str] = None -> bool",
+                        "desc": "ตรวจสอบว่า LoRA ที่ระบุเข้ากันได้กับ Base Model หรือไม่ โดยเปรียบเทียบตระกูลสถาปัตยกรรม หาก LoRA เป็นของตระกูล SDXL/Pony แต่ Base Model เป็น SD 1.5 จะคืนค่า <code>False</code> เพื่อส่งต่อให้ระบบ Auto-skip ป้องกันไม่ให้การสร้างภาพล้มเหลว",
+                        "visual": "is_lora_compatible(lora_id, model_name)\n   ├── LoRA Family = LORA_REGISTRY[lora_id]['family']\n   ├── Model Family = detect_model_family(model_name)\n   └── ตรวจสอบเงื่อนไข: LoRA Family == Model Family ?\n          ├── ตรงกัน ➔ คืนค่า True (อนุญาตให้แทรก LoRA)\n          └── ไม่ตรงกัน ➔ คืนค่า False (Auto-skip ข้ามอย่างปลอดภัย)",
+                        "snippet": "def is_lora_compatible(lora_id: str, model_name: Optional[str] = None) -> bool:\n    \"\"\"\n    ตรวจสอบว่า LoRA ที่ระบุเข้ากันได้กับ Base Model หรือไม่\n    \"\"\"\n    if not lora_id or lora_id not in LORA_REGISTRY or not model_name:\n        return True\n    lora_family = LORA_REGISTRY[lora_id].get(\"family\")\n    model_family = detect_model_family(model_name)\n    if not lora_family or lora_family == \"unknown\":\n        return True\n    return lora_family == model_family",
+                        "called_by": "เรียกใน <code>build_prompt_with_lora()</code> เพื่อทำ Guard ตรวจสอบก่อนแทรกแท็ก",
+                        "subcalls": [
+                                {
+                                        "targetMod": "prompt",
+                                        "targetFn": "detect_model_family",
+                                        "label": "detect_model_family(model_name)",
+                                        "why": "เพื่อหาตระกูลของ Base Model ที่กำลังจะถูกใช้งานสร้างภาพ",
+                                        "what": "วิเคราะห์สตริงชื่อโมเดลและคืนค่าเป็น sd15, illustrious_xl หรือ pony_xl",
+                                        "callsNext": "ไม่เรียกฟังก์ชันอื่นต่อ"
+                                }
+                        ],
+                        "tip": "หลักการ Defense in Depth: แม้ Frontend จะมีตัวกรอง UI แล้ว แต่ AI Server ต้องมีฟังก์ชันนี้คอย Guard ป้องกันคำขอผิดพลาดจาก API โดยตรงเสมอ"
+                },
+                {
+                        "line": 75,
+                        "name": "build_prompt_with_lora(user_prompt, lora_id, model_name)",
+                        "tag": "Prompt Engineering",
+                        "tag_color": "bg-amber-950/60 text-amber-300 border-amber-500/30",
+                        "title": "ประกอบร่าง Prompt ฉบับสมบูรณ์พร้อม Auto-skip Guard และ Deduplication",
+                        "params": "user_prompt: str, lora_id: Optional[str] = None, model_name: Optional[str] = None -> tuple[str, str]",
+                        "desc": "หัวใจหลักของการเตรียม Prompt: 1) ป้องกัน LoRA ข้ามตระกูลด้วย Auto-skip Guard, 2) แทรก Trigger Words ตามตำแหน่ง Prefix/Suffix, 3) ขจัดคำซ้ำซ้อน (Deduplication) หากผู้ใช้พิมพ์คีย์เวิร์ดมาเองแล้ว, 4) แปลงเป็นไวยากรณ์ <code>&lt;lora:name:weight&gt;</code> ที่ Stable Diffusion WebUI Forge เข้าใจ",
+                        "visual": "[ User Prompt: '1girl, white hair' ] + [ LoRA: SousouNoFrieren (frieren, white hair) ]\n           │\n           ├── 1. ตรวจสอบ Compatibility (ถ้าข้ามตระกูล ➔ Skip ทันที)\n           ├── 2. Trigger Word Deduplication ('white hair' ซ้ำ ➔ ตัดทิ้ง เหลือ 'frieren')\n           ├── 3. แทรก LoRA Tag (<lora:SousouNoFrieren:0.85>)\n           │\n           ▼\n[ Final Prompt: 'frieren, 1girl, white hair <lora:SousouNoFrieren:0.85>' ]",
+                        "snippet": "def build_prompt_with_lora(user_prompt: str, lora_id: str = None, model_name: str = None) -> tuple[str, str]:\n    # 1. ถ้าไม่เลือก LoRA หรือไม่พบใน Registry คืน Prompt เดิมทันที\n    if not lora_id or lora_id not in LORA_REGISTRY:\n        return user_prompt.strip(), \"\"\n\n    # 2. Compatibility Guard: ข้ามการแทรก LoRA อัตโนมัติถ้าโมเดลข้ามตระกูล\n    if model_name and not is_lora_compatible(lora_id, model_name):\n        print(f\"[WARN] Compatibility Guard: LoRA '{lora_id}' is incompatible with model '{model_name}'. Auto-skipping...\")\n        return user_prompt.strip(), \"\"\n\n    config = LORA_REGISTRY[lora_id]\n    trigger = config.get(\"trigger_words\", \"\")\n    weight = config.get(\"weight\", 0.8)\n    position = config.get(\"position\", \"prefix\")\n    lora_name = lora_id.replace(\".safetensors\", \"\")\n    lora_tag = f\"<lora:{lora_name}:{weight}>\"\n\n    # 3. Trigger Word Deduplication: ป้องกันการใส่คำซ้ำซ้อน\n    words_to_add = []\n    for phrase in [p.strip() for p in trigger.split(\",\") if p.strip()]:\n        if phrase.lower() not in user_prompt.lower():\n            words_to_add.append(phrase)\n    injected_trigger = \", \".join(words_to_add)\n\n    # 4. ประกอบ Prompt ตามตำแหน่ง prefix หรือ suffix\n    if position == \"prefix\" and injected_trigger:\n        final_prompt = f\"{injected_trigger}, {user_prompt} {lora_tag}\".strip()\n    elif position == \"suffix\" and injected_trigger:\n        final_prompt = f\"{user_prompt}, {injected_trigger} {lora_tag}\".strip()\n    else:\n        final_prompt = f\"{user_prompt} {lora_tag}\".strip()\n    return final_prompt, lora_tag",
+                        "called_by": "เรียกใน <code>handle_txt2img_inference()</code> และ <code>handle_edit_inference()</code> ใน <code>server.py</code>",
+                        "subcalls": [
+                                {
+                                        "targetMod": "prompt",
+                                        "targetFn": "is_lora_compatible",
+                                        "label": "is_lora_compatible(lora_id, model_name)",
+                                        "why": "เพื่อป้องกันความผิดพลาดของภาพจากการผสมผสาน LoRA ข้ามตระกูลสถาปัตยกรรม",
+                                        "what": "ตรวจสอบตระกูลของ LoRA เทียบกับ Checkpoint",
+                                        "callsNext": "เรียกต่อ ➔ detect_model_family()"
+                                }
+                        ],
+                        "tip": "อาจารย์ถาม: ทำไมถึงทำ Auto-skip แทนที่จะโยน HTTP 400 Bad Request error กลับไป? ตอบ: เพื่อความคงทนของระบบ (Fault Tolerance) ในระดับผู้ใช้ หากผู้ใช้เลือกโมเดลผิด ระบบยังคงสร้างภาพตามคำสั่งหลักให้ได้ ไม่ต้องเสียเวลารับ Error แล้วเริ่มทำรายการใหม่ทั้งหมดครับ"
+                }
         ]
 };
 
@@ -1604,7 +1703,7 @@ return {
                 updateNavUI();
             }
 
-            ['server', 'queue', 'forge', 'image', 'gpu'].forEach(m => {
+            ['server', 'queue', 'forge', 'image', 'gpu', 'prompt'].forEach(m => {
                 const b = document.getElementById('btn-mod-' + m);
                 if (!b) return;
                 if (m === mod) {
@@ -1619,7 +1718,8 @@ return {
                 queue: 'queue_manager.py',
                 forge: 'forge_client.py',
                 image: 'image_utils.py',
-                gpu: 'gpu_monitor.py'
+                gpu: 'gpu_monitor.py',
+                prompt: 'prompt_builder.py'
             };
 
             document.getElementById('module-file-badge').innerText = fileNames[mod] || mod;
@@ -1956,6 +2056,30 @@ return {
                 ],
                 correct: 2,
                 rationale: "ถูกต้อง! Watchdog ถูกตั้งไว้ที่ 120 วินาที (TASK_TIMEOUT_SECONDS) หากเกินกำหนด ระบบจะสั่ง interrupt ไปยัง Forge บนพอร์ต 7861 เพื่อหยุดการคำนวณของการ์ดจอทันที ป้องกันไม่ให้ GPU ติดสถานะ Zombie Work"
+            },
+            {
+                id: 11,
+                q: "ทำไมถึงไม่สามารถนำ LoRA ของโมเดลตระกูล Pony XL หรือ Illustrious XL ไปรันร่วมกับ SD 1.5 ได้ และ AI Server ป้องกันอย่างไร?",
+                options: [
+                    "เพราะไฟล์ LoRA มีขนาดใหญ่เกินกว่า VRAM ของ RTX 3070 จะโหลดได้",
+                    "เพราะมิติของ Text Encoder และ Latent Space ไม่เท่ากัน (SD 1.5 ใช้ 768-dim ส่วน SDXL ใช้ Dual Encoders 2048-dim) หากฝืนใส่จะเกิด Dimension Mismatch หรือภาพจอดำ ระบบจึงมี Auto-skip Guard ใน prompt_builder.py คอยข้ามการแทรกพร้อมเตือน [WARN]",
+                    "เพราะระบบปฏิบัติการ Windows บล็อกไฟล์ LoRA ของ SDXL",
+                    "เพราะ FastAPI ไม่รองรับการประมวลผลคำสั่งข้ามตระกูล"
+                ],
+                correct: 1,
+                rationale: "ถูกต้อง! โมเดลแต่ละตระกูลมีสถาปัตยกรรม UNet Cross-Attention และ Text Encoder แตกต่างกันอย่างสิ้นเชิง การนำ LoRA ข้ามตระกูลไปผสมจะทำให้มิติเทนเซอร์ไม่ตรงกัน (Tensor Mismatch) หรือเกิดภาพรบกวนสีดำ การมี Auto-skip Compatibility Guard ช่วยให้คำขอหลักยังคงสร้างภาพต่อไปได้โดยระบบไม่ล่ม"
+            },
+            {
+                id: 12,
+                q: "ทำไมคอนฟิกูเรชัน Nginx Reverse Proxy ฝั่ง DevOps ต้องระบุคำสั่ง 'underscores_in_headers on;' และตั้ง 'client_max_body_size 50M;'?",
+                options: [
+                    "เพื่อเพิ่มความเร็วในการดาวน์โหลดไฟล์ภาพผ่านโปรโตคอล UDP",
+                    "เพื่อป้องกันไม่ให้ Nginx ตัด Header ความปลอดภัย 'X-LUMA-INTERNAL-SECRET' ทิ้ง และรองรับ Base64 ขนาดใหญ่ของภาพในโหมด Inpaint/Img2Img",
+                    "เพื่อให้การ์ดจอ RTX 3070 สามารถรันโมเดลขนาด 50GB ได้",
+                    "เป็นข้อกำหนดมาตรฐานที่จำเป็นเฉพาะบนเซิร์ฟเวอร์ Linux"
+                ],
+                correct: 1,
+                rationale: "ถูกต้อง! โดยค่าดีฟอลต์ Nginx จะมองว่า Header ที่มี Underscore ไม่ปลอดภัยและตัดทิ้ง การเปิด underscores_in_headers on; จึงจำเป็นเพื่อให้ส่งผ่านคีย์ลับความปลอดภัยข้ามโหนดได้ และการส่งภาพแบบ Base64 สำหรับ Inpaint ทำให้ขนาด Request เพิ่มขึ้น ~33% จึงต้องขยายขนาดรับ Body เป็น 50M เพื่อป้องกัน HTTP 413 Payload Too Large"
             }
         ];
 
@@ -1982,7 +2106,7 @@ return {
 
                 card.innerHTML = `
                     <div class="flex items-center justify-between text-xs border-b border-slate-800 pb-2">
-                        <span class="font-bold text-sky-400 font-mono">คำถามข้อที่ ${item.id} / 10</span>
+                        <span class="font-bold text-sky-400 font-mono">คำถามข้อที่ ${item.id} / ${EXAM_QUESTIONS.length}</span>
                         <span id="badge-${item.id}" class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono text-[11px]">ยังไม่ตอบ</span>
                     </div>
                     <h3 class="text-sm font-bold text-white leading-snug">${item.q}</h3>

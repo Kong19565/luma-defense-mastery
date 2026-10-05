@@ -337,12 +337,12 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
                 <div>
                     <h2 class="text-base font-bold text-white flex items-center gap-2">
-                        <span>🎯</span> ห้องซ้อมสอบปากเปล่า: 10 คำถามวัดกึ๋นสถาปัตยกรรม Frontend
+                        <span>🎯</span> ห้องซ้อมสอบปากเปล่า: 11 คำถามวัดกึ๋นสถาปัตยกรรม Frontend
                     </h2>
                     <p class="text-xs text-slate-400 mt-0.5">จำลองคำถามที่อาจารย์สาย Image Processing และ Web Engineering นิยมถามเพื่อตัดเกรด</p>
                 </div>
                 <div class="flex items-center gap-4 text-xs font-mono">
-                    <span class="text-slate-400">คะแนนปัจจุบัน: <b class="text-emerald-400 text-sm" id="exam-score">0 / 10</b></span>
+                    <span class="text-slate-400">คะแนนปัจจุบัน: <b class="text-emerald-400 text-sm" id="exam-score">0 / 11</b></span>
                     <button onclick="resetExam()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold">🔄 เริ่มสอบใหม่</button>
                 </div>
             </div>
@@ -383,6 +383,10 @@
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
                     <span class="text-teal-400 font-bold block">6. ทำไมถึงเก็บ Token ใน LocalStorage/Memory Store แทนที่จะใช้ Cookie ปกติ?</span>
                     <p class="text-slate-300"><b>ตอบ:</b> เนื่องจากสถาปัตยกรรมระบบเป็นแบบ Decoupled API (Frontend อยู่พอร์ต 5173, Backend อยู่พอร์ต 8000) ซึ่งข้าม Origin กัน การใช้ Authorization Header แบบ Bearer Token ช่วยป้องกันการโจมตีประเภท CSRF (Cross-Site Request Forgery) ได้อย่างเด็ดขาดโดยไม่ต้องพึ่งพา CSRF Token เสริม</p>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-sky-400 font-bold block">7. ทำไมฝ่าย Frontend ถึงต้องมีโมดูล families.js สำหรับตรวจจับตระกูลโมเดล และกรอง LoRA Dropdown แบบ Real-time?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพื่อปฏิบัติตามหลักการ User Experience (UX) และการตรวจสอบข้อมูลล่วงหน้า (Pre-flight Validation) โดยสถาปัตยกรรม SD 1.5, Illustrious XL, และ Pony XL ใช้โครงข่าย Text Encoder และมิติที่ไม่เท่ากัน หากผู้ใช้จับคู่ LoRA ผิดตระกูล ภาพที่ได้จะพังเสียหาย โมดูล families.js จะอ่านค่า family จาก GET /api/models แล้วกรอง Dropdown ให้แสดงเฉพาะ LoRA ที่เข้ากันได้กับ Base Model ทันที พร้อมติดป้ายกำกับสี ช่วยป้องกันความผิดพลาดตั้งแต่ฝั่งผู้ใช้ก่อนส่งคำขอไปยังเซิร์ฟเวอร์ครับ</p>
                 </div>
             </div>
         </div>
@@ -1073,6 +1077,18 @@
         ],
         "correct": 1,
         "rationale": "ถูกต้อง! การใช้ Bearer Token เหมาะกับ Cross-origin Microservices Architecture อย่างยิ่ง ป้องกันปัญหาเรื่อง Third-party Cookie และการโจมตี CSRF"
+    },
+    {
+        "id": 11,
+        "q": "ทำไมฝ่าย Frontend จึงต้องกรอง LoRA ตามตระกูลโมเดลผ่าน families.js ทั้งที่ AI Server มี Auto-skip Guard อยู่แล้ว?",
+        "options": [
+            "เพราะเบราว์เซอร์จะแคชไฟล์ถ้าไม่กรอง",
+            "เพื่อให้สอดคล้องกับหลักการ 'Defense in Depth' และยกระดับ UX โดยป้องกันไม่ให้ผู้ใช้เลือกตัวเลือกที่ผิดตั้งแต่ต้นทาง พร้อมทั้งให้ Feedback ทางสายตาทันที",
+            "เพื่อไม่ให้ Backend ต้องบันทึกชื่อ LoRA ลงฐานข้อมูล",
+            "เพราะมาตรฐาน W3C บังคับให้ Dropdown มีไม่เกิน 5 ตัวเลือก"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! การตรวจสอบทั้งสองฝั่งคือหลักการ Defense in Depth: ฝั่งหน้าบ้านช่วยยกระดับประสบการณ์ผู้ใช้งาน (UX) โดยแสดงเฉพาะสิ่งที่ใช้งานได้จริง ส่วนฝั่ง AI Server ทำหน้าที่เป็นกำแพงด่านสุดท้าย (Fail-safe Guard) ป้องกันกรณีที่มีการเรียกยิง API จากภายนอกโดยตรง"
     }
 ];
 
@@ -1117,7 +1133,7 @@
 
                 card.innerHTML = `
                     <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
-                        <span class="text-xs font-mono font-bold text-sky-400">คำถามข้อที่ ${qIdx + 1} / 10</span>
+                        <span class="text-xs font-mono font-bold text-sky-400">คำถามข้อที่ ${qIdx + 1} / ${FRONTEND_EXAM.length}</span>
                         <span class="text-[11px] font-mono text-slate-500">Image Processing & Web UI</span>
                     </div>
                     <h4 class="text-sm font-bold text-white leading-relaxed">${item.q}</h4>

@@ -412,13 +412,13 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
                 <div>
                     <h2 class="text-base font-bold text-white flex items-center gap-2">
-                        <span>🎯</span> ห้องซ้อมตอบคำถามปากเปล่าสำหรับฝ่าย Backend (10 คำถามยอดฮิต)
+                        <span>🎯</span> ห้องซ้อมตอบคำถามปากเปล่าสำหรับฝ่าย Backend (11 คำถามยอดฮิต)
                     </h2>
                     <p class="text-xs text-slate-400 mt-1">คัดสรรประเด็นที่คณะกรรมการสอบมักจะจี้ถาม: FastAPI, Webhook, OpenCV Blending, และ Database Optimization</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="text-xs font-mono px-3 py-1.5 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">
-                        คะแนนของคุณ: <span id="b-exam-score" class="font-bold">0 / 10</span>
+                        คะแนนของคุณ: <span id="b-exam-score" class="font-bold">0 / 11</span>
                     </div>
                     <button onclick="resetBackendExam()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 transition-all">
                         🔄 เริ่มสอบใหม่
@@ -474,6 +474,10 @@
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
                     <span class="text-teal-400 font-bold block">6. ทำไมถึงรันงาน Image Tools ผ่าน ThreadPoolExecutor แทนการรันบน Async Loop ปกติ?</span>
                     <p class="text-slate-300"><b>ตอบ:</b> เพราะการประมวลผลภาพใน OpenCV เป็นงานแบบ CPU-bound Synchronous Computation หากรันบน Async Event Loop หลักของ FastAPI จะเกิดการบล็อกเธรด ทำให้ไม่สามารถรับคำขอ HTTP ของผู้ใช้คนอื่นได้ การส่งไปรันใน ThreadPool ผ่าน <code>_run_in_pool()</code> จึงเป็นไปตามข้อปฏิบัติ Non-blocking I/O ที่ถูกต้อง</p>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-cyan-400 font-bold block">7. ทำไม Backend (Node 2) ถึงต้องสื่อสารกับ AI Node ผ่าน Nginx พอร์ต 80 และแนบ Header X-LUMA-INTERNAL-SECRET?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เป็นเรื่องของการแบ่งแยกโครงสร้างเครือข่ายและความปลอดภัยแบบ Inter-Service Security ครับ: 1) การใช้ Nginx เป็น Ingress Reverse Proxy บนพอร์ต 80 ช่วยปิดกั้นพอร์ต 7860 ภายในของ AI Server ไม่ให้เปิดเผยโดยตรง และรองรับการทำ Timeout 300s กับ Payload ขนาดใหญ่ 50MB ได้อย่างเป็นระบบ และ 2) Header X-LUMA-INTERNAL-SECRET ทำหน้าที่เป็น Shared Token ยืนยันว่าคำขอที่เข้ามายังคิว AI มาจาก Backend ที่ได้รับอนุญาตเท่านั้น ป้องกันการถูกยิงคำขอก่อกวนโดยตรงจาก Client ครับ</p>
                 </div>
             </div>
         </div>
@@ -1136,6 +1140,18 @@
         ],
         "correct": 1,
         "rationale": "ถูกต้อง! การตั้งวันหมดอายุให้ Access Token เป็นหลักการความปลอดภัยพื้นฐาน เพื่อป้องกันไม่ให้ผู้ไม่ประสงค์ดีนำ Token ที่รั่วไหลไปใช้งานต่อได้อย่างไม่มีกำหนด"
+    },
+    {
+        "id": 11,
+        "q": "เมื่อ Backend ดึงรายชื่อโมเดลผ่าน GET /api/models ข้อมูลสถาปัตยกรรม (Architecture Family) มีประโยชน์อย่างไรต่อระบบ?",
+        "options": [
+            "ช่วยเพิ่มความเร็วในการเชื่อมต่อสาย LAN",
+            "ช่วยให้ Frontend ทราบว่า Checkpoint และ LoRA แต่ละตัวอยู่ในตระกูลใด (sd15, illustrious_xl, pony_xl) เพื่อนำไปกรองตัวเลือกใน UI ป้องกันการจับคู่โมเดลข้ามตระกูลที่ทำให้ภาพพังเละ",
+            "ช่วยลดการใช้แรมของ PostgreSQL ลง 50%",
+            "เป็นเพียงข้อมูลสถิติที่ไม่มีผลต่อการทำงานของระบบ"
+        ],
+        "correct": 1,
+        "rationale": "ถูกต้อง! ข้อมูล metadata ตระกูลโมเดล (Family) ที่ส่งต่อมาจาก AI Server ช่วยให้ Frontend นำไปใช้ใน families.js เพื่อกรองตัวเลือกใน UI แบบเรียลไทม์ ป้องกันไม่ให้ผู้ใช้เลือก LoRA ข้ามตระกูลสถาปัตยกรรมตั้งแต่ต้นทาง"
     }
 ];
         let bUserAnswers = {};
@@ -1180,7 +1196,7 @@
 
                 card.innerHTML = `
                     <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
-                        <span class="text-xs font-mono font-bold text-emerald-400">คำถามข้อที่ ${qIdx + 1} / 10</span>
+                        <span class="text-xs font-mono font-bold text-emerald-400">คำถามข้อที่ ${qIdx + 1} / ${BACKEND_EXAM.length}</span>
                         <span class="text-[11px] font-mono text-slate-500">FastAPI, OpenCV & Architecture</span>
                     </div>
                     <h4 class="text-sm font-bold text-white leading-relaxed">${item.q}</h4>

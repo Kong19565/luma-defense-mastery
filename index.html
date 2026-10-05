@@ -102,37 +102,48 @@
                 <span class="text-xs text-slate-400 font-mono hidden sm:inline">Event-Driven Asynchronous Pipeline</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs font-mono">
                 <!-- Node 1 -->
                 <div class="bg-slate-950 p-4 rounded-xl border border-sky-500/30 space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="text-sky-400 font-bold">Node 1: Frontend Client</span>
+                        <span class="text-sky-400 font-bold">Node 1: Frontend</span>
                         <span class="px-2 py-0.5 rounded bg-sky-950 text-sky-300 text-[10px]">Port 5173</span>
                     </div>
                     <p class="text-slate-300 font-sans text-xs">
-                        วาด Mask ขาว-ดำ (#FFFFFF บน #000000) สำหรับ Inpainting ➔ ล็อกพิกัดด้วย Coordinate Transform ➔ ส่งคำขอพร้อม JWT ➔ แสดง Optimistic UI ➔ Adaptive Polling
+                        วาด Inpainting Mask ➔ แปลงพิกัด Viewport ➔ กรอง LoRA ตามตระกูลโมเดลด้วย <code>families.js</code> ➔ ส่ง JWT ➔ แสดง Optimistic UI ➔ Adaptive Polling
                     </p>
                 </div>
 
                 <!-- Node 2 -->
                 <div class="bg-slate-950 p-4 rounded-xl border border-emerald-500/30 space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="text-emerald-400 font-bold">Node 2: Backend Core</span>
+                        <span class="text-emerald-400 font-bold">Node 2: Backend</span>
                         <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 text-[10px]">Port 8000</span>
                     </div>
                     <p class="text-slate-300 font-sans text-xs">
-                        ตรวจสอบ JWT Auth ➔ บันทึกงาน queued ลง SQLite WAL ➔ ยิง HTTP ข้ามโหนดไป AI ➔ รองรับ OpenCV Pencil Sketch (Color Dodge) ➔ รับผลลัพธ์ผ่าน Webhook
+                        ตรวจสอบ JWT ➔ บันทึกสถานะ 'queued' ลง SQLite WAL ➔ แนบ <code>X-LUMA-INTERNAL-SECRET</code> ยิงไป Nginx ➔ OpenCV Color Dodge ➔ รับ Webhook
+                    </p>
+                </div>
+
+                <!-- DevOps Gateway -->
+                <div class="bg-slate-950 p-4 rounded-xl border border-cyan-500/30 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-cyan-400 font-bold">DevOps Gateway</span>
+                        <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 text-[10px]">Port 80 Ingress</span>
+                    </div>
+                    <p class="text-slate-300 font-sans text-xs">
+                        Nginx Reverse Proxy ➔ เปิด <code>underscores_in_headers on;</code> ส่งต่อกุญแจลับ ➔ รองรับ Base64 ขนาดใหญ่ <code>50M</code> ➔ Timeout 300s
                     </p>
                 </div>
 
                 <!-- Node 3 -->
                 <div class="bg-slate-950 p-4 rounded-xl border border-purple-500/30 space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="text-purple-400 font-bold">Node 3: AI Inference Server</span>
-                        <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 text-[10px]">Port 7860 & 7861</span>
+                        <span class="text-purple-400 font-bold">Node 3: AI Inference</span>
+                        <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 text-[10px]">Port 7860/7861</span>
                     </div>
                     <p class="text-slate-300 font-sans text-xs">
-                        ตรวจ Secret Header ➔ FIFO Queue ➔ แทรก LoRA ➔ รัน Latent Diffusion บน RTX 3070 ➔ บีบอัดภาพเป็น WebP Method 6 ลดขนาด 80% ➔ เคลียร์ VRAM 8GB คืนระบบ
+                        ตรวจ Secret ➔ Auto-skip LoRA ข้ามตระกูล ➔ รัน Latent Diffusion บน RTX 3070 ➔ บีบอัด WebP Method 6 ลดขนาด 80% ➔ เคลียร์ VRAM 8GB คืนระบบ
                     </p>
                 </div>
             </div>
@@ -261,9 +272,9 @@
         <!-- Academic Defense Strategies -->
         <section class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
             <h3 class="text-base font-bold text-white flex items-center gap-2">
-                <span>💡</span> เคล็ดลับ 4 เสาหลักในการตอบคำถามอาจารย์วิชา Image Processing
+                <span>💡</span> เคล็ดลับ 5 เสาหลักในการตอบคำถามอาจารย์วิชา Image Processing
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-xs">
                 <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
                     <span class="font-bold text-sky-400">1. ทฤษฎี Latent Space (ย่อขนาด f = 8 เท่า)</span>
                     <p class="text-slate-300">
@@ -283,9 +294,15 @@
                     </p>
                 </div>
                 <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
-                    <span class="font-bold text-amber-400">4. Asynchronous Webhook Architecture</span>
+                    <span class="font-bold text-amber-400">4. Asynchronous Webhook</span>
                     <p class="text-slate-300">
                         ตอบให้ชัดเจนว่าทำไมไม่บล็อก HTTP Connection: เพราะการสร้างภาพใช้เวลานาน การใช้ FIFO Queue + Webhook เป็น Event-driven Pattern ที่ถูกต้อง
+                    </p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
+                    <span class="font-bold text-cyan-400">5. LoRA Family & Ingress Security</span>
+                    <p class="text-slate-300">
+                        อธิบายเรื่อง Auto-skip LoRA ข้ามตระกูล (SD 1.5 vs SDXL) เพื่อป้องกันภาพเละ และการส่งต่อ <code>X-LUMA-INTERNAL-SECRET</code> ผ่าน Nginx Ingress Gateway
                     </p>
                 </div>
             </div>
