@@ -73,11 +73,11 @@
                 <p class="text-xs text-slate-400 mt-0.5">คู่มือเตรียมสอบปากเปล่าวิชา Image Processing: ส่องสถาปัตยกรรม Zero-Build Vanilla JS, จำลอง Canvas Inpainting, และตะลุยโจทย์ 12 ข้อ</p>
             </div>
         </div>
-        <div class="flex items-center gap-2 text-xs font-mono">
-            <div class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 shrink-0">
-                <span class="text-slate-500">Tech:</span> HTML5 + CSS Tokens + Modular JS
+        <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
+            <div class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+                <span class="text-slate-500">Tech:</span> Vanilla JS + Canvas 2D
             </div>
-            <div class="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 shrink-0">
+            <div class="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">
                 Port: 5500 (Zero-Build)
             </div>
         </div>
@@ -122,9 +122,12 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 bg-slate-950 p-4 rounded-xl border border-slate-800">
                 <div class="lg:col-span-7 space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-mono px-2 py-0.5 rounded bg-sky-500/20 text-sky-300" id="step-badge">STEP 1</span>
-                        <span class="text-[11px] font-mono text-slate-500" id="step-file">js/generate/draft.js:60</span>
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-2.5">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30 shrink-0" id="step-badge">STEP 1</span>
+                            <span class="text-xs font-mono text-slate-300 font-semibold truncate max-w-[180px] sm:max-w-none" id="step-badge-phase">USER INPUT & FORM STATE</span>
+                        </div>
+                        <span class="text-[11px] font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800 shrink-0" id="step-file">js/generate/draft.js:60</span>
                     </div>
                     <h3 class="text-sm font-bold text-white" id="step-title">กำลังโหลด...</h3>
                     <p class="text-xs text-slate-300 leading-relaxed" id="step-desc">...</p>
@@ -170,15 +173,15 @@
                     <div>
                         <label class="text-slate-400 block mb-1">ขนาด DOM บนหน้าจอ (Rendered CSS):</label>
                         <select id="sim-dom-size" onchange="updateCanvasSim()" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-emerald-300">
-                            <option value="320x320">320 x 320 px (Mobile View)</option>
-                            <option value="400x400" selected>400 x 400 px (Laptop Panel)</option>
+                            <option value="300x300" selected>300 x 300 px (Mobile / Compact)</option>
+                            <option value="400x400">400 x 400 px (Laptop Panel)</option>
                             <option value="250x250">250 x 250 px (Small Widget)</option>
                         </select>
                     </div>
                 </div>
                 <div class="flex flex-col items-center justify-center p-4 bg-slate-950 rounded-xl border border-slate-800">
-                    <div id="canvas-dom-wrapper" class="relative border-2 border-dashed border-sky-500/40 rounded-lg cursor-crosshair overflow-hidden shadow-inner" style="width: 400px; height: 400px; background: #1e293b;">
-                        <canvas id="sim-canvas" width="400" height="400" class="w-full h-full"></canvas>
+                    <div id="canvas-dom-wrapper" class="relative border-2 border-dashed border-sky-500/40 rounded-lg cursor-crosshair overflow-hidden shadow-inner max-w-full" style="width: 300px; height: 300px; background: #1e293b;">
+                        <canvas id="sim-canvas" width="300" height="300" class="w-full h-full"></canvas>
                         <div class="absolute top-2 left-2 pointer-events-none px-2 py-1 rounded bg-slate-950/80 text-[10px] font-mono text-slate-300">
                             ลากเมาส์เพื่อทดลองวาด Mask
                         </div>
@@ -423,6 +426,7 @@
         const PIPELINE_STEPS = [
     {
         "badge": "STEP 1: USER INPUT & FORM STATE",
+        "shortTitle": "Form & Draft",
         "file": "js/generate/draft.js:60",
         "title": "1. รับข้อมูล Prompt และบันทึก Draft ลง LocalStorage / Form State",
         "desc": "ผู้ใช้พิมพ์คำสั่ง Prompt และเลือกโหมด (txt2img, img2img, inpaint) ข้อมูลจะถูกบันทึกแบบ Real-time ลง LocalStorage (คีย์ luma.draft) ผ่านฟังก์ชัน saveDraft() เพื่อไม่ให้ข้อความและพารามิเตอร์สูญหายแม้ผู้ใช้จะรีเฟรชหน้าเว็บ พร้อมควบคุมขนาดภาพด้วย snapSize() ให้เป็นพหุคูณของ 8 เสมอ",
@@ -432,6 +436,7 @@
     },
     {
         "badge": "STEP 2: CANVAS INPAINT MASK",
+        "shortTitle": "Inpaint Mask",
         "file": "js/mask.js:196",
         "title": "2. วาดรอยหน้ากากบน Canvas 2D และแปลงเป็น Binary Black/White Mask",
         "desc": "ในโหมด inpaint วาง <canvas> ซ้อนทับภาพต้นฉบับ เมื่อผู้ใช้วาดพู่กัน (สีส้ม #e0a458) ระบบจะแปลงพิกัด Pointer สู่ Natural Resolution และส่งออกด้วย MaskEditor.exportMask() โดยใช้เทคนิค destination-in ผสม destination-over สร้างเป็นภาพขาวดำบริสุทธิ์ (#FFFFFF บน #000000) ส่งออกเป็นไบนารี PNG Blob",
@@ -441,6 +446,7 @@
     },
     {
         "badge": "STEP 3: API DISPATCH & UPLOAD",
+        "shortTitle": "API Upload",
         "file": "js/generate/run.js:55",
         "title": "3. อัปโหลด Mask (POST /uploads) และส่งคำขอสร้างภาพ (POST /generations)",
         "desc": "ฟังก์ชัน submit() ตรวจสอบโหมด หากเป็น inpaint จะส่ง mask Blob ผ่าน apiUpload('/uploads', maskBlob, 'mask.png') ด้วย XMLHttpRequest เพื่อแทร็กความคืบหน้า จากนั้นสร้าง buildRequest(maskUrl) แนบ Authorization: Bearer <token> ผ่าน apiRequest('/generations', { method: 'POST', json: ... }) เพื่อรับ Task ID",
@@ -450,6 +456,7 @@
     },
     {
         "badge": "STEP 4: RUN STAGE & WATCHDOG",
+        "shortTitle": "Watch Token",
         "file": "js/generate/run.js:95",
         "title": "4. ปรับเปลี่ยน Stage ตรงกลาง และเริ่มตัวจับเวลาด้วย watchToken",
         "desc": "watchRun(newRun) จะล้างภาพในหน่วยความจำเดิม (releaseImages()), เริ่มต้นนาฬิกานับเวลา (startClock()), และใช้ตัวแปร watchToken ป้องกันปัญหา Race Condition กรณีที่ผู้ใช้กดยกเลิกหรือเปลี่ยนงานกะทันหัน",
@@ -459,6 +466,7 @@
     },
     {
         "badge": "STEP 5: ADAPTIVE POLLING LOOP",
+        "shortTitle": "Adaptive Poll",
         "file": "js/generate/run.js:126",
         "title": "5. ถามสถานะซ้ำๆ แบบ Adaptive Interval (2s ➔ 5s ➔ เลิกหลัง 5 นาที)",
         "desc": "ฟังก์ชัน poll() จะสอบถาม GET /generations/{id} และ GET /generations/{id}/progress โดยในนาทีแรกจะถามทุก 2 วินาที หลังจากนั้นจะขยายความถี่เป็นทุก 5 วินาที หากเกิน 5 นาที (POLL_GIVE_UP_MS = 300,000) จะตัดเข้าสู่สถานะ stalled = true เพื่อแจ้งเตือนผู้ใช้",
@@ -468,6 +476,7 @@
     },
     {
         "badge": "STEP 6: RESULT & RAM CLEANUP",
+        "shortTitle": "Release RAM",
         "file": "js/generate/run.js:160",
         "title": "6. ดึงภาพผลลัพธ์ด้วย Token และคืนหน่วยความจำ Blob ด้วย revokeObjectURL",
         "desc": "เมื่อได้รับสถานะ completed ฟังก์ชัน onFinished() จะเรียก apiBlob('/generations/' + runId + '/image') เพื่อดึงภาพผ่าน Authorization Bearer แล้วแปลงเป็น Object URL และเมื่อมีการปิดงานหรือเปลี่ยนภาพ ฟังก์ชัน releaseImages() จะสั่ง URL.revokeObjectURL() คืน RAM ให้เบราว์เซอร์ทันที",
@@ -483,8 +492,12 @@
             PIPELINE_STEPS.forEach((st, idx) => {
                 const el = document.createElement('div');
                 const isActive = idx === currentPipelineStep;
-                el.className = `p-2 rounded-lg cursor-pointer transition-all border ${isActive ? 'bg-sky-500/20 border-sky-500/60 text-sky-300 font-bold' : 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700'}`;
-                el.innerText = `${idx + 1}. ${st.badge.split(':')[0]}`;
+                el.className = `p-2 rounded-lg cursor-pointer transition-all border ${isActive ? 'bg-sky-500/20 border-sky-500/60 text-sky-300 font-bold shadow-sm' : 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700'}`;
+                const shortName = st.shortTitle || `Step ${idx + 1}`;
+                el.innerHTML = `
+                    <div class="text-[10px] font-mono text-sky-400 font-bold">STEP ${idx + 1}</div>
+                    <div class="text-[11px] font-sans truncate font-medium ${isActive ? 'text-white font-bold' : 'text-slate-300'}">${shortName}</div>
+                `;
                 el.onclick = () => { currentPipelineStep = idx; updatePipelineUI(); };
                 track.appendChild(el);
             });
@@ -492,7 +505,10 @@
 
         function updatePipelineUI() {
             const st = PIPELINE_STEPS[currentPipelineStep];
-            document.getElementById('step-badge').innerText = st.badge;
+            const badgeParts = (st.badge || '').split(':');
+            document.getElementById('step-badge').innerText = badgeParts[0].trim();
+            const phaseEl = document.getElementById('step-badge-phase');
+            if (phaseEl) phaseEl.innerText = (badgeParts[1] || '').trim();
             document.getElementById('step-file').innerText = st.file;
             document.getElementById('step-title').innerText = st.title;
             document.getElementById('step-desc').innerText = st.desc;
