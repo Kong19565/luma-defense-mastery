@@ -370,9 +370,9 @@
         <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-6">
             <div class="border-b border-slate-800 pb-4">
                 <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                    <span>🧠</span> คลังคำตอบสำเร็จรูป: สรุป 7 จุดตายที่อาจารย์ชอบจี้ถามฝั่ง Frontend
+                    <span>🧠</span> คลังคำตอบสำเร็จรูป: สรุป 8 จุดตายที่อาจารย์ชอบจี้ถามฝั่ง Frontend
                 </h2>
-                <p class="text-xs text-slate-400 mt-1">จำแนวทางคำตอบ 7 ข้อนี้ไว้ให้ขึ้นใจ ตอบได้อย่างมั่นใจ รับเกรด A ได้แน่นอนครับ</p>
+                <p class="text-xs text-slate-400 mt-1">จำแนวทางคำตอบ 8 ข้อนี้ไว้ให้ขึ้นใจ ตอบได้อย่างมั่นใจ รับเกรด A ได้แน่นอนครับ</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed">
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
@@ -385,11 +385,11 @@
                 </div>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
                     <span class="text-purple-400 font-bold block">3. ทำไมทีมถึงเปลี่ยนจาก React 18/Zustand มาเป็น Zero-Build Vanilla HTML/CSS/JS?</span>
-                    <p class="text-slate-300"><b>ตอบ:</b> เพื่อขจัดความซับซ้อนของ Build Pipeline (ไม่มี Node.js, Vite, หรือ npm dependency ให้พัง), สามารถเปิดรันได้ทันทีผ่านคำสั่งสั้นๆ เช่น <code>python3 -m http.server 5500</code>, ลด Memory Footprint และขจัดปัญหา Re-render Overhead ของ Virtual DOM ขณะลากวาดพู่กันความถี่สูง (60-120 Hz) ทำให้ Canvas วาดเส้นได้ลื่นไหลระดับ Native และง่ายต่อการ Debug และทดสอบด้วย Unit Test แบบ pure ES modules ครับ</p>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพื่อขจัดความซับซ้อนของ Build Pipeline (ไม่มี Node.js, Vite, หรือ npm dependency ให้พัง), สามารถเปิดรันได้ทันทีผ่านคำสั่งสั้นๆ เช่น <code>python serve_gateway.py</code> (ซึ่งล็อกรับทราฟฟิกเฉพาะจาก Nginx Gateway ป้องกันคนเข้าตรงพอร์ต 5500), ลด Memory Footprint และขจัดปัญหา Re-render Overhead ของ Virtual DOM ขณะลากวาดพู่กันความถี่สูง (60-120 Hz) ทำให้ Canvas วาดเส้นได้ลื่นไหลระดับ Native และง่ายต่อการ Debug และทดสอบด้วย Unit Test แบบ pure ES modules ครับ</p>
                 </div>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
                     <span class="text-amber-400 font-bold block">4. กลไก watchToken ป้องกัน Stale Response และ Race Condition อย่างไรเมื่อผู้ใช้กด Cancel หรือสลับงาน?</span>
-                    <p class="text-slate-300"><b>ตอบ:</b> เมื่อผู้ใช้สั่งหยุด สลับดูงานอื่น หรือกดสร้างใหม่ ฟังก์ชัน <code>stopWatching()</code> จะเพิ่มค่า <code>watchToken += 1</code> ทันที เมื่อการร้องขอ Polling รอบก่อนหน้าตอบกลับมา ระบบจะตรวจสอบ <code>token !== watchToken</code> หากค่าไม่ตรงกัน จะทำการทิ้ง (Discard) คำตอบนั้นทันที ทำให้ไม่มี Response จากงานเก่ามาเขียนทับหรือเปลี่ยนสถานะของ UI ปัจจุบันครับ</p>
+                    <p class="text-slate-300"><b>ตอบ:</b> เมื่อผู้ใช้สั่งหยุด สลับดูงานอื่น หรือกดสร้างใหม่ ฟังก์ชัน <code>stopWatching()</code> จะเพิ่มค่า <code>watchToken += 1</code> ทันที เมื่อการร้องขอ Polling รอบก่อนหน้าตอบกลับมา ระบบจะตรวจสอบ <code>token !== watchToken</code> หากค่าไม่ตรงกัน จะทำการทิ้ง (Discard) คำตอบนั้นทันที ทำให้ไม่มี Response จากงานเก่ามาเขียนทับหรือเปลี่ยนสถานะของ UI ปัจจุบัน พร้อมทั้งจำกัดงบประมาณหน่วยความจำ <code>UNDO_BUDGET_BYTES = 200MB</code> ใน <code>saveUndo()</code> ป้องกันเบราว์เซอร์แครชเมื่อระบายภาพขนาด 4096px ครับ</p>
                 </div>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
                     <span class="text-rose-400 font-bold block">5. ทำไมถึงต้องบังคับขนาดภาพพรีเซ็ตให้หารด้วย 8 ลงตัว (เช่น 512, 680, 768) ด้วย snapSize()?</span>
@@ -402,6 +402,10 @@
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
                     <span class="text-sky-400 font-bold block">7. ทำไมฝ่าย Frontend ถึงต้องมีโมดูล families.js สำหรับตรวจจับตระกูลโมเดล และกรอง LoRA Dropdown แบบ Real-time?</span>
                     <p class="text-slate-300"><b>ตอบ:</b> เพื่อปฏิบัติตามหลักการ User Experience (UX) และการตรวจสอบข้อมูลล่วงหน้า (Pre-flight Validation) โดยสถาปัตยกรรม SD 1.5, Illustrious XL, และ Pony XL ใช้โครงข่าย Text Encoder และมิติ Latent ที่ไม่เท่ากัน หากผู้ใช้จับคู่ LoRA ผิดตระกูล ภาพที่ได้จะพังเสียหาย โมดูล <code>families.js</code> จะอ่านค่า family แล้วกรอง Dropdown ให้แสดงเฉพาะ LoRA ที่เข้ากันได้กับ Base Model ทันที พร้อมติดป้ายกำกับสี ช่วยป้องกันความผิดพลาดตั้งแต่ฝั่งผู้ใช้ก่อนส่งคำขอไปยังเซิร์ฟเวอร์ครับ</p>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-indigo-400 font-bold block">8. ทำไมหน้าบ้านจึงมีกฎความปลอดภัย Content-Security-Policy (CSP) ห้ามเขียน inline &lt;script&gt; หรือ onclick ใน HTML เด็ดขาด?</span>
+                    <p class="text-slate-300"><b>ตอบ:</b> เพื่อป้องกันช่องโหว่ Cross-Site Scripting (XSS) ขั้นสูงสุดตามมาตรฐานความปลอดภัย OWASP เนื่องจากข้อความ Prompt และ Error จากเซิร์ฟเวอร์อาจมี Malicious Code แฝงมา หากเบราว์เซอร์ยอมให้รัน inline script ผู้ไม่ประสงค์ดีจะสามารถขโมย JWT Token จาก <code>localStorage</code> ได้ทันที ระบบจึงกำหนด CSP ผ่าน <code>&lt;meta http-equiv="Content-Security-Policy"&gt;</code> บังคับผูก Event ทั้งหมดด้วย <code>addEventListener</code> ในไฟล์ JS แยก และครอบ <code>escapeHtml()</code> ทุกครั้งก่อนแทรก <code>innerHTML</code> ครับ</p>
                 </div>
             </div>
         </div>
@@ -430,10 +434,10 @@
     {
         "badge": "STEP 1: USER INPUT & FORM STATE",
         "shortTitle": "Form & Draft",
-        "file": "js/generate/draft.js:60",
-        "title": "1. รับข้อมูล Prompt และบันทึก Draft ลง LocalStorage / Form State",
-        "desc": "ผู้ใช้พิมพ์คำสั่ง Prompt และเลือกโหมด (txt2img, img2img, inpaint) ข้อมูลจะถูกบันทึกแบบ Real-time ลง LocalStorage (คีย์ luma.draft) ผ่านฟังก์ชัน saveDraft() เพื่อไม่ให้ข้อความและพารามิเตอร์สูญหายแม้ผู้ใช้จะรีเฟรชหน้าเว็บ พร้อมควบคุมขนาดภาพด้วย snapSize() ให้เป็นพหุคูณของ 8 เสมอ",
-        "snippet": "// js/generate/draft.js\nfunction saveDraft() {\n  localStorage.setItem('luma.draft', JSON.stringify({\n    mode, prompt: $('prompt').value.trim(),\n    negative_prompt: $('negative-prompt').value.trim(),\n    model: $('model').value, lora: $('lora').value,\n    sampler: $('sampler').value, steps: $('steps').value\n  }));\n}",
+        "file": "js/generate/draft.js:25",
+        "title": "1. รับข้อมูล Prompt และบันทึก Draft ลง LocalStorage (คีย์ luma.html.draft)",
+        "desc": "ผู้ใช้พิมพ์คำสั่ง Prompt และเลือกโหมด (txt2img, img2img, inpaint) ข้อมูลจะถูกบันทึกแบบ Real-time ลง LocalStorage ภายใต้คีย์ DRAFT_KEY ('luma.html.draft') ผ่านฟังก์ชัน saveDraft() เพื่อไม่ให้ข้อความและพารามิเตอร์สูญหายแม้ผู้ใช้จะรีเฟรชหน้าเว็บ พร้อมควบคุมขนาดภาพด้วย snapSize() ให้เป็นพหุคูณของ 8 เสมอ",
+        "snippet": "// js/generate/draft.js:25\nfunction saveDraft() {\n  const draft = { mode, source };\n  for (const id of DRAFT_FIELDS) draft[id] = $(id).value;\n  localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));\n}",
         "defenseQ": "ทำไมถึงเปลี่ยนจาก React 18 / Zustand มาเป็น Vanilla JS + LocalStorage ในโปรเจกต์นี้?",
         "defenseA": "เพราะ Vanilla JS ปราศจาก Build Step (Zero-Build) ไม่ต้องติดตั้ง Node.js หรือ build tools ให้วุ่นวาย โค้ดทำงานได้ทันทีบนทุกลิมิตของเครื่องและเบราว์เซอร์ พร้อมทั้งกำจัดปัญหา Re-render Overhead ของ Virtual DOM ขณะลากวาดพู่กันความถี่สูง (60-120 Hz) ครับ"
     },
@@ -470,10 +474,10 @@
     {
         "badge": "STEP 5: ADAPTIVE POLLING LOOP",
         "shortTitle": "Adaptive Poll",
-        "file": "js/generate/run.js:126",
+        "file": "js/generate/run.js:130",
         "title": "5. ถามสถานะซ้ำๆ แบบ Adaptive Interval (2s ➔ 5s ➔ เลิกหลัง 5 นาที)",
         "desc": "ฟังก์ชัน poll() จะสอบถาม GET /generations/{id} และ GET /generations/{id}/progress โดยในนาทีแรกจะถามทุก 2 วินาที หลังจากนั้นจะขยายความถี่เป็นทุก 5 วินาที หากเกิน 5 นาที (POLL_GIVE_UP_MS = 300,000) จะตัดเข้าสู่สถานะ stalled = true เพื่อแจ้งเตือนผู้ใช้",
-        "snippet": "// js/generate/run.js:148\nconst watched = Date.now() - watchStartedAt;\nif (watched > POLL_GIVE_UP_MS) {\n  stalled = true; clearInterval(clockTimer);\n  renderStage(); return;\n}\nrenderStage();\npollTimer = setTimeout(poll, watched > 60 * 1000 ? 5000 : 2000);",
+        "snippet": "// js/generate/run.js:130, 148\nconst watched = Date.now() - watchStartedAt;\nif (watched > POLL_GIVE_UP_MS) {\n  stalled = true; clearInterval(clockTimer);\n  renderStage(); return;\n}\nrenderStage();\npollTimer = setTimeout(poll, watched > 60 * 1000 ? 5000 : 2000);",
         "defenseQ": "ทำไมการตั้งเวลา 2s -> 5s ดีกว่าการใช้ WebSocket ตลอดเวลาในโปรเจกต์นี้?",
         "defenseA": "งาน Diffusion เป็นงานแบบ Batch Job ที่ใช้เวลารันเป็นช่วงๆ (10-30 วินาที) ไม่ใช่การแชท Real-time การใช้ Adaptive Polling ทำงานแบบ Stateless หากเน็ตหลุดจะไม่เกิด Connection Leak และช่วยลดภาระ Socket File Descriptors ของ Nginx Gateway และ FastAPI Backend ได้อย่างมากครับ"
     },
@@ -922,7 +926,7 @@
     ],
     "state_run": [
         {
-            "line": 65,
+            "line": 71,
             "name": "snapSize(value) & fitToEngine(width, height)",
             "tag": "VAE f=8 Rule",
             "tag_color": "bg-teal-950/60 text-teal-300 border-teal-500/30",
@@ -1039,7 +1043,7 @@
             "tip": "การจัดการ HTTP 409 Conflict: หากผู้ใช้กดยกเลิกจังหวะเดียวกับที่ AI สร้างภาพเสร็จพอดี ระบบจะแจ้งอย่างสุภาพว่า 'งานเสร็จก่อนที่จะหยุดทัน' โดยไม่ทำให้แอปพลิเคชันพัง"
         },
         {
-            "line": 75,
+            "line": 78,
             "name": "sendToGenerate(blob, extra, button)",
             "tag": "Studio Handoff",
             "tag_color": "bg-indigo-950/60 text-indigo-300 border-indigo-500/30",
